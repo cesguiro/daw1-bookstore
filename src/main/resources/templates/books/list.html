@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{layouts/base :: head}">
+</head>
+<body>
+<nav th:replace="~{layouts/base:: menu}"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-8 col-lg-5">
+            <h6 class="text-muted">Listado de libros</h6>
+            <ul class="list-group">
+                <a th:each="book : ${bookList}" th:href="@{${'/books/' + book.id}}">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="image-parent">
+                            <img th:src="@{${'/images/cover/' + book.cover}}" class="img-fluid" th:alt="${book.title}" style="height: 100px">
+                        </div>
+                        <span th:text="${book.title}" style="font-weight: bold"></span>
+                        <span th:text="|${book.price} €|"></span>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--<div class="container">
+    <div class="list-group">
+        <a th:each="book : ${bookList}" th:href="@{${'/books/' + book.id}}" class="list-group-item list-group-item-action" aria-current="true">
+            <div></div>
+            <img th:src="@{${'/images/cover/' + book.cover}}" alt="">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" th:text="${book.title}"></h5>
+                <small th:text="${book.price}"></small>
+            </div>
+        </a>
+    </div>
+</div>-->
+
+<!--<div class="container">
+    <div class="row">
+        <div class="col-md-4" th:each="book : ${bookList}">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top" th:src="@{${'/images/cover/' + book.cover}}" style="height: 225px; display: block;">
+                <div class="card-body">
+                    <h5 class="card-title>" th:text="${book.title}">Book Title</h5>
+                    <a th:href="@{${'/books/' + book.id}}" class="btn btn-primary stretched-link">Detalles</a>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!--<div class="row row-cols-8 row-cols-md-8 g-8 m-8" href="categories.html">
+    <div th:each="book : ${bookList}" class="col">
+        <div  class="card">
+            <img class="card-img-top p-5" th:src="@{${'/images/cover/' + book.cover}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${book.title}">Card title that wraps to a new line</h5>
+                <a th:href="@{${'/books/' + book.id}}" class="btn btn-primary stretched-link">Detalles</a>
+            </div>
+        </div>
+    </div>
+</div>-->
+<footer th:replace="~{layouts/base :: footer}"></footer>
+<script th:replace="~{layouts/base :: jquery}"></script>
+<script th:replace="~{layouts/base :: popper}"></script>
+<script th:replace="~{layouts/base :: bootstrap}"></script>
+</body>
+</html>
