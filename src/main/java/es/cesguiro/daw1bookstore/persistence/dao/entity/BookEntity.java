@@ -1,11 +1,9 @@
-package es.cesguiro.daw1bookstore.domain.model;
+package es.cesguiro.daw1bookstore.persistence.dao.entity;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
 
-public class Book {
+public class BookEntity {
 
     private Integer id;
     private String isbn;
@@ -13,15 +11,15 @@ public class Book {
     private String synopsis;
     private BigDecimal price;
     private String cover;
-    private Publisher publisher;
-    List<Author> authorList;
+    private PublisherEntity publisherEntity;
+    List<AuthorEntity> authorEntityList;
 
-    public Book(Integer id, String isbn, String title, String synopsis, BigDecimal price, String cover) {
+    public BookEntity(Integer id, String isbn, String title, String synopsis, BigDecimal price, String cover) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
         this.synopsis = synopsis;
-        this.price = price.setScale(2, RoundingMode.HALF_UP);
+        this.price = price;
         this.cover = cover;
     }
 
@@ -62,7 +60,7 @@ public class Book {
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price.setScale(2, RoundingMode.HALF_UP);
+        this.price = price;
     }
 
     public String getCover() {
@@ -73,26 +71,19 @@ public class Book {
         this.cover = cover;
     }
 
-    public Publisher getPublisher() {
-        return publisher;
+    public PublisherEntity getPublisherEntity() {
+        return publisherEntity;
     }
 
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
+    public void setPublisherEntity(PublisherEntity publisherEntity) {
+        this.publisherEntity = publisherEntity;
     }
 
-    public List<Author> getAuthorList() {
-        return authorList;
+    public List<AuthorEntity> getAuthorEntityList() {
+        return authorEntityList;
     }
 
-    public void setAuthorList(List<Author> authorList) {
-        this.authorList = authorList;
-    }
-
-    public void addAuthor(Author author) {
-        if (authorList == null) {
-            authorList = new ArrayList<>();
-        }
-        authorList.add(author);
+    public void setAuthorEntityList(List<AuthorEntity> authorEntityList) {
+        this.authorEntityList = authorEntityList;
     }
 }

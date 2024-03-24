@@ -1,10 +1,10 @@
-package es.cesguiro.daw1bookstore.domain.model;
+package es.cesguiro.daw1bookstore.persistence.dao.entity;
 
-public class Author {
+public class PublisherEntity {
     private Integer id;
     private String name;
 
-    public Author(Integer id, String name) {
+    public PublisherEntity(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
