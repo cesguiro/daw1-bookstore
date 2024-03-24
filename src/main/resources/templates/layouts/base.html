@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap.min.css}">
-    <link th:rel="stylesheet" th:href="@{/css/main.css}">
+    <!--<link th:rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/main.css}">-->
     <title th:text="${title}">Document</title>
 </head>
 <body>
-<nav th:fragment="menu" class="navbar navbar-expand-lg bg-light">
+<!--<nav th:fragment="menu" class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
             <img th:src="@{${'/images/library.jpg'}}" alt="" height="60px">
@@ -20,28 +20,28 @@
                     <i class="fas fa-shopping-cart"></i>
                 </a>
                 <a class="nav-link" href="/books">Libros</a>
-            </div>
+            </div>-->
             <!--<div class="navbar-nav" th:if="${session.isEmpty()}" >
                 <a class="nav-link" href="/singup">Registro</a>
                 <a class="nav-link" href="/singin">Login</a>
             </div>
             <div class="navbar-nav" th:unless="${session.isEmpty()}">-->
-            <div class="navbar-nav">
+            <!--<div class="navbar-nav">
                 <a class="nav-link" href="/carts">Carrito</a>
                 <a class="nav-link" href="/orders">Pedidos</a>
             </div>
         </div>
     </div>
-</nav>
+</nav>-->
 
 
 <footer th:fragment="footer" class="text-center mb-5 fixed-bottom">
     &copy;2024 Todos los derechos reservados
 </footer>
 
-<script th:fragment="jquery" th:src="@{/js/jquery/jquery.min.js}"></script>
+<!--<script th:fragment="jquery" th:src="@{/js/jquery/jquery.min.js}"></script>
 <script th:fragment="popper" th:src="@{/js/popper/popper.min.js}"></script>
-<script th:fragment="bootstrap" th:src="@{/css/bootstrap/js/bootstrap.min.js}"></script>
+<script th:fragment="bootstrap" th:src="@{/css/bootstrap/js/bootstrap.min.js}"></script>-->
 
 </body>
 </html>
