@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{layouts/base :: head}">
+</head>
+<body>
+<!--<nav th:replace="~{layouts/base:: menu}"></nav>-->
+
+<div class="container">
+    <div class="card" style="width: 50rem;">
+        <img class="w-15 img-card" th:src="@{${'/images/cover/' + book.cover}}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title" th:text="|${book.title} (isbn: ${book.isbn})|"></h5>
+            <h6 class="card-text text-secondary" th:each="author : ${book.authorList}" th:text="${author.name}"></h6>
+            <h7 class="card-text text-muted" th:text="${book.publisher.name}"></h7>
+            <p></p>
+            <p class="card-text" th:text="${book.synopsis}"></p>
+            <p class="card-text text-primary" th:text="|${book.price} €|"></p>
+            <form th:action="@{${'/carts/books/' + book.id}}" method="POST">
+                <input type="number" min="1" max="5" name="quantity" value="1">
+                <button type="submit" class="btn btn-primary">Añadir al carrito</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{layouts/base :: footer}"></footer>
+<!--<script th:replace="~{layouts/base :: jquery}"></script>
+<script th:replace="~{layouts/base :: popper}"></script>
+<script th:replace="~{layouts/base :: bootstrap}"></script>-->
+</body>
+</html>
