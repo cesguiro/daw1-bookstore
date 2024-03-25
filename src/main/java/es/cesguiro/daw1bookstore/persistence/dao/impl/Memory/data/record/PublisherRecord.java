@@ -1,10 +1,11 @@
-package es.cesguiro.daw1bookstore.persistence.dao.entity;
+package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record;
 
-public class PublisherEntity {
+public class PublisherRecord {
+
     private Integer id;
     private String name;
 
-    public PublisherEntity(Integer id, String name) {
+    public PublisherRecord(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -24,4 +25,5 @@ public class PublisherEntity {
     public void setName(String name) {
         this.name = name;
     }
+
 }

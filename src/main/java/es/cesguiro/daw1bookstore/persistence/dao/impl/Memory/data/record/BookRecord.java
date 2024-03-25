@@ -1,26 +1,24 @@
-package es.cesguiro.daw1bookstore.persistence.dao.entity;
+package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-public class BookEntity {
-
+public class BookRecord {
     private Integer id;
     private String isbn;
     private String title;
     private String synopsis;
     private BigDecimal price;
     private String cover;
-    private PublisherEntity publisherEntity;
-    List<AuthorEntity> authorEntityList;
+    private int publisherId;
 
-    public BookEntity(Integer id, String isbn, String title, String synopsis, BigDecimal price, String cover) {
+    public BookRecord(Integer id, String isbn, String title, String synopsis, BigDecimal price, String cover, int publisherId) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
         this.synopsis = synopsis;
         this.price = price;
         this.cover = cover;
+        this.publisherId = publisherId;
     }
 
     public Integer getId() {
@@ -71,19 +69,13 @@ public class BookEntity {
         this.cover = cover;
     }
 
-    public PublisherEntity getPublisherEntity() {
-        return publisherEntity;
+    public int getPublisherId() {
+        return publisherId;
     }
 
-    public void setPublisherEntity(PublisherEntity publisherEntity) {
-        this.publisherEntity = publisherEntity;
+    public void setPublisherId(int publisherId) {
+        this.publisherId = publisherId;
     }
 
-    public List<AuthorEntity> getAuthorEntityList() {
-        return authorEntityList;
-    }
-
-    public void setAuthorEntityList(List<AuthorEntity> authorEntityList) {
-        this.authorEntityList = authorEntityList;
-    }
 }
+

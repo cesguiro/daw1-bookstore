@@ -7,4 +7,6 @@ import java.util.List;
 public interface BookRepository {
 
     public List<Book> findAll();
+
+    public Book findById(Integer id);
 }

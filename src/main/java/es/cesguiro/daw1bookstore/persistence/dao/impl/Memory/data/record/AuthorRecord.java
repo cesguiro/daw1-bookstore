@@ -1,11 +1,11 @@
-package es.cesguiro.daw1bookstore.persistence.dao.entity;
+package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record;
 
-public class AuthorEntity {
+public class AuthorRecord {
 
     private Integer id;
     private String name;
 
-    public AuthorEntity(Integer id, String name) {
+    public AuthorRecord(Integer id, String name) {
         this.id = id;
         this.name = name;
     }

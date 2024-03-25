@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.domain.service.impl;
 
+import es.cesguiro.daw1bookstore.common.exception.ResourceNotFounException;
 import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.domain.service.BookService;
 import es.cesguiro.daw1bookstore.persistence.repository.BookRepository;
@@ -17,5 +18,14 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findAll() {
         return bookRepository.findAll();
+    }
+
+    @Override
+    public Book findById(Integer id) {
+        Book book = bookRepository.findById(id);
+        if (book == null) {
+            throw new ResourceNotFounException("Book with id " + id + " not found.");
+        }
+        return book;
     }
 }

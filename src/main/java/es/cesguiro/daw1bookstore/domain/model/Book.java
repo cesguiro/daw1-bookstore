@@ -1,9 +1,16 @@
 package es.cesguiro.daw1bookstore.domain.model;
 
+import es.cesguiro.daw1bookstore.common.container.AuthorIoc;
+import es.cesguiro.daw1bookstore.common.container.PublisherIoc;
+import es.cesguiro.daw1bookstore.persistence.dao.PublisherDao;
+import es.cesguiro.daw1bookstore.persistence.repository.AuthorRepository;
+import es.cesguiro.daw1bookstore.persistence.repository.PublisherRepository;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Book {
 
@@ -21,8 +28,23 @@ public class Book {
         this.isbn = isbn;
         this.title = title;
         this.synopsis = synopsis;
-        this.price = price.setScale(2, RoundingMode.HALF_UP);
+        this.setPrice(price);
         this.cover = cover;
+    }
+
+    public Book() {
+
+    }
+
+    public Book(Integer id, String isbn, String title, String synopsis, BigDecimal price, String cover, Publisher publisher, List<Author> authorList) {
+        this.id = id;
+        this.isbn = isbn;
+        this.title = title;
+        this.synopsis = synopsis;
+        this.setPrice(price);
+        this.cover = cover;
+        this.publisher = publisher;
+        this.authorList = authorList;
     }
 
     public Integer getId() {
@@ -62,6 +84,9 @@ public class Book {
     }
 
     public void setPrice(BigDecimal price) {
+        if (price == null) {
+            price = new BigDecimal(0);
+        }
         this.price = price.setScale(2, RoundingMode.HALF_UP);
     }
 
@@ -73,7 +98,12 @@ public class Book {
         this.cover = cover;
     }
 
+    //lazy loading
     public Publisher getPublisher() {
+        if(publisher == null) {
+            PublisherRepository publisherRepository = PublisherIoc.getPublisherRepository();
+            publisher = publisherRepository.findByBookId(id);
+        }
         return publisher;
     }
 
@@ -81,7 +111,12 @@ public class Book {
         this.publisher = publisher;
     }
 
+    //lazy loading
     public List<Author> getAuthorList() {
+        if(authorList == null) {
+            AuthorRepository authorRepository = AuthorIoc.getAuthorRepository();
+            authorList = authorRepository.findByBookId(id);
+        }
         return authorList;
     }
 
@@ -94,5 +129,18 @@ public class Book {
             authorList = new ArrayList<>();
         }
         authorList.add(author);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(isbn, book.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isbn);
     }
 }
