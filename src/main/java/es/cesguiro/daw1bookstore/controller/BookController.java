@@ -8,6 +8,7 @@ import es.cesguiro.daw1bookstore.domain.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
@@ -32,18 +33,8 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public String findById(Model model, Integer id) {
-        Book book =  new Book(
-                5,
-                "9788448022440",
-                "Buenos presagios",
-                "Buenos presagios es una novela de humor escrita por Terry Pratchett y Neil Gaiman. Fue publicada por primera vez en 1990. La novela es una narrativa de múltiples capas que se centra en la vida de cuatro personajes principales: Tomáš, Teresa, Sabina y Franz.",
-                new BigDecimal(9.30),
-                "buenosPresagios.jpeg",
-                new Publisher(5, "Minotauro"),
-                List.of(new Author(4, "Terry Pratchett"), new Author(5, "Neil Gaiman"))
-        );
-        model.addAttribute("book", book);
+    public String findById(@PathVariable int id, Model model) {
+        model.addAttribute("book", bookService.findById(id));
         return "books/detail";
     }
 }
