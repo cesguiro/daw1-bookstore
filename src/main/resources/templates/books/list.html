@@ -10,7 +10,7 @@
         <div class="col-12 col-sm-8 col-lg-5">
             <h6 class="text-muted">Listado de libros</h6>
             <ul class="list-group">
-                <a th:each="book : ${bookList}" th:href="@{${'/books/' + book.id}}">
+                <a th:each="book : ${bookList}" th:href="@{'/books/' + ${book.id}}">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div class="image-parent">
                             <img th:src="@{${'/images/cover/' + book.cover}}" class="img-fluid" th:alt="${book.title}" style="height: 100px">

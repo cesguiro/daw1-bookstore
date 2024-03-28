@@ -35,7 +35,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable int id, Model model) {
+    public String findById(@PathVariable(required = false) String language, @PathVariable int id, Model model) {
         model.addAttribute("book", bookService.findById(id));
         return "books/detail";
     }
