@@ -33,14 +33,14 @@ public class AuthorRepositoryDaoIntegrationTest {
                 new Author(4, "Terry Pratchett"),
                 new Author(5, "Neil Gaiman")
         );
-        assertEquals(actualAuthorList, expectedAuthorList, "Autor incorrecto");
+        assertEquals(expectedAuthorList, actualAuthorList, "Autor incorrecto");
     }
 
     @DisplayName("Test find author list by not existing book id")
     @Test
     public void testFindByNotExistingBookId() {
         List<Author> actualAuthorList = authorRepository.findByBookId(100);
-        assertEquals(actualAuthorList, List.of(), "Autor incorrecto");
+        assertEquals(List.of(), actualAuthorList, "Autor incorrecto");
     }
 
 }

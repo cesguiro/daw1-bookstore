@@ -20,7 +20,7 @@ public class AuthorDaoUnitTest {
     public void testFindAuthorListByBookId() {
         List<Author> actualAuthorList = authorDao.findByBookId(1);
         List<Author> expectedAuthorList = List.of(new Author(1, "John Kennedy Toole"));
-        assertEquals(actualAuthorList, expectedAuthorList, "Autor incorrecto");
+        assertEquals(expectedAuthorList, actualAuthorList, "Autor incorrecto");
     }
 
     @DisplayName("Test find author list with more than 1 author by book id")
@@ -31,7 +31,7 @@ public class AuthorDaoUnitTest {
                 new Author(4, "Terry Pratchett"),
                 new Author(5, "Neil Gaiman")
         );
-        assertEquals(actualAuthorList, expectedAuthorList, "Autor incorrecto");
+        assertEquals(expectedAuthorList, actualAuthorList, "Autor incorrecto");
     }
 
 
@@ -39,6 +39,6 @@ public class AuthorDaoUnitTest {
     @Test
     public void testFindByNotExistingBookId() {
         List<Author> actualAuthorList = authorDao.findByBookId(100);
-        assertEquals(actualAuthorList, List.of(), "Autor incorrecto");
+        assertEquals(List.of(), actualAuthorList, "Autor incorrecto");
     }
 }

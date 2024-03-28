@@ -1,6 +1,7 @@
 package es.cesguiro.daw1bookstore.unit.dao;
 
 import es.cesguiro.daw1bookstore.common.container.BookIoc;
+import es.cesguiro.daw1bookstore.common.container.LanguageIoc;
 import es.cesguiro.daw1bookstore.domain.model.Author;
 import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.domain.model.Publisher;
@@ -33,8 +34,8 @@ public class BookDaoUnitTest {
         );
 
         assertAll("books",
-                () -> assertEquals(actualBookList.size(), 5, "Tamaño del listado incorrecto"),
-                () -> assertEquals(actualBookList.get(0), expectedBookList, "Libro incorrecto")
+                () -> assertEquals(5, actualBookList.size(), "Tamaño del listado incorrecto"),
+                () -> assertEquals(expectedBookList, actualBookList.get(0), "Libro incorrecto")
         );
     }
 
@@ -54,9 +55,9 @@ public class BookDaoUnitTest {
         );
 
         assertAll("books",
-                () -> assertEquals(actualBook, expectedBook, "Libro incorrecto"),
-                () -> assertEquals(actualBook.getPublisher(), expectedBook.getPublisher(), "Editor incorrecto"),
-                () -> assertEquals(actualBook.getAuthorList(), expectedBook.getAuthorList(), "Lista de autores incorrecta")
+                () -> assertEquals(expectedBook, actualBook, "Libro incorrecto"),
+                () -> assertEquals(expectedBook.getPublisher(), actualBook.getPublisher(), "Editor incorrecto"),
+                () -> assertEquals(expectedBook.getAuthorList(), actualBook.getAuthorList(), "Lista de autores incorrecta")
         );
     }
 
@@ -65,5 +66,26 @@ public class BookDaoUnitTest {
     public void testFindBookByIdNotFound() {
         Book actualBook = bookDao.findById(10);
         assertNull(actualBook, "Libro encontrado");
+    }
+
+    @DisplayName("Test find book in english")
+    @Test
+    public void testFindBookInEnglish() {
+        LanguageIoc.getLanguageManager().setCurrentLanguage("en");
+        Book actualBook = bookDao.findById(2);
+        Book expectedBook = new Book(
+                2,
+                "9788426418197",
+                "The name of the rose",
+                "The year is 1327. Franciscans in a wealthy Italian abbey are suspected of heresy, and Brother William of Baskerville arrives to investigate...",
+                new BigDecimal(12.30),
+                "nombreRosa.jpeg",
+                new Publisher(2, "Penguin Random House Grupo Editorial España"),
+                List.of(new Author(2, "Umberto Eco"))
+        );
+        assertAll(
+                () -> assertEquals(expectedBook.getTitle(), actualBook.getTitle(), "Título incorrecto"),
+                () -> assertEquals(expectedBook.getSynopsis(), actualBook.getSynopsis(), "Sinopsis incorrecta")
+        );
     }
 }

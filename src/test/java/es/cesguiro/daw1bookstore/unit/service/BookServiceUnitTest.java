@@ -37,7 +37,7 @@ public class BookServiceUnitTest {
                 new Book(4, "9788466338141", "La isla del día de antes", null, null, null),
                 new Book(5, "9788448022440", "Buenos presagios", null, null, null)
         );
-        assertEquals(actualBookList, expectedBookList, "Libro incorrecto");
+        assertEquals(expectedBookList, actualBookList, "Libro incorrecto");
     }
 
     @DisplayName("test find book by id")
@@ -45,7 +45,7 @@ public class BookServiceUnitTest {
     public void testFindById() {
         Book actualBook = bookService.findById(1);
         Book expectedBook = new Book(1, "9788433920423", "La conjura de los necios", null, null, null);
-        assertEquals(actualBook, expectedBook, "Libro incorrecto");
+        assertEquals(expectedBook, actualBook, "Libro incorrecto");
     }
 
     @DisplayName("test find book by non-existent id")

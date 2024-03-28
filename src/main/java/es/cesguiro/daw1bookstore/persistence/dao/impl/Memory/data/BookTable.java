@@ -12,7 +12,9 @@ public class BookTable {
                     1,
                     "9788433920423",
                     "La conjura de los necios",
+                    "A confederacy of dunce",
                     "El protagonista de esta novela es uno de los personajes más memorables...",
+                    "A monument to sloth, rant and contempt, a behemoth of fat, flatulence and furious suspicion of anything modern - this is Ignatius J. Reilly...",
                     new BigDecimal(13.20),
                     "necios.jpeg",
                     1
@@ -21,7 +23,9 @@ public class BookTable {
                     2,
                     "9788426418197",
                     "El nombre de la rosa",
-                    "Valiéndose de las características de la novela gótica, la crónica medieval y la novela policíaca, El nombre de la rosa narra las investigaciones detectivescas que realiza el fraile franciscano Guillermo de Baskerville para esclarecer los crímenes cometidos en una abadía benedictina en el año 1327. Le ayudará en su labor el novicio Adso, un joven que se enfrenta por primera vez a las realidades de la vida situadas más allá de las puertas del convento.",
+                    "The name of the rose",
+                    "Valiéndose de las características de la novela gótica, la crónica medieval y la novela policíaca, El nombre de la rosa narra las...",
+                    "The year is 1327. Franciscans in a wealthy Italian abbey are suspected of heresy, and Brother William of Baskerville arrives to investigate...",
                     new BigDecimal(12.30),
                     "nombreRosa.jpeg",
                     2
@@ -30,7 +34,9 @@ public class BookTable {
                     3,
                     "9786074213485",
                     "La insoportable levedad del ser",
-                    "La insoportable levedad del ser es una novela del escritor checo Milan Kundera publicada en 1984. La novela es una exploración filosófica de la vida, el amor, la muerte y la eternidad. La historia se desarrolla en Praga, capital de Checoslovaquia, en la década de 1960. La novela es una narrativa de múltiples capas que se centra en la vida de cuatro personajes principales: Tomáš, Teresa, Sabina y Franz.",
+                    "The unbearable lightness of being",
+                    "La insoportable levedad del ser es una novela del escritor checo Milan Kundera publicada en 1984. La novela es una exploración filosófica de la vida...",
+                    "In The Unbearable Lightness of Being, Milan Kundera tells the story of a young...",
                     new BigDecimal(11.50),
                     "levedad.jpeg",
                     3
@@ -38,7 +44,10 @@ public class BookTable {
             new BookRecord(
                     4,
                     "9788466338141",
-                    "La isla del día de antes", "La isla del día de antes es una novela del escritor italiano Umberto Eco publicada en 1994. La novela es una exploración filosófica de la vida, el amor, la muerte y la eternidad. La historia se desarrolla en Praga, capital de Checoslovaquia, en la década de 1960. La novela es una narrativa de múltiples capas que se centra en la vida de cuatro personajes principales: Tomáš, Teresa, Sabina y Franz.",
+                    "La isla del día de antes",
+                    "The island of the day before",
+                    "La isla del día de antes es una novela del escritor italiano Umberto Eco publicada en 1994. La novela es una exploración filosófica de la vida...",
+                    "It is the year 1643. Roberto, a young nobleman, survives war, the Bastille, exile, and shipwreck as he voyages to a Pacific island straddling the date meridian...",
                     new BigDecimal(10.40),
                     "islaDiaAntes.jpeg",
                     4
@@ -47,7 +56,9 @@ public class BookTable {
                     5,
                     "9788448022440",
                     "Buenos presagios",
-                    "Buenos presagios es una novela de humor escrita por Terry Pratchett y Neil Gaiman. Fue publicada por primera vez en 1990. La novela es una narrativa de múltiples capas que se centra en la vida de cuatro personajes principales: Tomáš, Teresa, Sabina y Franz.",
+                    "Good omens",
+                    "Buenos presagios es una novela de humor escrita por Terry Pratchett y Neil Gaiman. Fue publicada por primera vez en 1990. La novela es una narrativa de...",
+                    "According to The Nice and Accurate Prophecies of Agnes Nutter, Witch (the world's only completely accurate book of prophecies, written in 1655, before she exploded),...",
                     new BigDecimal(9.30),
                     "buenosPresagios.jpeg",
                     5

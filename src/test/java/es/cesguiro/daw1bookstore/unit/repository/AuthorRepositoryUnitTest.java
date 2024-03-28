@@ -30,7 +30,7 @@ public class AuthorRepositoryUnitTest {
         List<Author> expectedAuthorList = List.of(
                 new Author(1, "John Kennedy Toole")
         );
-        assertEquals(actualAuthorList, expectedAuthorList, "Autor incorrecto");
+        assertEquals(expectedAuthorList, actualAuthorList, "Autor incorrecto");
     }
 
     @DisplayName("Test find multiple authors by book id")
@@ -41,14 +41,14 @@ public class AuthorRepositoryUnitTest {
                 new Author(4, "Terry Pratchett"),
                 new Author(5, "Neil Gaiman")
         );
-        assertEquals(actualAuthorList, expectedAuthorList, "Autores incorrectos");
+        assertEquals(expectedAuthorList, actualAuthorList, "Autores incorrectos");
     }
 
     @DisplayName("Test find author by non-existent book id")
     @Test
     public void testFindByBookIdNonExistent() {
         List<Author> actualAuthorList = authorRepository.findByBookId(6);
-        assertEquals(actualAuthorList.size(), 0, "Autor encontrado");
+        assertEquals(0, actualAuthorList.size(), "Autor encontrado");
     }
 
 }

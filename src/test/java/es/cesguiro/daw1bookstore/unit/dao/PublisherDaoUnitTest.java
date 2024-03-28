@@ -18,13 +18,13 @@ public class PublisherDaoUnitTest {
     public void testFindByBookId() {
         Publisher actualPublisher = publisherDao.findByBookId(1);
         Publisher expectedPublisher = new Publisher(1, "Editorial Anagrama");
-        assertEquals(actualPublisher, expectedPublisher, "Editorial incorrecta");
+        assertEquals(expectedPublisher, actualPublisher, "Editorial incorrecta");
     }
 
     @DisplayName("Test find publisher by not existing book id")
     @Test
     public void testFindByNotExistingBookId() {
         Publisher actualPublisher = publisherDao.findByBookId(100);
-        assertEquals(actualPublisher, null, "Editorial incorrecta");
+        assertEquals(null, actualPublisher, "Editorial incorrecta");
     }
 }

@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.mapper;
 
+import es.cesguiro.daw1bookstore.common.container.LanguageIoc;
 import es.cesguiro.daw1bookstore.common.container.PublisherIoc;
 import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.domain.model.Publisher;
@@ -13,14 +14,23 @@ import java.util.List;
 public class BookMapper {
 
     public static Book toBook(BookRecord bookRecord) {
+        String language = LanguageIoc.getLanguageManager().getCurrentLanguage();
+
         if(bookRecord == null) {
             return null;
         }
         Book book = new Book();
         book.setId(bookRecord.getId());
         book.setIsbn(bookRecord.getIsbn());
-        book.setTitle(bookRecord.getTitle());
-        book.setSynopsis(bookRecord.getSynopsis());
+        if("en".equals(language)) {
+            book.setTitle(bookRecord.getTitleEn());
+            book.setSynopsis(bookRecord.getSynopsisEn());
+        } else {
+            book.setTitle(bookRecord.getTitle());
+            book.setSynopsis(bookRecord.getSynopsis());
+        }
+        //book.setTitle(bookRecord.getTitle());
+        //book.setSynopsis(bookRecord.getSynopsis());
         book.setPrice(bookRecord.getPrice());
         book.setCover(bookRecord.getCover());
 

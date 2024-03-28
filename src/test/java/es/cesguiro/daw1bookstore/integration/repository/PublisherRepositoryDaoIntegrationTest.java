@@ -18,13 +18,13 @@ public class PublisherRepositoryDaoIntegrationTest {
     public void testFindByBookId(){
         Publisher actualPublisher = publisherRepository.findByBookId(1);
         Publisher expectedPublisher = new Publisher(1, "Anagrama");
-        assertEquals(actualPublisher, expectedPublisher, "Editorial incorrecta");
+        assertEquals(expectedPublisher, actualPublisher, "Editorial incorrecta");
     }
 
     @DisplayName("Test find publisher by non-existent book id")
     @Test
     public void testFindByBookIdNonExistent() {
         Publisher actualPublisher = publisherRepository.findByBookId(6);
-        assertEquals(actualPublisher, null, "Editorial encontrada");
+        assertEquals(null, actualPublisher, "Editorial encontrada");
     }
 }

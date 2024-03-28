@@ -7,6 +7,7 @@ import es.cesguiro.daw1bookstore.domain.service.BookService;
 import es.cesguiro.daw1bookstore.mock.dao.BookDaoMock;
 import es.cesguiro.daw1bookstore.persistence.dao.BookDao;
 import es.cesguiro.daw1bookstore.persistence.repository.BookRepository;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ public class BookServiceRepositoryIntegrationTest {
                 new Book(4, "9788466338141", "La isla del día de antes", null, null, null),
                 new Book(5, "9788448022440", "Buenos presagios", null, null, null)
         );
-        assertEquals(actualBookList, expectedBookList, "Libro incorrecto");
+        assertEquals(expectedBookList, actualBookList, "Libro incorrecto");
     }
 
     @DisplayName("test find book by id")
@@ -45,7 +46,7 @@ public class BookServiceRepositoryIntegrationTest {
     public void testFindById() {
         Book actualBook = bookService.findById(1);
         Book expectedBook = new Book(1, "9788433920423", "La conjura de los necios", null, null, null);
-        assertEquals(actualBook, expectedBook, "Libro incorrecto");
+        assertEquals(expectedBook, actualBook, "Libro incorrecto");
     }
 
     @DisplayName("test find book by non-existent id")
@@ -55,5 +56,10 @@ public class BookServiceRepositoryIntegrationTest {
             Book actualBook = bookService.findById(6);
         });
         assertEquals("Resource not found. Book with id 6 not found.", exception.getMessage(), "Mensaje de error incorrecto");
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        BookIoc.setBookDao(null);
     }
 }

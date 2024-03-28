@@ -27,7 +27,7 @@ public class PublisherRepositoryUnitTest {
     public void testFindByBookId(){
         Publisher actualPublisher = publisherRepository.findByBookId(1);
         Publisher expectedPublisher = new Publisher(1, "Anagrama");
-        assertEquals(actualPublisher, expectedPublisher, "Editorial incorrecta");
+        assertEquals(expectedPublisher, actualPublisher, "Editorial incorrecta");
     }
 
     @DisplayName("Test find publisher by non-existent book id")

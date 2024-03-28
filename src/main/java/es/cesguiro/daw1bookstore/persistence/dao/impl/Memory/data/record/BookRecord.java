@@ -6,16 +6,20 @@ public class BookRecord {
     private Integer id;
     private String isbn;
     private String title;
+    private String titleEn;
     private String synopsis;
+    private String synopsisEn;
     private BigDecimal price;
     private String cover;
     private int publisherId;
 
-    public BookRecord(Integer id, String isbn, String title, String synopsis, BigDecimal price, String cover, int publisherId) {
+    public BookRecord(Integer id, String isbn, String title, String titleEn, String synopsis, String synopsisEn, BigDecimal price, String cover, int publisherId) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
+        this.titleEn = titleEn;
         this.synopsis = synopsis;
+        this.synopsisEn = synopsisEn;
         this.price = price;
         this.cover = cover;
         this.publisherId = publisherId;
@@ -77,5 +81,20 @@ public class BookRecord {
         this.publisherId = publisherId;
     }
 
+    public String getTitleEn() {
+        return titleEn;
+    }
+
+    public void setTitleEn(String titleEn) {
+        this.titleEn = titleEn;
+    }
+
+    public String getSynopsisEn() {
+        return synopsisEn;
+    }
+
+    public void setSynopsisEn(String synopsisEn) {
+        this.synopsisEn = synopsisEn;
+    }
 }
 
