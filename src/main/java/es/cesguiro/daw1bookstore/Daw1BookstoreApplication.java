@@ -6,7 +6,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 // Necesario para que Spring detecte los filtros y los registre automáticamente. Si utilizamos @Component en el filtro, no es necesario
-@ServletComponentScan
+//@ServletComponentScan
 public class Daw1BookstoreApplication {
 
 	public static void main(String[] args) {

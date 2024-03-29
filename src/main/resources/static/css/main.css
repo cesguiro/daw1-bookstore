@@ -1,0 +1,12 @@
+body{
+    padding: 2rem 0rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+.img-card {
+    max-width: 150px;
+    margin: 0 auto;
+}

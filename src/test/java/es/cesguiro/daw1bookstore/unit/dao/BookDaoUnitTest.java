@@ -1,16 +1,18 @@
 package es.cesguiro.daw1bookstore.unit.dao;
 
 import es.cesguiro.daw1bookstore.common.container.BookIoc;
-import es.cesguiro.daw1bookstore.common.container.LanguageIoc;
 import es.cesguiro.daw1bookstore.domain.model.Author;
 import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.domain.model.Publisher;
 import es.cesguiro.daw1bookstore.persistence.dao.BookDao;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -71,7 +73,7 @@ public class BookDaoUnitTest {
     @DisplayName("Test find book in english")
     @Test
     public void testFindBookInEnglish() {
-        LanguageIoc.getLanguageManager().setCurrentLanguage("en");
+        LocaleContextHolder.setLocale(new Locale("en"));
         Book actualBook = bookDao.findById(2);
         Book expectedBook = new Book(
                 2,
@@ -87,5 +89,10 @@ public class BookDaoUnitTest {
                 () -> assertEquals(expectedBook.getTitle(), actualBook.getTitle(), "Título incorrecto"),
                 () -> assertEquals(expectedBook.getSynopsis(), actualBook.getSynopsis(), "Sinopsis incorrecta")
         );
+    }
+
+    @AfterEach
+    public void tearDown() {
+        LocaleContextHolder.resetLocaleContext();
     }
 }
