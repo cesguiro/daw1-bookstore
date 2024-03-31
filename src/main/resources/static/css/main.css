@@ -10,3 +10,8 @@ a{
     max-width: 150px;
     margin: 0 auto;
 }
+
+.flag-icon-small {
+    width: 32px; /* ajusta este valor según sea necesario */
+    height: 32px; /* ajusta este valor según sea necesario */
+}

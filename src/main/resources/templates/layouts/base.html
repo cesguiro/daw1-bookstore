@@ -1,55 +1,54 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="head">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
     <link th:rel="stylesheet" th:href="@{/css/main.css}">
+    <script src="/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="/webjars/jquery/3.6.4/jquery.min.js"></script>
     <title th:text="${title}">Document</title>
 </head>
 <body>
 <nav th:fragment="menu" class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-        <!--<a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="/">
             <img th:src="@{${'/images/library.jpg'}}" alt="" height="60px">
-        </a>-->
+        </a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav me-auto">
                 <a class="nav-link" href=".">
                     <i class="fas fa-shopping-cart"></i>
                 </a>
-                <!--<a th:href="@{${param.lang} != null} ? @{/books/1(lang=${param.lang})} : @{/books/1}" th:text="Book 1"></a>-->
-                <!--<a class="nav-link" th:href="@{${param.lang != null} ? '/books?lang=' + ${param.lang} : '/books'}" th:text="#{menu.books}"></a>-->
                 <a class="nav-link" th:href="@{'/books?lang=' + ${#locale.language} }" th:text="#{menu.books}"></a>
-                <!--<a class="nav-link" href="/books" th:text="#{menu.books}"></a>-->
             </div>
             <div class="navbar-nav">
-                    <a class="nav-link" href="?lang=es">Español</a>
-                    <a class="nav-link" href="?lang=en">Inglés</a>
+                <span sec:authorize="isAuthenticated()">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${#authentication.name}"></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/orders" th:text="#{menu.orders}">Pedidos</a>
+                            <a class="dropdown-item" href="/logout" th:text="#{menu.logout}">Cerrar sesión</a>
+                        </div>
+                    </div>
+                </span>
+                <span sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/login" th:text="#{menu.login}">Iniciar sesión</a>
+                </span>
+            </div>
+            <div class="navbar-nav">
+                    <a class="nav-link" href="?lang=es">
+                        <img th:src="@{${'/images/spain.png'}}" alt="Español" class="flag-icon rounded-circle flag-icon-small">
+                    </a>
+                    <a class="nav-link" href="?lang=en">
+                        <img th:src="@{${'/images/england.png'}}" alt="Español" class="flag-icon rounded-circle flag-icon-small">
+                    </a>
             </div>
 
-            <!--<div class="navbar-nav" th:if="${session.isEmpty()}" >
-                <a class="nav-link" href="/singup">Registro</a>
-                <a class="nav-link" href="/singin">Login</a>
-            </div>
-            <div class="navbar-nav" th:unless="${session.isEmpty()}">-->
-            <!--<div class="navbar-nav">
-                <a class="nav-link" href="/carts">Carrito</a>
-                <a class="nav-link" href="/orders">Pedidos</a>
-            </div>-->
         </div>
     </div>
 </nav>
-
-
-<footer th:fragment="footer" class="text-center mb-5 fixed-bottom">
-    &copy;2024 Todos los derechos reservados
-</footer>
-
-<script th:fragment="jquery" th:src="@{/js/jquery/jquery.min.js}"></script>
-<script th:fragment="popper" th:src="@{/js/popper/popper.min.js}"></script>
-<script th:fragment="bootstrap" th:src="@{/css/bootstrap/js/bootstrap.min.js}"></script>
-
+<footer th:fragment="footer" class="text-center mb-5 fixed-bottom"></footer>
 </body>
 </html>

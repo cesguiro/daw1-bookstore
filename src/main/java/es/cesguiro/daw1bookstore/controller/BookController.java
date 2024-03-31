@@ -2,6 +2,8 @@ package es.cesguiro.daw1bookstore.controller;
 
 import es.cesguiro.daw1bookstore.common.container.BookIoc;
 import es.cesguiro.daw1bookstore.domain.service.BookService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,9 @@ public class BookController {
 
     @GetMapping
     public String findAll(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        System.out.println("currentPrincipalName = " + currentPrincipalName);
         model.addAttribute("bookList", bookService.findAll());
         //model.addAttribute("language", LanguageIoc.getLanguageManager().getCurrentLanguage());
         return "books/list";
