@@ -29,7 +29,6 @@ public class BookController {
         String currentPrincipalName = authentication.getName();
         System.out.println("currentPrincipalName = " + currentPrincipalName);
         model.addAttribute("bookList", bookService.findAll());
-        //model.addAttribute("language", LanguageIoc.getLanguageManager().getCurrentLanguage());
         return "books/list";
     }
 

@@ -6,6 +6,7 @@ import es.cesguiro.daw1bookstore.persistence.repository.OrderRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,9 +23,9 @@ public class OrderRepositoryDaoIntegrationTest {
     public void testFindByUserId() {
         int userId = 2;
         List<Order> expectedOrderList = List.of(
-                new Order(1, null, LocalDate.of(2023, 11, 30), LocalDate.of(2023, 12, 05), 75.05f, 4),
-                new Order(2, null, LocalDate.of(2023, 02, 12), LocalDate.of(2023, 02, 15), 190.00f, 4),
-                new Order(5, null, LocalDate.of(2024, 03, 29), null, 125.50f, 2)
+                new Order(1, null, LocalDate.of(2023, 11, 30), LocalDate.of(2023, 12, 05), new BigDecimal(75.05), 4),
+                new Order(2, null, LocalDate.of(2023, 02, 12), LocalDate.of(2023, 02, 15), new BigDecimal(190.00), 4),
+                new Order(5, null, LocalDate.of(2024, 03, 29), null, new BigDecimal(125.50), 2)
         );
         List<Order> actualOrderList = orderRepository.findByUserId(userId);
 

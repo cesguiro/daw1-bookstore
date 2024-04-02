@@ -1,5 +1,7 @@
 package es.cesguiro.daw1bookstore.domain.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -10,7 +12,7 @@ public class Order {
     private User user;
     private LocalDate orderDate;
     private LocalDate deliveryDate;
-    private double total;
+    private BigDecimal total;
 
     /*
      * 1: delivered
@@ -20,20 +22,20 @@ public class Order {
      */
     private int status;
 
-    public Order(Integer id, User user, LocalDate orderDate, LocalDate deliveryDate, double total, int status) {
+    public Order(Integer id, User user, LocalDate orderDate, LocalDate deliveryDate, BigDecimal total, int status) {
         this.id = id;
         this.user = user;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
-        this.total = total;
+        setTotal(total);
         this.status = status;
     }
 
-    public Order(Integer id, LocalDate orderDate, LocalDate deliveryDate, double total, int status) {
+    public Order(Integer id, LocalDate orderDate, LocalDate deliveryDate, BigDecimal total, int status) {
         this.id = id;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
-        this.total = total;
+        setTotal(total);
         this.status = status;
     }
 
@@ -69,12 +71,15 @@ public class Order {
         this.deliveryDate = deliveryDate;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setTotal(BigDecimal total) {
+        if (total == null) {
+            total = new BigDecimal(0);
+        }
+        this.total = total.setScale(2, RoundingMode.HALF_UP);
     }
 
     public int getStatus() {

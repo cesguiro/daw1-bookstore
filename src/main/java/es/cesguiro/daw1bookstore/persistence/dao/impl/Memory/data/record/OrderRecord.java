@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class OrderRecord {
@@ -8,7 +9,7 @@ public class OrderRecord {
     private int userId;
     private LocalDate orderDate;
     private LocalDate deliveryDate;
-    private double total;
+    private BigDecimal total;
 
     /*
         * 0: pending (cart)
@@ -19,7 +20,7 @@ public class OrderRecord {
      */
     private int status;
 
-    public OrderRecord(int id, int userId, LocalDate orderDate, LocalDate deliveryDate, double total, int status) {
+    public OrderRecord(int id, int userId, LocalDate orderDate, LocalDate deliveryDate, BigDecimal total, int status) {
         this.id = id;
         this.userId = userId;
         this.orderDate = orderDate;
@@ -60,11 +61,11 @@ public class OrderRecord {
         this.deliveryDate = deliveryDate;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 
