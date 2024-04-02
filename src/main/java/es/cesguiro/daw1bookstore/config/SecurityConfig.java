@@ -1,13 +1,14 @@
 package es.cesguiro.daw1bookstore.config;
 
-import es.cesguiro.daw1bookstore.domain.model.User;
+import es.cesguiro.daw1bookstore.domain.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -48,14 +49,12 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        // Passwords are not encrypted for simplicity
-        // In a real application, passwords should be encrypted
-        // {noop} is a prefix that indicates that the password is not encrypted
-        User admin = new User(1, "admin", "{noop}admin", "admin@bookstore.com", "María", "González", "Calle Mayor, 1", true);
-        User user1 = new User(2, "user1", "{noop}user1", "user1@bookstore.com", "Juan", "Pérez", "Calle Mayor, 2", false);
-        User user2 = new User(3, "user2", "{noop}user2", "user2@bookstore.com", "Ana", "Martínez", "Calle Mayor, 3", false);
+        return new UserDetailsServiceImpl();
+    }
 
-        return new InMemoryUserDetailsManager(admin, user1, user2);
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }

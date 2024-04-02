@@ -1,6 +1,8 @@
 package es.cesguiro.daw1bookstore.domain.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
+
 
 public class Order {
 
@@ -82,4 +84,18 @@ public class Order {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 }

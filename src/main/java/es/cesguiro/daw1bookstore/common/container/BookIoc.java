@@ -47,4 +47,10 @@ public class BookIoc {
     public static void setBookDao(BookDao bookDao) {
         BookIoc.bookDao = bookDao;
     }
+
+    public static void reset() {
+        bookService = null;
+        bookRepository = null;
+        bookDao = null;
+    }
 }

@@ -31,4 +31,9 @@ public class AuthorIoc {
     public static void setAuthorDao(AuthorDao authorDao) {
         AuthorIoc.authorDao = authorDao;
     }
+
+    public static void reset() {
+        authorRepository = null;
+        authorDao = null;
+    }
 }

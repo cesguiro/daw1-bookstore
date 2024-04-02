@@ -26,7 +26,7 @@
             <div class="navbar-nav">
                 <span sec:authorize="isAuthenticated()">
                     <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${#authentication.name}"></a>
+                        <a th:text="${#authentication.principal.name}" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/orders" th:text="#{menu.orders}">Pedidos</a>
                             <a class="dropdown-item" href="/logout" th:text="#{menu.logout}">Cerrar sesión</a>

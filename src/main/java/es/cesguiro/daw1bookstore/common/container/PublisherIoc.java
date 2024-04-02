@@ -31,4 +31,9 @@ public class PublisherIoc {
     public static void setPublisherDao(PublisherDao publisherDao) {
         PublisherIoc.publisherDao = publisherDao;
     }
+
+    public static void reset() {
+        publisherRepository = null;
+        publisherDao = null;
+    }
 }

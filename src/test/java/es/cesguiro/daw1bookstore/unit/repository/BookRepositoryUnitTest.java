@@ -4,6 +4,7 @@ import es.cesguiro.daw1bookstore.common.container.BookIoc;
 import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.mock.dao.BookDaoMock;
 import es.cesguiro.daw1bookstore.persistence.repository.BookRepository;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,4 +53,10 @@ public class BookRepositoryUnitTest {
         Book actualBook = bookRepository.findById(6);
         assertNull(actualBook, "Libro encontrado");
     }
+
+    @AfterAll
+    public static void tearDown() {
+        BookIoc.reset();
+    }
+
 }

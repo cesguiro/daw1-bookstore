@@ -60,6 +60,6 @@ public class BookServiceRepositoryIntegrationTest {
 
     @AfterAll
     public static void tearDown() {
-        BookIoc.setBookDao(null);
+        BookIoc.reset();
     }
 }

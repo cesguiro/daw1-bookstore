@@ -26,7 +26,7 @@ public class BookDaoUnitTest {
     @Test
     public void testFindAllBooks() {
         List<Book> actualBookList = bookDao.findAll();
-        Book expectedBookList = new Book(
+        Book expectedBook = new Book(
                 1,
                 "9788433920423",
                 "La conjura de los necios",
@@ -37,7 +37,7 @@ public class BookDaoUnitTest {
 
         assertAll("books",
                 () -> assertEquals(5, actualBookList.size(), "Tamaño del listado incorrecto"),
-                () -> assertEquals(expectedBookList, actualBookList.get(0), "Libro incorrecto")
+                () -> assertEquals(expectedBook, actualBookList.get(0), "Libro incorrecto")
         );
     }
 

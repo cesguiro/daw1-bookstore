@@ -106,11 +106,6 @@ public class User implements UserDetails {
         return authoritieList;
     }
 
-    /*@Override
-    public String getUsername() {
-        return null;
-    }*/
-
     @Override
     public boolean isAccountNonExpired() {
         return true;

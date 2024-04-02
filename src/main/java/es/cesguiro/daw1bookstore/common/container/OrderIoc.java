@@ -4,13 +4,15 @@ import es.cesguiro.daw1bookstore.domain.service.OrderService;
 import es.cesguiro.daw1bookstore.domain.service.impl.OrderServiceImpl;
 import es.cesguiro.daw1bookstore.persistence.dao.OrderDao;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.OrderDaoMemory;
-import es.cesguiro.daw1bookstore.persistence.repository.OrderRespository;
-import es.cesguiro.daw1bookstore.persistence.repository.impl.OrderRespositoryImpl;
+import es.cesguiro.daw1bookstore.persistence.repository.OrderRepository;
+import es.cesguiro.daw1bookstore.persistence.repository.impl.OrderRepositoryImpl;
+
 
 public class OrderIoc {
 
     private static OrderService orderService;
-    private static OrderRespository orderRespository;
+    private static OrderRepository orderRepository;
+
     private static OrderDao orderDao;
 
     public static OrderService getOrderService() {
@@ -20,17 +22,35 @@ public class OrderIoc {
         return orderService;
     }
 
-    private static OrderRespository getOrderRespository() {
-        if (orderRespository == null) {
-            orderRespository = new OrderRespositoryImpl(getOrderDao());
+    public static OrderRepository getOrderRespository() {
+        if (orderRepository == null) {
+            orderRepository = new OrderRepositoryImpl(getOrderDao());
         }
-        return orderRespository;
+        return orderRepository;
     }
 
-    private static OrderDao getOrderDao() {
+    public static OrderDao getOrderDao() {
         if (orderDao == null) {
             orderDao = new OrderDaoMemory();
         }
         return orderDao;
+    }
+
+    public static void setOrderService(OrderService orderService) {
+        OrderIoc.orderService = orderService;
+    }
+
+    public static void setOrderRespository(OrderRepository orderRepository) {
+        OrderIoc.orderRepository = orderRepository;
+    }
+
+    public static void setOrderDao(OrderDao orderDao) {
+        OrderIoc.orderDao = orderDao;
+    }
+
+    public static void reset() {
+        orderService = null;
+        orderRepository = null;
+        orderDao = null;
     }
 }

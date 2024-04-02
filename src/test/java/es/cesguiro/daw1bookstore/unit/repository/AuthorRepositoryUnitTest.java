@@ -4,6 +4,7 @@ import es.cesguiro.daw1bookstore.common.container.AuthorIoc;
 import es.cesguiro.daw1bookstore.domain.model.Author;
 import es.cesguiro.daw1bookstore.mock.dao.AuthorDaoMock;
 import es.cesguiro.daw1bookstore.persistence.repository.AuthorRepository;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,6 +50,11 @@ public class AuthorRepositoryUnitTest {
     public void testFindByBookIdNonExistent() {
         List<Author> actualAuthorList = authorRepository.findByBookId(6);
         assertEquals(0, actualAuthorList.size(), "Autor encontrado");
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        AuthorIoc.reset();
     }
 
 }
