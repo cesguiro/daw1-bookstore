@@ -48,4 +48,23 @@ public class OrderDaoUnitTest {
                 () -> assertEquals(expectedOrderList.size(), actualOrderList.size(), "Tamaño del listado incorrecto")
         );
     }
+
+    @DisplayName("Test find order by id")
+    @Test
+    public void testFindOrderById() {
+        int orderId = 1;
+        Order expectedOrder = new Order(1, null, LocalDate.of(2023, 11, 30), LocalDate.of(2023, 12, 05), new BigDecimal(75.05), 4);
+        Order actualOrder = orderDao.findById(orderId);
+
+        assertEquals(expectedOrder, actualOrder, "Orden incorrecta");
+    }
+
+    @DisplayName("Test find order by non-existent id")
+    @Test
+    public void testFindOrderByNonExistentId() {
+        int orderId = 100;
+        Order actualOrder = orderDao.findById(orderId);
+
+        assertEquals(null, actualOrder, "Orden incorrecta");
+    }
 }

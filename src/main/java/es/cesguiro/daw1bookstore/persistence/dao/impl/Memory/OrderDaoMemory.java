@@ -18,4 +18,13 @@ public class OrderDaoMemory implements OrderDao {
         List<OrderRecord> orderRecordList = orderTable.selectByUserId(userId);
         return OrderMapper.toOrderList(orderRecordList);
     }
+
+    @Override
+    public Order findById(Integer id) {
+        OrderRecord orderRecord = orderTable.selectById(id);
+        if (orderRecord == null) {
+            return null;
+        }
+        return OrderMapper.toOrder(orderRecord);
+    }
 }

@@ -30,4 +30,12 @@ public class OrderTable {
         return orderRecordListByUserId;
     }
 
+    public OrderRecord selectById(Integer id) {
+        for (OrderRecord orderRecord : orderRecordList) {
+            if (orderRecord.getId() == id) {
+                return orderRecord;
+            }
+        }
+        return null;
+    }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("Book Service-Repository-Dao Integration Test")
+@DisplayName("Book Integration Test")
 public class BookIntegrationTest {
 
     private final BookService bookService = BookIoc.getBookService();

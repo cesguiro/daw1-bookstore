@@ -35,4 +35,14 @@ public class OrderDaoMock implements OrderDao {
         }
         return result;
     }
+
+    @Override
+    public Order findById(Integer id) {
+        for (Order order : orderList) {
+            if (order.getId() == id) {
+                return order;
+            }
+        }
+        return null;
+    }
 }

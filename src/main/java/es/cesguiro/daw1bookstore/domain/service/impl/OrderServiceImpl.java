@@ -19,4 +19,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findByUserId(Integer userId) {
         return orderRepository.findByUserId(userId);
     }
+
+    @Override
+    public Order findById(Integer id) {
+        return orderRepository.findById(id);
+    }
 }

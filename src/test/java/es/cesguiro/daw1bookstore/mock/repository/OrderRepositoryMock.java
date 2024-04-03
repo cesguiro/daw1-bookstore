@@ -36,4 +36,14 @@ public class OrderRepositoryMock implements OrderRepository {
         }
         return result;
     }
+
+    @Override
+    public Order findById(Integer id) {
+        for (Order order : orderList) {
+            if (order.getId() == id) {
+                return order;
+            }
+        }
+        return null;
+    }
 }

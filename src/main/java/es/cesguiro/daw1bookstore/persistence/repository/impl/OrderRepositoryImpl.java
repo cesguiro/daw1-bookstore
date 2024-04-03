@@ -18,4 +18,9 @@ public class OrderRepositoryImpl implements OrderRepository {
     public List<Order> findByUserId(Integer userId) {
         return orderDao.findByUserId(userId);
     }
+
+    @Override
+    public Order findById(Integer id) {
+        return orderDao.findById(id);
+    }
 }

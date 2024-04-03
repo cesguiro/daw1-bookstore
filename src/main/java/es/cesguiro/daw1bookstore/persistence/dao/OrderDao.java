@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OrderDao {
     List<Order> findByUserId(Integer userId);
+
+    Order findById(Integer id);
 }
