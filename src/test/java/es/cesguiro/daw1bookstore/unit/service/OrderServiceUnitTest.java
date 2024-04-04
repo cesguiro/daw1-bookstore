@@ -1,16 +1,21 @@
 package es.cesguiro.daw1bookstore.unit.service;
 
 import es.cesguiro.daw1bookstore.common.container.OrderIoc;
+import es.cesguiro.daw1bookstore.common.exception.AuthorizationException;
 import es.cesguiro.daw1bookstore.common.exception.ResourceNotFoundException;
 import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.domain.model.Order;
 import es.cesguiro.daw1bookstore.domain.model.OrderDetail;
+import es.cesguiro.daw1bookstore.domain.model.User;
 import es.cesguiro.daw1bookstore.domain.service.OrderService;
 import es.cesguiro.daw1bookstore.mock.repository.OrderRepositoryMock;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -27,6 +32,12 @@ public class OrderServiceUnitTest {
     public static void setUp() {
         OrderIoc.setOrderRespository(new OrderRepositoryMock());
         orderService = OrderIoc.getOrderService();
+
+        // Set authenticated user
+        User authenticatedUser = new User();
+        authenticatedUser.setId(2);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(authenticatedUser, null);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     @DisplayName("Test find All orders by userId")
@@ -106,8 +117,19 @@ public class OrderServiceUnitTest {
         assertEquals("Resource not found. Order with id 100 not found.", exception.getMessage(), "Mensaje de error incorrecto");
     }
 
+    @DisplayName("Test find order by id with authorized user")
+    @Test
+    public void testFindOrderByNonOwnerUser() {
+        Exception exception = assertThrows(AuthorizationException.class, () -> {
+            Order actualOrder = orderService.findById(8);
+        });
+        assertEquals("Authorization exception: You are not authorized to access this resource.", exception.getMessage(), "Mensaje de error incorrecto");
+    }
+
     @AfterAll
     public static void tearDown() {
         OrderIoc.reset();
+        // Limpiar el contexto de seguridad para eliminar el usuario autenticado
+        SecurityContextHolder.clearContext();
     }
 }

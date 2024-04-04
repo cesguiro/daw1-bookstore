@@ -30,6 +30,9 @@ public class User implements UserDetails {
         this.admin = admin;
     }
 
+    public User() {
+    }
+
     public Integer getId() {
         return id;
     }

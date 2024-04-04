@@ -16,14 +16,15 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public List<Order> findByUserId(Integer userId) {
-        Order order = orderDao.findById(userId);
         return orderDao.findOrderByUserId(userId);
     }
 
     @Override
     public Order findById(Integer id) {
         Order order = orderDao.findById(id);
-
-        return orderDao.findById(id);
+        if(order == null || order.getStatus() == 0) {
+            return null;
+        }
+        return order;
     }
 }

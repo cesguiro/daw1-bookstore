@@ -13,4 +13,9 @@ public class UserDaoMemory implements UserDao {
     public User findByUsername(String username) {
         return UserMapper.toUser(userTable.selectByUsername(username));
     }
+
+    @Override
+    public User findById(int userId) {
+        return UserMapper.toUser(userTable.selectById(userId));
+    }
 }

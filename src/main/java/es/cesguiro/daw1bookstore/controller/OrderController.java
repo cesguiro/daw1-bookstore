@@ -56,9 +56,10 @@ public class OrderController {
         // Formatear las fechas de la orden según el patrón de formato obtenido
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateFormatPattern, locale);
         String orderDateFormatted = order.getOrderDate().format(dateFormatter);
-        String deliveryDateFormatted = order.getDeliveryDate().format(dateFormatter);
-
-
+        String deliveryDateFormatted = "";
+        if(order.getDeliveryDate() != null) {
+            deliveryDateFormatted = order.getDeliveryDate().format(dateFormatter);
+        }
 
         // Agregar las fechas formateadas al modelo
         model.addAttribute("orderDate", orderDateFormatted);
