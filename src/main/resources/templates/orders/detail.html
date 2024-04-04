@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{layouts/base :: head}">
+</head>
+<body>
+<nav th:replace="~{layouts/base:: menu}"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-8 col-lg-5">
+            <h6 class="text-muted" th:text="|Pedido número ${order.id} (${order.total} €)|"></h6>
+            <h6 class="text-muted" th:text="|Fecha de pedido ${orderDate}|"></h6>
+            <h6 class="text-muted" th:text="|Fecha de entrega ${deliveryDate}|"></h6>
+            <ul class="list-group">
+                <a th:each="orderDetail : ${order.orderDetailList}" th:href="@{${'/books/' + orderDetail.book.id}}">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="image-parent">
+                            <img th:src="@{${'/images/cover/' + orderDetail.book.cover}}" class="img-fluid" th:alt="${orderDetail.book.title}" style="height: 100px">
+                        </div>
+                        <span th:text="${orderDetail.book.title}" style="font-weight: bold"></span>
+                        <span th:text="|${orderDetail.quantity} x |"></span>
+                        <span th:text="|${orderDetail.price} €|"></span>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -3,6 +3,7 @@ package es.cesguiro.daw1bookstore.domain.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -21,6 +22,8 @@ public class Order {
      * 4: received
      */
     private int status;
+
+    private List<OrderDetail> orderDetailList;
 
     public Order(Integer id, User user, LocalDate orderDate, LocalDate deliveryDate, BigDecimal total, int status) {
         this.id = id;
@@ -90,6 +93,18 @@ public class Order {
         this.status = status;
     }
 
+    public List<OrderDetail> getOrderDetailList() {
+        return orderDetailList;
+    }
+
+    public void setOrderDetailList(List<OrderDetail> orderDetailList) {
+        this.orderDetailList = orderDetailList;
+    }
+
+    public void addOrderDetail(OrderDetail orderDetail) {
+        orderDetailList.add(orderDetail);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,4 +118,16 @@ public class Order {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", user=" + user +
+                ", orderDate=" + orderDate +
+                ", deliveryDate=" + deliveryDate +
+                ", total=" + total +
+                ", status=" + status +
+                ", orderDetailList=" + orderDetailList +
+                '}';
+    }
 }

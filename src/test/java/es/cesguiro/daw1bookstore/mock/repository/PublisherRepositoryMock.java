@@ -1,13 +1,12 @@
-package es.cesguiro.daw1bookstore.mock.dao;
+package es.cesguiro.daw1bookstore.mock.repository;
 
-import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.domain.model.Publisher;
-import es.cesguiro.daw1bookstore.persistence.dao.PublisherDao;
+import es.cesguiro.daw1bookstore.persistence.repository.PublisherRepository;
 
 import java.util.List;
 import java.util.Map;
 
-public class PublisherDaoMock implements PublisherDao {
+public class PublisherRepositoryMock implements PublisherRepository {
 
     private final List<Publisher> publisherList = List.of(
             new Publisher(1, "Editorial Anagrama"),
@@ -42,4 +41,5 @@ public class PublisherDaoMock implements PublisherDao {
         }
         return findById(publisherId);
     }
+
 }

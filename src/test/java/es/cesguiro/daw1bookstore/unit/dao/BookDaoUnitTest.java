@@ -13,6 +13,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.LogManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -55,7 +56,6 @@ public class BookDaoUnitTest {
                 new Publisher(1, "Editorial Anagrama"),
                 List.of(new Author(1, "John Kennedy Toole"))
         );
-
         assertAll("books",
                 () -> assertEquals(expectedBook, actualBook, "Libro incorrecto"),
                 () -> assertEquals(expectedBook.getPublisher(), actualBook.getPublisher(), "Editor incorrecto"),

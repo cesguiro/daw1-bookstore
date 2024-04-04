@@ -1,12 +1,10 @@
 package es.cesguiro.daw1bookstore.integration.service;
 
 import es.cesguiro.daw1bookstore.common.container.BookIoc;
-import es.cesguiro.daw1bookstore.common.exception.ResourceNotFounException;
+import es.cesguiro.daw1bookstore.common.exception.ResourceNotFoundException;
 import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.domain.service.BookService;
 import es.cesguiro.daw1bookstore.mock.dao.BookDaoMock;
-import es.cesguiro.daw1bookstore.persistence.dao.BookDao;
-import es.cesguiro.daw1bookstore.persistence.repository.BookRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -52,7 +50,7 @@ public class BookServiceRepositoryIntegrationTest {
     @DisplayName("test find book by non-existent id")
     @Test
     public void testFindByIdNonExistent() {
-        Exception exception = assertThrows(ResourceNotFounException.class, () -> {
+        Exception exception = assertThrows(ResourceNotFoundException.class, () -> {
             Book actualBook = bookService.findById(6);
         });
         assertEquals("Resource not found. Book with id 6 not found.", exception.getMessage(), "Mensaje de error incorrecto");

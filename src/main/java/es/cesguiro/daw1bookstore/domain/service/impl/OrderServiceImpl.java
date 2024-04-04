@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.domain.service.impl;
 
+import es.cesguiro.daw1bookstore.common.exception.ResourceNotFoundException;
 import es.cesguiro.daw1bookstore.domain.model.Order;
 import es.cesguiro.daw1bookstore.domain.service.OrderService;
 import es.cesguiro.daw1bookstore.persistence.repository.OrderRepository;
@@ -22,6 +23,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findById(Integer id) {
+        Order order = orderRepository.findById(id);
+        if (order == null) {
+            throw new ResourceNotFoundException("Order with id " + id + " not found.");
+        }
         return orderRepository.findById(id);
     }
 }

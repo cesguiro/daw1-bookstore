@@ -5,14 +5,6 @@ import es.cesguiro.daw1bookstore.persistence.dao.BookDao;
 
 import java.util.List;
 
-public class BookDaoJson implements BookDao {
-    @Override
-    public List<Book> findAll() {
-        return null;
-    }
+public class BookDaoJson {
 
-    @Override
-    public Book findById(Integer id) {
-        return null;
-    }
 }

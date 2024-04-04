@@ -47,6 +47,7 @@ public class Book {
         this.authorList = authorList;
     }
 
+
     public Integer getId() {
         return id;
     }
@@ -142,5 +143,19 @@ public class Book {
     @Override
     public int hashCode() {
         return Objects.hash(isbn);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", synopsis='" + synopsis + '\'' +
+                ", price=" + price +
+                ", cover='" + cover + '\'' +
+                ", publisher=" + publisher +
+                ", authorList=" + authorList +
+                '}';
     }
 }

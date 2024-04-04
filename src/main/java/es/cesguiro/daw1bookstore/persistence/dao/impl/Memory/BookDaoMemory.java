@@ -3,6 +3,7 @@ package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory;
 import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.persistence.dao.BookDao;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.BookTable;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.OrderDetailTable;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record.BookRecord;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.mapper.BookMapper;
 
@@ -24,4 +25,5 @@ public class BookDaoMemory implements BookDao {
     public Book findById(Integer id) {
         return BookMapper.toBook(bookTable.selectById(id));
     }
+
 }

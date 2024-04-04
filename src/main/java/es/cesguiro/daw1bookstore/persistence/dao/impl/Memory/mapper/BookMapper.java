@@ -11,7 +11,6 @@ import java.util.Locale;
 public class BookMapper {
 
     public static Book toBook(BookRecord bookRecord) {
-        //String language = LanguageIoc.getLanguageManager().getCurrentLanguage();
         Locale currentLocale = LocaleContextHolder.getLocale();
         String language = currentLocale.getLanguage();
 
@@ -28,8 +27,6 @@ public class BookMapper {
             book.setTitle(bookRecord.getTitle());
             book.setSynopsis(bookRecord.getSynopsis());
         }
-        //book.setTitle(bookRecord.getTitle());
-        //book.setSynopsis(bookRecord.getSynopsis());
         book.setPrice(bookRecord.getPrice());
         book.setCover(bookRecord.getCover());
 

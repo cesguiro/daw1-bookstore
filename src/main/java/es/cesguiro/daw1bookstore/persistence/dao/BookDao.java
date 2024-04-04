@@ -9,4 +9,5 @@ public interface BookDao {
     public List<Book> findAll();
 
     public Book findById(Integer id);
+
 }

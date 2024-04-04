@@ -10,6 +10,8 @@ import java.util.List;
 
 public class BookDaoMock implements BookDao {
 
+    AuthorDaoMock authorDaoMock = new AuthorDaoMock();
+    PublisherDaoMock publisherDaoMock = new PublisherDaoMock();
     private final List<Book> bookList = List.of(
             new Book(
                     1,
@@ -18,8 +20,8 @@ public class BookDaoMock implements BookDao {
                     "El protagonista de esta novela es uno de los personajes más memorables...",
                     new BigDecimal(13.20),
                     "necios.jpeg",
-                    new Publisher(1, "Editorial Anagrama"),
-                    List.of(new Author(1, "John Kennedy Toole"))
+                    publisherDaoMock.findById(1),
+                    List.of(authorDaoMock.findById(1))
             ),
             new Book(
                     2,
@@ -28,8 +30,8 @@ public class BookDaoMock implements BookDao {
                     "Valiéndose de las características de la novela gótica, la crónica medieval y la novela policíaca, El nombre de la rosa narra las investigaciones detectivescas que realiza el fraile franciscano Guillermo de Baskerville para esclarecer los crímenes cometidos en una abadía benedictina en el año 1327. Le ayudará en su labor el novicio Adso, un joven que se enfrenta por primera vez a las realidades de la vida situadas más allá de las puertas del convento.",
                     new BigDecimal(12.30),
                     "nombreRosa.jpeg",
-                    new Publisher(2, "Penguin Random House Grupo Editorial España"),
-                    List.of(new Author(2, "Umberto Eco"))
+                    publisherDaoMock.findById(2),
+                    List.of(authorDaoMock.findById(2))
             ),
             new Book(
                     3,
@@ -38,8 +40,8 @@ public class BookDaoMock implements BookDao {
                     "La insoportable levedad del ser es una novela del escritor checo Milan Kundera publicada en 1984. La novela es una exploración filosófica de la vida, el amor, la muerte y la eternidad. La historia se desarrolla en Praga, capital de Checoslovaquia, en la década de 1960. La novela es una narrativa de múltiples capas que se centra en la vida de cuatro personajes principales: Tomáš, Teresa, Sabina y Franz.",
                     new BigDecimal(11.50),
                     "levedad.jpeg",
-                    new Publisher(3, "Editorial Planeta"),
-                    List.of(new Author(3, "Milan Kundera"))
+                    publisherDaoMock.findById(3),
+                    List.of(authorDaoMock.findById(3))
             ),
             new Book(
                     4,
@@ -48,8 +50,8 @@ public class BookDaoMock implements BookDao {
                     "La isla del día de antes es una novela del escritor italiano Umberto Eco publicada en 1994. La novela es una exploración filosófica de la vida, el amor, la muerte y la eternidad. La historia se desarrolla en Praga, capital de Checoslovaquia, en la década de 1960. La novela es una narrativa de múltiples capas que se centra en la vida de cuatro personajes principales: Tomáš, Teresa, Sabina y Franz.",
                     new BigDecimal(10.40),
                     "islaDiaAntes.jpeg",
-                    new Publisher(4, "DeBolsillo"),
-                    List.of(new Author(2, "Umberto Eco"))
+                    publisherDaoMock.findById(4),
+                    List.of(authorDaoMock.findById(2))
             ),
             new Book(
                     5,
@@ -58,8 +60,8 @@ public class BookDaoMock implements BookDao {
                     "Buenos presagios es una novela de humor escrita por Terry Pratchett y Neil Gaiman. Fue publicada por primera vez en 1990. La novela es una narrativa de múltiples capas que se centra en la vida de cuatro personajes principales: Tomáš, Teresa, Sabina y Franz.",
                     new BigDecimal(9.30),
                     "buenosPresagios.jpeg",
-                    new Publisher(5, "Minotauro"),
-                    List.of(new Author(4, "Terry Pratchett"), new Author(5, "Neil Gaiman"))
+                    publisherDaoMock.findById(5),
+                    List.of(authorDaoMock.findById(4), authorDaoMock.findById(5))
             )
     );
 
@@ -71,7 +73,7 @@ public class BookDaoMock implements BookDao {
     @Override
     public Book findById(Integer id) {
         for (Book book : bookList) {
-            if (book.getId().equals(id)) {
+            if (book.getId() == id) {
                 return book;
             }
         }

@@ -1,11 +1,15 @@
-package es.cesguiro.daw1bookstore.mock.dao;
+package es.cesguiro.daw1bookstore.mock.repository;
 
 import es.cesguiro.daw1bookstore.domain.model.Author;
 import es.cesguiro.daw1bookstore.persistence.dao.AuthorDao;
+import es.cesguiro.daw1bookstore.persistence.repository.AuthorRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class AuthorDaoMock implements AuthorDao {
+public class AuthorRepositoryMock implements AuthorRepository {
 
     private final List<Author> authorList = List.of(
             new Author(1, "John Kennedy Toole"),
@@ -17,7 +21,7 @@ public class AuthorDaoMock implements AuthorDao {
 
     private final Map<Integer, List<Integer>> booksAuthorsMap = new HashMap<>();
 
-    public AuthorDaoMock() {
+    public AuthorRepositoryMock() {
         booksAuthorsMap.put(1, List.of(1));
         booksAuthorsMap.put(2, List.of(2));
         booksAuthorsMap.put(3, List.of(3));
