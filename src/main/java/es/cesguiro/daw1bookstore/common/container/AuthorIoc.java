@@ -2,6 +2,7 @@ package es.cesguiro.daw1bookstore.common.container;
 
 import es.cesguiro.daw1bookstore.persistence.dao.AuthorDao;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.AuthorDaoMemory;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.AuthorDaoJdbc;
 import es.cesguiro.daw1bookstore.persistence.repository.AuthorRepository;
 import es.cesguiro.daw1bookstore.persistence.repository.impl.AuthorRepositoryImpl;
 
@@ -19,7 +20,8 @@ public class AuthorIoc {
 
     public static AuthorDao getAuthorDao() {
         if (authorDao == null) {
-            authorDao = new AuthorDaoMemory();
+            //authorDao = new AuthorDaoMemory();
+            authorDao = new AuthorDaoJdbc();
         }
         return authorDao;
     }

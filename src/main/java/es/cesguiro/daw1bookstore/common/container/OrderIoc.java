@@ -4,6 +4,7 @@ import es.cesguiro.daw1bookstore.domain.service.OrderService;
 import es.cesguiro.daw1bookstore.domain.service.impl.OrderServiceImpl;
 import es.cesguiro.daw1bookstore.persistence.dao.OrderDao;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.OrderDaoMemory;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.OrderDaoJdbc;
 import es.cesguiro.daw1bookstore.persistence.repository.OrderRepository;
 import es.cesguiro.daw1bookstore.persistence.repository.impl.OrderRepositoryImpl;
 
@@ -31,7 +32,8 @@ public class OrderIoc {
 
     public static OrderDao getOrderDao() {
         if (orderDao == null) {
-            orderDao = new OrderDaoMemory();
+            //orderDao = new OrderDaoMemory();
+            orderDao = new OrderDaoJdbc();
         }
         return orderDao;
     }

@@ -1,38 +1,38 @@
 package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data;
 
-import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record.BookAuthorRecord;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record.BookAuthorsRecord;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookAuthorTable {
 
-    List<BookAuthorRecord> bookAuthorRecordList = List.of(
-            new BookAuthorRecord(1, 1, 1),
-            new BookAuthorRecord(2, 2, 2),
-            new BookAuthorRecord(3, 3, 3),
-            new BookAuthorRecord(4, 4, 2),
-            new BookAuthorRecord(5, 5, 4),
-            new BookAuthorRecord(6, 5, 5)
+    List<BookAuthorsRecord> bookAuthorsRecordList = List.of(
+            new BookAuthorsRecord(1, 1, 1),
+            new BookAuthorsRecord(2, 2, 2),
+            new BookAuthorsRecord(3, 3, 3),
+            new BookAuthorsRecord(4, 4, 2),
+            new BookAuthorsRecord(5, 5, 4),
+            new BookAuthorsRecord(6, 5, 5)
     );
 
-    public List<BookAuthorRecord> selectByBookId(int bookId) {
-        List<BookAuthorRecord> bookAuthorRecordList = new ArrayList<>();
-        for (BookAuthorRecord bookAuthorRecord : this.bookAuthorRecordList) {
-            if (bookAuthorRecord.getBookId() == bookId) {
-                bookAuthorRecordList.add(bookAuthorRecord);
+    public List<BookAuthorsRecord> selectByBookId(int bookId) {
+        List<BookAuthorsRecord> bookAuthorsRecordList = new ArrayList<>();
+        for (BookAuthorsRecord bookAuthorsRecord : this.bookAuthorsRecordList) {
+            if (bookAuthorsRecord.getBookId() == bookId) {
+                bookAuthorsRecordList.add(bookAuthorsRecord);
             }
         }
-        return bookAuthorRecordList;
+        return bookAuthorsRecordList;
     }
 
-    public List<BookAuthorRecord> selectByAuthorId(int authorId) {
-        List<BookAuthorRecord> bookAuthorRecordList = new ArrayList<>();
-        for (BookAuthorRecord bookAuthorRecord : this.bookAuthorRecordList) {
-            if (bookAuthorRecord.getAuthorId() == authorId) {
-                bookAuthorRecordList.add(bookAuthorRecord);
+    public List<BookAuthorsRecord> selectByAuthorId(int authorId) {
+        List<BookAuthorsRecord> bookAuthorsRecordList = new ArrayList<>();
+        for (BookAuthorsRecord bookAuthorsRecord : this.bookAuthorsRecordList) {
+            if (bookAuthorsRecord.getAuthorId() == authorId) {
+                bookAuthorsRecordList.add(bookAuthorsRecord);
             }
         }
-        return bookAuthorRecordList;
+        return bookAuthorsRecordList;
     }
 }

@@ -2,6 +2,7 @@ package es.cesguiro.daw1bookstore.common.container;
 
 import es.cesguiro.daw1bookstore.persistence.dao.UserDao;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.UserDaoMemory;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.UserDaoJdbc;
 import es.cesguiro.daw1bookstore.persistence.repository.UserRepository;
 import es.cesguiro.daw1bookstore.persistence.repository.impl.UserRepositoryImpl;
 
@@ -19,7 +20,8 @@ public class UserIoc {
 
     public static UserDao getUserDao() {
         if (userDao == null) {
-            userDao = new UserDaoMemory();
+            //userDao = new UserDaoMemory();
+            userDao = new UserDaoJdbc();
         }
         return userDao;
     }

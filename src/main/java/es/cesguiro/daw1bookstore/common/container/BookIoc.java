@@ -4,6 +4,7 @@ import es.cesguiro.daw1bookstore.domain.service.BookService;
 import es.cesguiro.daw1bookstore.domain.service.impl.BookServiceImpl;
 import es.cesguiro.daw1bookstore.persistence.dao.BookDao;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.BookDaoMemory;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.BookDaoJdbc;
 import es.cesguiro.daw1bookstore.persistence.repository.BookRepository;
 import es.cesguiro.daw1bookstore.persistence.repository.impl.BookRepositoryImpl;
 
@@ -31,7 +32,8 @@ public class BookIoc {
 
     public static BookDao getBookDao() {
         if(bookDao == null) {
-            bookDao = new BookDaoMemory();
+            //bookDao = new BookDaoMemory();
+            bookDao = new BookDaoJdbc();
         }
         return bookDao;
     }

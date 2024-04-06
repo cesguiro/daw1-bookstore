@@ -1,12 +1,10 @@
 package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.mapper;
 
 import es.cesguiro.daw1bookstore.domain.model.Order;
-import es.cesguiro.daw1bookstore.domain.model.OrderDetail;
 import es.cesguiro.daw1bookstore.persistence.dao.OrderDetailDao;
 import es.cesguiro.daw1bookstore.persistence.dao.UserDao;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.OrderDetailDaoMemory;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.UserDaoMemory;
-import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record.OrderDetailRecord;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record.OrderRecord;
 
 import java.util.ArrayList;

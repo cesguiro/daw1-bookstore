@@ -1,12 +1,12 @@
 package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record;
 
-public class BookAuthorRecord {
+public class BookAuthorsRecord {
 
     int id;
     int bookId;
     int authorId;
 
-    public BookAuthorRecord(int id, int bookId, int authorId) {
+    public BookAuthorsRecord(int id, int bookId, int authorId) {
         this.id = id;
         this.bookId = bookId;
         this.authorId = authorId;

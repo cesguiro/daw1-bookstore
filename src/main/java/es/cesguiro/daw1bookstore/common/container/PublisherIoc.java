@@ -2,6 +2,7 @@ package es.cesguiro.daw1bookstore.common.container;
 
 import es.cesguiro.daw1bookstore.persistence.dao.PublisherDao;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.PublisherDaoMemory;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.PublisherDaoJdbc;
 import es.cesguiro.daw1bookstore.persistence.repository.PublisherRepository;
 import es.cesguiro.daw1bookstore.persistence.repository.impl.PublisherRepositoryImpl;
 
@@ -19,7 +20,8 @@ public class PublisherIoc {
 
     public static PublisherDao getPublisherDao() {
         if (publisherDao == null) {
-            publisherDao = new PublisherDaoMemory();
+            //publisherDao = new PublisherDaoMemory();
+            publisherDao = new PublisherDaoJdbc();
         }
         return publisherDao;
     }

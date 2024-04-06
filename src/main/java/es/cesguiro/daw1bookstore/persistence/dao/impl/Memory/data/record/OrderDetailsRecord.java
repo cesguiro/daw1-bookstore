@@ -2,7 +2,7 @@ package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record;
 
 import java.math.BigDecimal;
 
-public class OrderDetailRecord {
+public class OrderDetailsRecord {
 
     private int id;
     private int orderId;
@@ -10,7 +10,7 @@ public class OrderDetailRecord {
     private int quantity;
     private BigDecimal price;
 
-    public OrderDetailRecord(int id, int orderId, int bookId, int quantity, BigDecimal price) {
+    public OrderDetailsRecord(int id, int orderId, int bookId, int quantity, BigDecimal price) {
         this.id = id;
         this.orderId = orderId;
         this.bookId = bookId;
