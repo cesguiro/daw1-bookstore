@@ -121,7 +121,7 @@ public class OrderServiceUnitTest {
         Exception exception = assertThrows(ResourceNotFoundException.class, () -> {
             Order actualOrder = orderService.findById(100);
         });
-        assertEquals("Resource not found. Order with id 100 not found.", exception.getMessage(), "Mensaje de error incorrecto");
+        assertEquals("Resource not found: Order with id 100 not found.", exception.getMessage(), "Mensaje de error incorrecto");
     }
 
     @DisplayName("Test find order by id with authorized user")

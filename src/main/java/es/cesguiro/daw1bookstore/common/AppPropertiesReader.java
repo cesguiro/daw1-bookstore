@@ -2,6 +2,8 @@ package es.cesguiro.daw1bookstore.common;
 
 
 
+import es.cesguiro.daw1bookstore.common.exception.AppReaderException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -9,7 +11,7 @@ import java.util.logging.LogManager;
 
 public class AppPropertiesReader {
 
-    private static Properties properties = new Properties();
+    private static final Properties properties = new Properties();
 
     static {
         loadProperties("application.properties"); // Carga las propiedades por defecto
@@ -33,7 +35,8 @@ public class AppPropertiesReader {
             // Cargar las propiedades desde el archivo de configuración
             properties.load(input);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogManager.getLogManager().getLogger("").severe("Error loading properties file: " + filename);
+            throw new AppReaderException("Error loading properties file: " + filename);
         }
     }
 

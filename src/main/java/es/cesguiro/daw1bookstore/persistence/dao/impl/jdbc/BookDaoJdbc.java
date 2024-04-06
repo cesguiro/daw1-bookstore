@@ -8,8 +8,6 @@ import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.queryBuilder.DB;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 import java.util.Locale;
 

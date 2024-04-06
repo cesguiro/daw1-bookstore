@@ -65,6 +65,6 @@ public class BookIntegrationTest {
         Exception exception = assertThrows(ResourceNotFoundException.class, () -> {
             Book actualBook = bookService.findById(6);
         });
-        assertEquals("Resource not found. Book with id 6 not found.", exception.getMessage(), "Mensaje de error incorrecto");
+        assertEquals("Resource not found: Book with id 6 not found.", exception.getMessage(), "Mensaje de error incorrecto");
     }
 }
