@@ -8,6 +8,9 @@ import java.sql.SQLException;
 public class UserMapper {
 
     public static User toUser(ResultSet resultSet) throws SQLException {
+        if(resultSet == null) {
+            return null;
+        }
         return new User(
                 resultSet.getInt("id"),
                 resultSet.getString("username"),

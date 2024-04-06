@@ -17,6 +17,9 @@ import java.util.List;
 public class OrderMapper {
 
     public static Order toOrder(ResultSet resultSet) throws SQLException {
+        if(resultSet == null) {
+            return null;
+        }
         LocalDate orderDate = resultSet.getDate("order_date") != null ? resultSet.getDate("order_date").toLocalDate() : null;
         LocalDate deliveryDate = resultSet.getDate("delivery_date") != null ? resultSet.getDate("delivery_date").toLocalDate() : null;
         BigDecimal total = resultSet.getString("total") != null ? new BigDecimal(resultSet.getString("total")) : new BigDecimal(0);
@@ -42,6 +45,9 @@ public class OrderMapper {
     }
 
     public static Order toOrderWithOrderDetailList(ResultSet resultSet) throws SQLException {
+        if(resultSet == null) {
+            return null;
+        }
         Order order = toOrder(resultSet);
         OrderDetailDao orderDetailDao= new OrderDetailDaoJdbc();
         order.setOrderDetailList(orderDetailDao.findByOrderId(order.getId()));

@@ -12,6 +12,9 @@ import java.util.List;
 public class BookMapper {
 
     public static Book toBook(ResultSet resultSet) throws SQLException {
+        if(resultSet == null) {
+            return null;
+        }
         return new Book(
                 resultSet.getInt("id"),
                 resultSet.getString("isbn"),

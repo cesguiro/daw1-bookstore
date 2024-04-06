@@ -18,9 +18,14 @@ public class PublisherRepositoryUnitTest {
     private static PublisherRepository publisherRepository;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setupAll() {
         PublisherIoc.setPublisherDao(new PublisherDaoMock());
         publisherRepository = PublisherIoc.getPublisherRepository();
+    }
+
+    @AfterAll
+    public static void teardownAll() {
+        PublisherIoc.reset();
     }
 
     @DisplayName("Test find publisher by book id")
@@ -36,10 +41,5 @@ public class PublisherRepositoryUnitTest {
     public void testFindByBookIdNonExistent() {
         Publisher actualPublisher = publisherRepository.findByBookId(6);
         assertNull(actualPublisher, "Editorial encontrada");
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        PublisherIoc.reset();
     }
 }

@@ -20,9 +20,14 @@ public class BookServiceRepositoryIntegrationTest {
     private static BookService bookService;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setupAll() {
         BookIoc.setBookDao(new BookDaoMock());
         bookService = BookIoc.getBookService();
+    }
+
+    @AfterAll
+    public static void teardownAll() {
+        BookIoc.reset();
     }
 
     @DisplayName("test find all books")
@@ -54,10 +59,5 @@ public class BookServiceRepositoryIntegrationTest {
             Book actualBook = bookService.findById(6);
         });
         assertEquals("Resource not found. Book with id 6 not found.", exception.getMessage(), "Mensaje de error incorrecto");
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        BookIoc.reset();
     }
 }

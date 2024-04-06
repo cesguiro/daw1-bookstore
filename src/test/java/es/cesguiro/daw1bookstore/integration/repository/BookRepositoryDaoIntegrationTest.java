@@ -1,10 +1,12 @@
 package es.cesguiro.daw1bookstore.integration.repository;
 
+import es.cesguiro.daw1bookstore.common.AppPropertiesReader;
 import es.cesguiro.daw1bookstore.common.container.BookIoc;
 import es.cesguiro.daw1bookstore.domain.model.Book;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.rawSql.RawSql;
 import es.cesguiro.daw1bookstore.persistence.repository.BookRepository;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 
@@ -15,6 +17,24 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class BookRepositoryDaoIntegrationTest {
 
     private static final BookRepository bookRepository = BookIoc.getBookRepository();
+
+    @BeforeAll
+    public static void setupAll(){
+        // Configuración de Flyway
+        Flyway flyway = Flyway.configure().dataSource(
+                AppPropertiesReader.getProperty("flyway.url"),
+                AppPropertiesReader.getProperty("flyway.user"),
+                AppPropertiesReader.getProperty("flyway.password")
+        ).load();
+
+        // Ejecución de migraciones
+        flyway.migrate();
+    }
+
+    @AfterEach
+    public void teardown(){
+        RawSql.rollback();
+    }
 
     @DisplayName("Test find book List")
     @Test

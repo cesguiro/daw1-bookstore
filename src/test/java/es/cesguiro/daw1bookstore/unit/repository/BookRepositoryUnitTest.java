@@ -20,9 +20,14 @@ public class BookRepositoryUnitTest {
     private static BookRepository bookRepository;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setupAll() {
         BookIoc.setBookDao(new BookDaoMock());
         bookRepository = BookIoc.getBookRepository();
+    }
+
+    @AfterAll
+    public static void teardownAll() {
+        BookIoc.reset();
     }
 
     @DisplayName("Test find book List")
@@ -53,10 +58,4 @@ public class BookRepositoryUnitTest {
         Book actualBook = bookRepository.findById(6);
         assertNull(actualBook, "Libro encontrado");
     }
-
-    @AfterAll
-    public static void tearDown() {
-        BookIoc.reset();
-    }
-
 }

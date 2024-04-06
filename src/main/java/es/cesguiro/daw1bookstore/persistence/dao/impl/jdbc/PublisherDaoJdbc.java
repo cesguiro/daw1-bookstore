@@ -17,7 +17,9 @@ public class PublisherDaoJdbc implements PublisherDao {
                     .join("books", "publishers.id", "books.publisher_id")
                     .where("books.id","=",  bookId)
                     .get();
-            resultSet.next();
+            if(!resultSet.next()) {
+                return null;
+            }
             return PublisherMapper.toPublisher(resultSet);
         } catch (SQLException e) {
             throw new QueryBuilderSQLException(e.getMessage());

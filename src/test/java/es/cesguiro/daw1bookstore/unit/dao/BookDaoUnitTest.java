@@ -1,13 +1,15 @@
 package es.cesguiro.daw1bookstore.unit.dao;
 
+import es.cesguiro.daw1bookstore.common.AppPropertiesReader;
 import es.cesguiro.daw1bookstore.common.container.BookIoc;
 import es.cesguiro.daw1bookstore.domain.model.Author;
 import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.domain.model.Publisher;
 import es.cesguiro.daw1bookstore.persistence.dao.BookDao;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.rawSql.RawSql;
+import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.MigrationInfo;
+import org.junit.jupiter.api.*;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 import java.math.BigDecimal;
@@ -22,6 +24,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BookDaoUnitTest {
 
     private final BookDao bookDao = BookIoc.getBookDao();
+
+    @BeforeAll
+    public static void setupAll(){
+        // Configuración de Flyway
+        Flyway flyway = Flyway.configure().dataSource(
+                AppPropertiesReader.getProperty("flyway.url"),
+                AppPropertiesReader.getProperty("flyway.user"),
+                AppPropertiesReader.getProperty("flyway.password")
+        ).load();
+
+        // Ejecución de migraciones
+        flyway.migrate();
+    }
+
+    @AfterEach
+    public void teardown(){
+        RawSql.rollback();
+    }
+
+    @AfterEach
+    public void tearDown() {
+
+    }
 
     @DisplayName("Test find All books")
     @Test
@@ -91,8 +116,5 @@ public class BookDaoUnitTest {
         );
     }
 
-    @AfterEach
-    public void tearDown() {
-        LocaleContextHolder.resetLocaleContext();
-    }
+
 }

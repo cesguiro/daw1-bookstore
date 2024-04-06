@@ -30,7 +30,7 @@ public class OrderServiceRepositoryIntegrationTest {
     private static OrderService orderService;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setupAll() {
         OrderIoc.setOrderDao(new OrderDaoMock());
         orderService = OrderIoc.getOrderService();
 
@@ -39,6 +39,13 @@ public class OrderServiceRepositoryIntegrationTest {
         authenticatedUser.setId(2);
         Authentication authentication = new UsernamePasswordAuthenticationToken(authenticatedUser, null);
         SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    @AfterAll
+    public static void tearDownAll() {
+        OrderIoc.reset();
+        // Limpiar el contexto de seguridad para eliminar el usuario autenticado
+        SecurityContextHolder.clearContext();
     }
 
     @DisplayName("Test find All orders by userId")
@@ -131,13 +138,6 @@ public class OrderServiceRepositoryIntegrationTest {
             Order actualOrder = orderService.findById(7);
         });
         assertEquals("Authorization exception: You are not authorized to access this resource.", exception.getMessage(), "Mensaje de error incorrecto");
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        OrderIoc.reset();
-        // Limpiar el contexto de seguridad para eliminar el usuario autenticado
-        SecurityContextHolder.clearContext();
     }
 
 }

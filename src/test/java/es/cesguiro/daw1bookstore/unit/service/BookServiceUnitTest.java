@@ -20,7 +20,7 @@ public class BookServiceUnitTest {
     private static BookService bookService;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setupAll() {
         BookIoc.setBookRepository(new BookRepositoryMock());
         bookService = BookIoc.getBookService();
     }

@@ -1,12 +1,14 @@
 package es.cesguiro.daw1bookstore.integration.repository;
 
+import es.cesguiro.daw1bookstore.common.AppPropertiesReader;
 import es.cesguiro.daw1bookstore.common.container.OrderIoc;
 import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.domain.model.Order;
 import es.cesguiro.daw1bookstore.domain.model.OrderDetail;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.rawSql.RawSql;
 import es.cesguiro.daw1bookstore.persistence.repository.OrderRepository;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,6 +20,24 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OrderRepositoryDaoIntegrationTest {
 
     private static final OrderRepository orderRepository = OrderIoc.getOrderRespository();
+
+    @BeforeAll
+    public static void setupAll(){
+        // Configuración de Flyway
+        Flyway flyway = Flyway.configure().dataSource(
+                AppPropertiesReader.getProperty("flyway.url"),
+                AppPropertiesReader.getProperty("flyway.user"),
+                AppPropertiesReader.getProperty("flyway.password")
+        ).load();
+
+        // Ejecución de migraciones
+        flyway.migrate();
+    }
+
+    @AfterEach
+    public void teardown(){
+        RawSql.rollback();
+    }
 
     @DisplayName("Test find All orders by userId")
     @Test

@@ -13,6 +13,9 @@ import java.util.List;
 public class OrderDetailMapper {
 
     public static OrderDetail toOrderDetail(ResultSet resultSet) throws SQLException {
+        if(resultSet == null) {
+            return null;
+        }
         BookDao bookDao = new BookDaoJdbc();
         Book book =  bookDao.findById(resultSet.getInt("book_id"));
         OrderDetail orderDetail = new OrderDetail(

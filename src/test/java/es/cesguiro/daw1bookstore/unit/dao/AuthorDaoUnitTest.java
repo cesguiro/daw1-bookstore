@@ -1,10 +1,12 @@
 package es.cesguiro.daw1bookstore.unit.dao;
 
+import es.cesguiro.daw1bookstore.common.AppPropertiesReader;
 import es.cesguiro.daw1bookstore.common.container.AuthorIoc;
 import es.cesguiro.daw1bookstore.domain.model.Author;
 import es.cesguiro.daw1bookstore.persistence.dao.AuthorDao;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.rawSql.RawSql;
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 
@@ -14,6 +16,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AuthorDaoUnitTest {
 
     AuthorDao authorDao = AuthorIoc.getAuthorDao();
+
+    @BeforeAll
+    public static void setupAll(){
+        // Configuración de Flyway
+        Flyway flyway = Flyway.configure().dataSource(
+                AppPropertiesReader.getProperty("flyway.url"),
+                AppPropertiesReader.getProperty("flyway.user"),
+                AppPropertiesReader.getProperty("flyway.password")
+        ).load();
+
+        // Ejecución de migraciones
+        flyway.migrate();
+    }
+
+    @AfterEach
+    public void teardown(){
+        RawSql.rollback();
+    }
 
     @DisplayName("Test find author list with only 1 author by book id")
     @Test

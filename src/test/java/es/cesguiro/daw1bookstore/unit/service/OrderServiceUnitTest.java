@@ -29,7 +29,7 @@ public class OrderServiceUnitTest {
     private static OrderService orderService;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setupAll() {
         OrderIoc.setOrderRespository(new OrderRepositoryMock());
         orderService = OrderIoc.getOrderService();
 
@@ -38,6 +38,13 @@ public class OrderServiceUnitTest {
         authenticatedUser.setId(2);
         Authentication authentication = new UsernamePasswordAuthenticationToken(authenticatedUser, null);
         SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    @AfterAll
+    public static void teardownAll() {
+        OrderIoc.reset();
+        // Limpiar el contexto de seguridad para eliminar el usuario autenticado
+        SecurityContextHolder.clearContext();
     }
 
     @DisplayName("Test find All orders by userId")
@@ -124,12 +131,5 @@ public class OrderServiceUnitTest {
             Order actualOrder = orderService.findById(8);
         });
         assertEquals("Authorization exception: You are not authorized to access this resource.", exception.getMessage(), "Mensaje de error incorrecto");
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        OrderIoc.reset();
-        // Limpiar el contexto de seguridad para eliminar el usuario autenticado
-        SecurityContextHolder.clearContext();
     }
 }

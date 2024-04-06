@@ -10,6 +10,9 @@ import java.util.List;
 public class AuthorMapper {
 
     public static Author toAuthor(ResultSet resultSet) throws SQLException {
+        if(resultSet == null) {
+            return null;
+        }
         return new Author(
                 resultSet.getInt("id"),
                 resultSet.getString("name")

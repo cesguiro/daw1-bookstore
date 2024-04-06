@@ -1,11 +1,13 @@
 package es.cesguiro.daw1bookstore.integration;
 
+import es.cesguiro.daw1bookstore.common.AppPropertiesReader;
 import es.cesguiro.daw1bookstore.common.container.BookIoc;
 import es.cesguiro.daw1bookstore.common.exception.ResourceNotFoundException;
 import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.domain.service.BookService;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.rawSql.RawSql;
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 
@@ -16,6 +18,24 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class BookIntegrationTest {
 
     private final BookService bookService = BookIoc.getBookService();
+
+    @BeforeAll
+    public static void setupAll(){
+        // Configuración de Flyway
+        Flyway flyway = Flyway.configure().dataSource(
+                AppPropertiesReader.getProperty("flyway.url"),
+                AppPropertiesReader.getProperty("flyway.user"),
+                AppPropertiesReader.getProperty("flyway.password")
+        ).load();
+
+        // Ejecución de migraciones
+        flyway.migrate();
+    }
+
+    @AfterEach
+    public void teardown(){
+        RawSql.rollback();
+    }
 
     @DisplayName("test find all books")
     @Test

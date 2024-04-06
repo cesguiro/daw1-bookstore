@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.integration;
 
+import es.cesguiro.daw1bookstore.common.AppPropertiesReader;
 import es.cesguiro.daw1bookstore.common.container.OrderIoc;
 import es.cesguiro.daw1bookstore.common.exception.AuthorizationException;
 import es.cesguiro.daw1bookstore.common.exception.ResourceNotFoundException;
@@ -9,10 +10,9 @@ import es.cesguiro.daw1bookstore.domain.model.OrderDetail;
 import es.cesguiro.daw1bookstore.domain.model.User;
 import es.cesguiro.daw1bookstore.domain.service.OrderService;
 import es.cesguiro.daw1bookstore.mock.dao.OrderDaoMock;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.rawSql.RawSql;
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,13 +28,35 @@ public class OrderIntegrationTest {
 
     private final OrderService orderService = OrderIoc.getOrderService();
 
+
     @BeforeAll
-    public static void setUp() {
+    public static void setupAll() {
         // Set authenticated user
         User authenticatedUser = new User();
         authenticatedUser.setId(2);
         Authentication authentication = new UsernamePasswordAuthenticationToken(authenticatedUser, null);
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // Configuración de Flyway
+        Flyway flyway = Flyway.configure().dataSource(
+                AppPropertiesReader.getProperty("flyway.url"),
+                AppPropertiesReader.getProperty("flyway.user"),
+                AppPropertiesReader.getProperty("flyway.password")
+        ).load();
+
+        // Ejecución de migraciones
+        flyway.migrate();
+    }
+
+    @AfterAll
+    public static void teardownAll() {
+        // Limpiar el contexto de seguridad para eliminar el usuario autenticado
+        SecurityContextHolder.clearContext();
+    }
+
+    @AfterEach
+    public void teardown() {
+        RawSql.rollback();
     }
 
     @DisplayName("Test find All orders by userId")
@@ -129,9 +151,5 @@ public class OrderIntegrationTest {
         assertEquals("Authorization exception: You are not authorized to access this resource.", exception.getMessage(), "Mensaje de error incorrecto");
     }
 
-    @AfterAll
-    public static void tearDown() {
-        // Limpiar el contexto de seguridad para eliminar el usuario autenticado
-        SecurityContextHolder.clearContext();
-    }
+
 }

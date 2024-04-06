@@ -34,7 +34,9 @@ public class OrderDaoJdbc implements OrderDao {
                     .join("users", "orders.user_id", "users.id")
                     .where("orders.id", "=", id)
                     .get();
-            resultSet.next();
+            if(!resultSet.next()) {
+                return null;
+            }
             return OrderMapper.toOrderWithOrderDetailList(resultSet);
         } catch (Exception e) {
             throw new QueryBuilderSQLException(e.getMessage());

@@ -19,9 +19,14 @@ public class AuthorRepositoryUnitTest {
     private static AuthorRepository authorRepository;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setupAll() {
         AuthorIoc.setAuthorDao(new AuthorDaoMock());
         authorRepository = AuthorIoc.getAuthorRepository();
+    }
+
+    @AfterAll
+    public static void teardownAll() {
+        AuthorIoc.reset();
     }
 
     @DisplayName("Test find single author by book id")
@@ -51,10 +56,4 @@ public class AuthorRepositoryUnitTest {
         List<Author> actualAuthorList = authorRepository.findByBookId(6);
         assertEquals(0, actualAuthorList.size(), "Autor encontrado");
     }
-
-    @AfterAll
-    public static void tearDown() {
-        AuthorIoc.reset();
-    }
-
 }

@@ -23,9 +23,14 @@ public class OrderRepositoryUnitTest {
     private static OrderRepository orderRepository;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setupAll() {
         OrderIoc.setOrderDao(new OrderDaoMock());
         orderRepository = OrderIoc.getOrderRespository();
+    }
+
+    @AfterAll
+    public static void teardownAll() {
+        OrderIoc.reset();
     }
 
     @DisplayName("Test find All orders by userId")
@@ -103,10 +108,5 @@ public class OrderRepositoryUnitTest {
         Order actualOrder =orderRepository.findById(orderId);
 
         assertNull(actualOrder, "Orden incorrecta");
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        OrderIoc.reset();
     }
 }
