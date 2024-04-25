@@ -1,0 +1,3 @@
+spring.application.name=daw1-bookstore
+
+app.profiles.active = dev

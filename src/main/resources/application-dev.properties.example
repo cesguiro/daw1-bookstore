@@ -1,0 +1,5 @@
+#BBDD
+daw1bookstore.datasource.url = jdbc:mariadb://localhost:3306/library
+daw1bookstore.datasource.username = user
+daw1bookstore.datasource.password = password
+daw1bookstore.autocommit = true
