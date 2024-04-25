@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping({BookController.URL, BookController.URL_LANGUAGE})
+@RequestMapping(BookController.URL)
 public class BookController {
 
     public static final String URL = "/books";
-    public static final String URL_LANGUAGE = "/{language}/books";
 
     private final BookService bookService;
 
