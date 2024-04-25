@@ -8,6 +8,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+
+/**
+ * User class. It implements UserDetails to provide the user authentication.
+ * Implements Spring Security's UserDetails for simplified authentication integration.
+ *
+ * Note: Implementing UserDetails breaks the clean architecture principle
+ *      by introducing a dependency with Spring Security. However, it significantly
+ *      simplifies authentication integration.
+ */
 public class User implements UserDetails {
 
     Integer id;

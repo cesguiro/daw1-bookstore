@@ -1,6 +1,7 @@
 package es.cesguiro.daw1bookstore.controller;
 
 import es.cesguiro.daw1bookstore.common.container.OrderIoc;
+import es.cesguiro.daw1bookstore.common.container.UserIoc;
 import es.cesguiro.daw1bookstore.domain.model.Order;
 import es.cesguiro.daw1bookstore.domain.model.User;
 import es.cesguiro.daw1bookstore.domain.service.OrderService;
@@ -36,10 +37,7 @@ public class OrderController {
 
     @GetMapping
     public String findAllByUser(Authentication authentication, Model model) {
-        if(authentication == null || !authentication.isAuthenticated()) {
-            return "redirect:/login";
-        }
-        User user = (User) authentication.getPrincipal();
+        User user = UserIoc.getUserService().getActiveUser();
         List<Order> orderList = orderService.findByUserId(user.getId());
         model.addAttribute("orderList", orderList);
         return "orders/list";
