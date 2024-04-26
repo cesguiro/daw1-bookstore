@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory;
 
+import es.cesguiro.daw1bookstore.domain.model.Cart;
 import es.cesguiro.daw1bookstore.domain.model.Order;
 import es.cesguiro.daw1bookstore.persistence.dao.OrderDao;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.OrderTable;
@@ -26,5 +27,10 @@ public class OrderDaoMemory implements OrderDao {
             return null;
         }
         return OrderMapper.toOrderWithOrderDetailList(orderRecord);
+    }
+
+    @Override
+    public Cart findCartByUserId(Integer userId) {
+        return null;
     }
 }

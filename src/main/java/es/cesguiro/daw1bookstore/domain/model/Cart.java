@@ -18,6 +18,13 @@ public class Cart {
         setTotal(total);
     }
 
+    public Cart(Integer id, User user, BigDecimal total, List<CartDetail> cartDetailList) {
+        this.id = id;
+        this.user = user;
+        this.total = total;
+        this.cartDetailList = cartDetailList;
+    }
+
     public Integer getId() {
         return id;
     }

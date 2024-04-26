@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.persistence.dao.impl.Memory;
 
+import es.cesguiro.daw1bookstore.domain.model.CartDetail;
 import es.cesguiro.daw1bookstore.domain.model.OrderDetail;
 import es.cesguiro.daw1bookstore.persistence.dao.OrderDetailDao;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.OrderDetailTable;
@@ -14,5 +15,10 @@ public class OrderDetailDaoMemory implements OrderDetailDao {
     @Override
     public List<OrderDetail> findByOrderId(Integer orderId) {
         return OrderDetailMapper.toOrderDetailList(orderDetailTable.selectByOrderId(orderId));
+    }
+
+    @Override
+    public List<CartDetail> findCartDetailListByCartId(Integer id) {
+        return List.of();
     }
 }

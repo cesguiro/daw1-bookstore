@@ -1,5 +1,7 @@
 package es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.mapper;
 
+import es.cesguiro.daw1bookstore.common.container.UserIoc;
+import es.cesguiro.daw1bookstore.domain.model.Cart;
 import es.cesguiro.daw1bookstore.domain.model.Order;
 import es.cesguiro.daw1bookstore.domain.model.User;
 import es.cesguiro.daw1bookstore.persistence.dao.OrderDetailDao;
@@ -25,32 +27,12 @@ public class OrderMapper {
         BigDecimal total = resultSet.getString("total") != null ? new BigDecimal(resultSet.getString("total")) : new BigDecimal(0);
         Order order = new Order(
                resultSet.getInt("id"),
+               getUser(resultSet),
                orderDate,
                deliveryDate,
                total,
                resultSet.getInt("status")
         );
-        User user = new User(
-                resultSet.getInt("users.id"),
-                resultSet.getString("users.username"),
-                resultSet.getString("users.password"),
-                resultSet.getString("users.email"),
-                resultSet.getString("users.name"),
-                resultSet.getString("users.surname"),
-                resultSet.getString("users.address"),
-                resultSet.getBoolean("users.admin")
-        );
-        order.setUser(user);
-        return order;
-    }
-
-    public static Order toOrderWithOrderDetailList(ResultSet resultSet) throws SQLException {
-        if(resultSet == null) {
-            return null;
-        }
-        Order order = toOrder(resultSet);
-        OrderDetailDao orderDetailDao= new OrderDetailDaoJdbc();
-        order.setOrderDetailList(orderDetailDao.findByOrderId(order.getId()));
         return order;
     }
 
@@ -60,5 +42,33 @@ public class OrderMapper {
             orderList.add(toOrder(resultSet));
         }
         return orderList;
+    }
+
+    public static Cart toCart(ResultSet resultSet) throws SQLException {
+        if(resultSet == null) {
+            return null;
+        }
+        Cart cart = new Cart(
+                resultSet.getInt("id"),
+                getUser(resultSet),
+                resultSet.getBigDecimal("total")
+        );
+        return cart;
+    }
+
+    private static User getUser(ResultSet resultSet) throws SQLException {
+        if(resultSet == null) {
+            return null;
+        }
+        return new User(
+                resultSet.getInt("users.id"),
+                resultSet.getString("users.username"),
+                resultSet.getString("users.password"),
+                resultSet.getString("users.email"),
+                resultSet.getString("users.name"),
+                resultSet.getString("users.surname"),
+                resultSet.getString("users.address"),
+                resultSet.getBoolean("users.admin")
+        );
     }
 }

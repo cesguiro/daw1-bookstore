@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.mock.dao;
 
+import es.cesguiro.daw1bookstore.domain.model.Cart;
 import es.cesguiro.daw1bookstore.domain.model.Order;
 import es.cesguiro.daw1bookstore.domain.model.User;
 import es.cesguiro.daw1bookstore.persistence.dao.OrderDao;
@@ -53,6 +54,16 @@ public class OrderDaoMock implements OrderDao {
         for (Order order : orderList) {
             if (order.getId() == id) {
                 return order;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Cart findCartByUserId(Integer userId) {
+        for (Order order : orderList) {
+            if (order.getUser().getId() == userId && order.getStatus() == 0) {
+                return new Cart(order.getId(), order.getUser(), order.getTotal());
             }
         }
         return null;

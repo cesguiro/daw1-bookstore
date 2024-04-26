@@ -3,6 +3,7 @@ package es.cesguiro.daw1bookstore.unit.dao;
 import es.cesguiro.daw1bookstore.common.AppPropertiesReader;
 import es.cesguiro.daw1bookstore.common.container.OrderIoc;
 import es.cesguiro.daw1bookstore.domain.model.Book;
+import es.cesguiro.daw1bookstore.domain.model.Cart;
 import es.cesguiro.daw1bookstore.domain.model.Order;
 import es.cesguiro.daw1bookstore.domain.model.OrderDetail;
 import es.cesguiro.daw1bookstore.persistence.dao.OrderDao;
@@ -75,35 +76,14 @@ public class OrderDaoUnitTest {
     @Test
     public void testFindOrderById() {
         int orderId = 3;
-        Book book1 = new Book(
-                2,
-                "9788426418197",
-                "El nombre de la rosa",
-                "Valiéndose de las características de la novela gótica, la crónica medieval y la novela policíaca, El nombre de la rosa narra las...",
-                new BigDecimal(12.30),
-                "nombreRosa.jpeg"
-        );
-        Book book2 = new Book(
-                4,
-                "9788466338141",
-                "La isla del día de antes",
-                "La isla del día de antes es una novela del escritor italiano Umberto Eco publicada en 1994. La novela es una exploración filosófica de la vida...",
-                new BigDecimal(10.40),
-                "islaDiaAntes.jpeg"
-        );
-        List<OrderDetail> orderDetailList = List.of(
-                new OrderDetail(1, book1, 2, new BigDecimal(12.30)),
-                new OrderDetail(2, book2, 3, new BigDecimal(20.30))
-        );
+
         Order expectedOrder = new Order(3, null, LocalDate.of(2023, 11, 30), LocalDate.of(2023, 12, 05), new BigDecimal(75.05), 4);
-        expectedOrder.setOrderDetailList(orderDetailList);
         Order actualOrder = orderDao.findById(orderId);
 
         assertAll(
                 () -> assertEquals(expectedOrder, actualOrder, "Id incorrecto"),
-                () -> assertEquals(expectedOrder.getOrderDetailList().size(), actualOrder.getOrderDetailList().size(), "Detalles de la orden incorrecto"),
-                () -> assertEquals(expectedOrder.getOrderDetailList().get(0), actualOrder.getOrderDetailList().get(0), "Libro 1 de la orden incorrecto"),
-                () -> assertEquals(expectedOrder.getOrderDetailList().get(1), actualOrder.getOrderDetailList().get(1), "Libro 2 de la orden incorrecto")
+                () -> assertEquals(expectedOrder.getOrderDate(), actualOrder.getOrderDate(), "Fecha de pedido incorrecta"),
+                () -> assertEquals(expectedOrder.getDeliveryDate(), actualOrder.getDeliveryDate(), "Fecha de entrega incorrecta")
         );
         assertEquals(expectedOrder, actualOrder, "Orden incorrecta");
     }
@@ -115,5 +95,24 @@ public class OrderDaoUnitTest {
         Order actualOrder = orderDao.findById(orderId);
 
         assertNull(actualOrder, "Orden incorrecta");
+    }
+
+    @DisplayName("Test find cart by userId")
+    @Test
+    public void testFindCartByUserId() {
+        int userId = 2;
+        Cart expectedCart = new Cart(1, null, new BigDecimal(0.00));
+        Cart actualCart = orderDao.findCartByUserId(userId);
+
+        assertEquals(expectedCart, actualCart, "Carrito incorrecto");
+    }
+
+    @DisplayName("Test find cart by non-existent userId")
+    @Test
+    public void testFindCartByNonExistentUserId() {
+        int userId = 100;
+        Cart actualCart = orderDao.findCartByUserId(userId);
+
+        assertNull(actualCart, "Carrito incorrecto");
     }
 }
