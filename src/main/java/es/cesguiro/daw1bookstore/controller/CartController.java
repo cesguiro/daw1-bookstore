@@ -25,10 +25,8 @@ public class CartController {
 
     @GetMapping()
     public String findById(Model model) {
-        //User user = UserIoc.getUserService().getActiveUser();
-        //Cart cart = cartService.findByUserId(user.getId());
-        Integer userId = 3;
-        Cart cart = cartService.findByUserId(userId);
+        User user = UserIoc.getUserService().getActiveUser();
+        Cart cart = cartService.findByUserId(user.getId());
         model.addAttribute("cart", cart);
         return "carts/detail";
     }
