@@ -10,8 +10,21 @@
         <div class="col-12 col-sm-8 col-lg-5">
             <h6 class="text-muted" th:text="|#{menu.cart}  - ${cart.total} €|"></h6>
             <ul class="list-group">
-
-                <form action="/carts" th:method="PUT" th:object="${cart}">
+                <li class="list-group-item d-flex justify-content-between align-items-center" th:each="cartDetail : ${cart.cartDetailList}">
+                    <a th:href="@{${'/books/' + cartDetail.book.id}}">
+                        <div class="image-parent">
+                            <img th:src="@{${'/images/cover/' + cartDetail.book.cover}}" class="img-fluid" th:alt="${cartDetail.book.title}" style="height: 100px">
+                        </div>
+                        <span th:text="${cartDetail.book.title}" style="font-weight: bold"></span>
+                    </a>
+                    <div class="col-auto">
+                        <input type="number" min="1" max="5" class="quantityInput form-control" th:value="${cartDetail.quantity}">
+                        <span th:text="|${cartDetail.price} €|"></span>
+                    </div>
+                    <form th:action="@{${'/cart/' + cartDetail.id}}" th:method="DELETE">
+                        <button type="submit" class="btn btn-danger" th:text="#{button.delete}"></button>
+                </li>
+                <!--<form action="/carts" th:method="PUT" th:object="${cart}">
                     <input type="hidden" th:field="*{id}">
                     <li class="list-group-item d-flex justify-content-between align-items-center" th:each="cartDetail, itemStat : *{cartDetailList}">
                         <a th:href="@{${'/books/' + cartDetail.book.id}}">
@@ -27,6 +40,9 @@
                     </li>
                     <button type="submit" class="btn btn-info" th:text="#{button.finishOrder}"></button>
                 </form>
+                <form action="@{${'/books/' + cartDetail.book.id}}" th:method="DELETE">
+                    <button type="submit" class="btn btn-danger" th:text="#{button.delete}"></button>
+                </form>-->
 
             </ul>
         </div>

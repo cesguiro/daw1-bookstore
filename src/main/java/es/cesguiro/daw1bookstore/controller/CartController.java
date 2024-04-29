@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 @RequestMapping(CartController.URL)
 public class CartController {
 
-    public static final String URL = "carts";
+    public static final String URL = "cart";
     private final CartService cartService;
 
     public CartController() {
@@ -42,6 +42,22 @@ public class CartController {
         book.setId(bookId);
         CartDetail cartDetail = new CartDetail(null, book, quantity, new BigDecimal(0.0));
         cartService.addCartDetail(cart, cartDetail);
-        return "redirect:/carts";
+        return "redirect:/cart";
     }
+
+    @DeleteMapping("/{cartDetailId}")
+    public String removeCartDetail(@PathVariable int cartDetailId) {
+        User user = UserIoc.getUserService().getActiveUser();
+        Cart cart = cartService.findByUserId(user.getId());
+        cartService.removeCartDetail(cart, cartDetailId);
+        return "redirect:/cart";
+    }
+
+    /*@DeleteMapping("/books/{bookId}")
+    public String removeBook(@PathVariable int bookId) {
+        User user = UserIoc.getUserService().getActiveUser();
+        Cart cart = cartService.findByUserId(user.getId());
+        cartService.removeCartDetail(cart, bookId);
+        return "redirect:/cart";
+    }*/
 }

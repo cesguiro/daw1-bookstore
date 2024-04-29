@@ -25,14 +25,32 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart addCartDetail(Cart cart, CartDetail cartDetail) {
-        Book book = BookIoc.getBookRepository().findById(cartDetail.getBook().getId());
-        if (book == null) {
-            throw new ResourceNotFoundException("Book not found");
-        }
+        Book book = getBook(cartDetail.getBook().getId());
         cartDetail.setBook(book);
         cartDetail.setPrice(book.getPrice());
         cart.addCartDetail(cartDetail);
         cartRepository.save(cart);
         return cart;
+    }
+
+    /*@Override
+    public void removeCartDetail(Cart cart, int bookId) {
+        Book book = getBook(bookId);
+        cart.removeCartDetail(book);
+        cartRepository.save(cart);
+    }*/
+
+    @Override
+    public void removeCartDetail(Cart cart, int cartDetailId) {
+        cart.removeCartDetail(cartDetailId);
+        cartRepository.save(cart);
+    }
+
+    private Book getBook(int bookId) {
+        Book book = BookIoc.getBookRepository().findById(bookId);
+        if (book == null) {
+            throw new ResourceNotFoundException("Book not found");
+        }
+        return book;
     }
 }

@@ -1,5 +1,7 @@
 package es.cesguiro.daw1bookstore.domain.model;
 
+import es.cesguiro.daw1bookstore.common.exception.ResourceNotFoundException;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -87,5 +89,27 @@ public class Cart {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    /*public void removeCartDetail(Book book) {
+        for (CartDetail cartDetail : cartDetailList) {
+            if (cartDetail.getBook().getId().equals(book.getId())) {
+                total = total.subtract(cartDetail.getTotal());
+                cartDetailList.remove(cartDetail);
+                return;
+            }
+        }
+        throw new ResourceNotFoundException("Book not found in cart");
+    }*/
+
+    public void removeCartDetail(int cartDetailId) {
+        for (CartDetail cartDetail : cartDetailList) {
+            if (cartDetail.getId().equals(cartDetailId)) {
+                total = total.subtract(cartDetail.getTotal());
+                cartDetailList.remove(cartDetail);
+                return;
+            }
+        }
+        throw new ResourceNotFoundException("Book not found in cart");
     }
 }

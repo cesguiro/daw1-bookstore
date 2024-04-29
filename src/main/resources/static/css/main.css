@@ -15,3 +15,9 @@ a{
     width: 32px; /* ajusta este valor según sea necesario */
     height: 32px; /* ajusta este valor según sea necesario */
 }
+
+.quantityInput {
+    width: 3em;
+    padding: 5px;
+    margin:0;
+}
