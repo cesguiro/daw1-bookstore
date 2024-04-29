@@ -60,4 +60,13 @@ public class CartController {
         cartService.removeCartDetail(cart, bookId);
         return "redirect:/cart";
     }*/
+
+    @PutMapping("/{cartDetailId}")
+    public String updateCartDetail(@PathVariable int cartDetailId, @RequestParam int quantity) {
+        User user = UserIoc.getUserService().getActiveUser();
+        Cart cart = cartService.findByUserId(user.getId());
+        cartService.updateCartDetail(cart, cartDetailId, quantity);
+        return "redirect:/cart";
+    }
+
 }

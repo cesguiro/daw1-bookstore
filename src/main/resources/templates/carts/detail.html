@@ -17,10 +17,11 @@
                         </div>
                         <span th:text="${cartDetail.book.title}" style="font-weight: bold"></span>
                     </a>
-                    <div class="col-auto">
-                        <input type="number" min="1" max="5" class="quantityInput form-control" th:value="${cartDetail.quantity}">
+                    <form th:action="@{${'/cart/' + cartDetail.id}}" th:method="PUT">
+                        <input type="number" min="1" max="5" class="quantityInput form-control" th:value="${cartDetail.quantity}" name="quantity">
                         <span th:text="|${cartDetail.price} €|"></span>
-                    </div>
+                        <button type="submit" class="btn btn-info" th:text="#{button.update}"></button>
+                    </form>
                     <form th:action="@{${'/cart/' + cartDetail.id}}" th:method="DELETE">
                         <button type="submit" class="btn btn-danger" th:text="#{button.delete}"></button>
                     </form>

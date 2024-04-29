@@ -46,6 +46,12 @@ public class CartServiceImpl implements CartService {
         cartRepository.save(cart);
     }
 
+    @Override
+    public void updateCartDetail(Cart cart, int cartDetailId, int quantity) {
+        cart.updateCartDetail(cartDetailId, quantity);
+        cartRepository.save(cart);
+    }
+
     private Book getBook(int bookId) {
         Book book = BookIoc.getBookRepository().findById(bookId);
         if (book == null) {

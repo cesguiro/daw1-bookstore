@@ -112,4 +112,16 @@ public class Cart {
         }
         throw new ResourceNotFoundException("Book not found in cart");
     }
+
+    public void updateCartDetail(int cartDetailId, int quantity) {
+        for (CartDetail cartDetail : cartDetailList) {
+            if (cartDetail.getId().equals(cartDetailId)) {
+                total = total.subtract(cartDetail.getTotal());
+                cartDetail.setQuantity(quantity);
+                total = total.add(cartDetail.getTotal());
+                return;
+            }
+        }
+        throw new ResourceNotFoundException("Book not found in cart");
+    }
 }
