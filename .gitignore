@@ -35,3 +35,5 @@ build/
 
 ### properties ###
 *.properties
+!messages_en.properties
+!messages_es.properties

@@ -9,5 +9,9 @@ public interface OrderDetailDao {
 
     List<OrderDetail> findByOrderId(Integer orderId);
 
-    List<CartDetail> findCartDetailListByCartId(Integer id);
+    List<CartDetail> findCartDetailListByCartId(Integer cartId);
+
+    void insertCartDetailIntoCart(Integer cartId, CartDetail cartDetail);
+
+    void deleteCartDetailListByCartId(Integer cartId);
 }

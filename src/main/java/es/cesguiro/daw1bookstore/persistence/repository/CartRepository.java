@@ -6,4 +6,6 @@ import es.cesguiro.daw1bookstore.persistence.dao.OrderDao;
 public interface CartRepository {
 
     Cart findByUserId(Integer userId);
+
+    void save(Cart cart);
 }

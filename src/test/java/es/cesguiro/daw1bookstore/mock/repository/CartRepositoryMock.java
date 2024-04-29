@@ -35,4 +35,9 @@ public class CartRepositoryMock implements CartRepository {
         return null;
     }
 
+    @Override
+    public void save(Cart cart) {
+
+    }
+
 }

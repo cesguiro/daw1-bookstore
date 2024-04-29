@@ -9,6 +9,7 @@ import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.queryBuilder.DB;
 
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Map;
 
 public class OrderDaoJdbc implements OrderDao {
 
@@ -39,7 +40,6 @@ public class OrderDaoJdbc implements OrderDao {
                 return null;
             }
             return OrderMapper.toOrder(resultSet);
-            //return OrderMapper.toOrderWithOrderDetailList(resultSet);
         } catch (Exception e) {
             throw new QueryBuilderSQLException(e.getMessage());
         }
@@ -58,6 +58,20 @@ public class OrderDaoJdbc implements OrderDao {
                 return null;
             }
             return OrderMapper.toCart(resultSet);
+        } catch (Exception e) {
+            throw new QueryBuilderSQLException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void update(Cart cart) {
+        try {
+            DB.table("orders")
+                    .where("id", "=", cart.getId())
+                    .update(Map.of(
+                            "total", cart.getTotal(),
+                            "status", 0
+                    ));
         } catch (Exception e) {
             throw new QueryBuilderSQLException(e.getMessage());
         }

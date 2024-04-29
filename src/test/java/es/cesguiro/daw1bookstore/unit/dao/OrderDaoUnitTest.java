@@ -2,12 +2,9 @@ package es.cesguiro.daw1bookstore.unit.dao;
 
 import es.cesguiro.daw1bookstore.common.AppPropertiesReader;
 import es.cesguiro.daw1bookstore.common.container.OrderIoc;
-import es.cesguiro.daw1bookstore.domain.model.Book;
-import es.cesguiro.daw1bookstore.domain.model.Cart;
+import es.cesguiro.daw1bookstore.domain.model.*;
 import es.cesguiro.daw1bookstore.domain.model.Order;
-import es.cesguiro.daw1bookstore.domain.model.OrderDetail;
 import es.cesguiro.daw1bookstore.persistence.dao.OrderDao;
-import es.cesguiro.daw1bookstore.persistence.dao.impl.Memory.data.record.BookRecord;
 import es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.rawSql.RawSql;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.*;
@@ -111,6 +108,28 @@ public class OrderDaoUnitTest {
     @Test
     public void testFindCartByNonExistentUserId() {
         int userId = 100;
+        Cart actualCart = orderDao.findCartByUserId(userId);
+
+        assertNull(actualCart, "Carrito incorrecto");
+    }
+
+    @DisplayName("Test update Cart")
+    @Test
+    public void testUpdateCart() {
+        Integer userId = 2;
+        Cart cart = new Cart(1, new User(userId, null, null, null, null, null, null, false), new BigDecimal(3.50));
+        orderDao.update(cart);
+        Cart actualCart = orderDao.findCartByUserId(userId);
+
+        assertEquals(cart, actualCart, "Carrito incorrecto");
+    }
+
+    @DisplayName("Test update cart with non-existent userId")
+    @Test
+    public void testUpdateCartWithNonExistentUserId() {
+        Integer userId = 100;
+        Cart cart = new Cart(1, new User(userId, null, null, null, null, null, null, false), new BigDecimal(3.50));
+        orderDao.update(cart);
         Cart actualCart = orderDao.findCartByUserId(userId);
 
         assertNull(actualCart, "Carrito incorrecto");

@@ -14,7 +14,7 @@ public class RawSql {
             PreparedStatement preparedStatement = setParameters(sql, params);
             return preparedStatement.executeQuery();
         } catch (Exception e) {
-            throw new RawSqlException("Error executing SQL query: " + sql);
+            throw new RawSqlException("Error executing SQL query: " + sql + " " + e.getMessage());
         }
     }
 
@@ -29,7 +29,7 @@ public class RawSql {
                 throw new RawSqlException("Unable to retrieve the last generated ID");
             }
         } catch (SQLException e) {
-            throw new RawSqlException("Error executing SQL query:" + sql);
+            throw new RawSqlException("Error executing SQL query:" + sql + " " + e.getMessage());
         }
     }
 
@@ -47,7 +47,7 @@ public class RawSql {
             PreparedStatement preparedStatement = setParameters(sql, params);
             return preparedStatement.executeUpdate();
         } catch (Exception e) {
-            throw new RawSqlException("Error executing SQL query: " + sql);
+            throw new RawSqlException("Error executing SQL query: " + sql + " " + e.getMessage());
         }
     }
 
@@ -71,7 +71,7 @@ public class RawSql {
         try {
             dbConnection.getConnection().commit();
         } catch (SQLException e) {
-            throw new RawSqlException("Error committing the transaction");
+            throw new RawSqlException("Error committing the transaction. " + e.getMessage());
         }
     }
 
@@ -79,7 +79,7 @@ public class RawSql {
         try {
             dbConnection.getConnection().rollback();
         } catch (SQLException e) {
-            throw new RawSqlException("\"Error rolling back the transaction");
+            throw new RawSqlException("\"Error rolling back the transaction " + e.getMessage());
         }
     }
 }

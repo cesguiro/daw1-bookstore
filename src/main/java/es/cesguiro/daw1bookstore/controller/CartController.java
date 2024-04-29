@@ -2,15 +2,18 @@ package es.cesguiro.daw1bookstore.controller;
 
 import es.cesguiro.daw1bookstore.common.container.CartIoc;
 import es.cesguiro.daw1bookstore.common.container.UserIoc;
+import es.cesguiro.daw1bookstore.domain.model.Book;
 import es.cesguiro.daw1bookstore.domain.model.Cart;
+import es.cesguiro.daw1bookstore.domain.model.CartDetail;
 import es.cesguiro.daw1bookstore.domain.model.User;
 import es.cesguiro.daw1bookstore.domain.service.CartService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping(CartController.URL)
@@ -29,5 +32,16 @@ public class CartController {
         Cart cart = cartService.findByUserId(user.getId());
         model.addAttribute("cart", cart);
         return "carts/detail";
+    }
+
+    @PostMapping("/books/{bookId}")
+    public String addBook(@PathVariable int bookId, @RequestParam int quantity) {
+        User user = UserIoc.getUserService().getActiveUser();
+        Cart cart = cartService.findByUserId(user.getId());
+        Book book = new Book();
+        book.setId(bookId);
+        CartDetail cartDetail = new CartDetail(null, book, quantity, new BigDecimal(0.0));
+        cartService.addCartDetail(cart, cartDetail);
+        return "redirect:/carts";
     }
 }

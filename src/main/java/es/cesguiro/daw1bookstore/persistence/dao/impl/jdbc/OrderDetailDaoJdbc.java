@@ -11,6 +11,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class OrderDetailDaoJdbc implements OrderDetailDao {
 
@@ -43,7 +44,7 @@ public class OrderDetailDaoJdbc implements OrderDetailDao {
     }
 
     @Override
-    public List<CartDetail> findCartDetailListByCartId(Integer id) {
+    public List<CartDetail> findCartDetailListByCartId(Integer cartId) {
         Locale currentLocale = LocaleContextHolder.getLocale();
         String language = currentLocale.getLanguage();
         try {
@@ -62,12 +63,37 @@ public class OrderDetailDaoJdbc implements OrderDetailDao {
                     )
                     .join("orders", "order_details.order_id", "orders.id")
                     .join("books", "order_details.book_id", "books.id")
-                    .where("orders.id", "=", id)
+                    .where("orders.id", "=", cartId)
                     .andWhere("status", "=", 0)
                     .get();
             return OrderDetailMapper.toCartDetailList(resultSet);
         } catch (Exception e) {
             throw new QueryBuilderSQLException(e.getMessage());
         }
+    }
+
+    @Override
+    public void insertCartDetailIntoCart(Integer cartId, CartDetail cartDetail) {
+        try {
+            DB.table("order_details")
+                    .insert(Map.of(
+                                    "order_id", cartId,
+                                    "book_id", cartDetail.getBook().getId(),
+                                    "quantity", cartDetail.getQuantity(),
+                                    "price", cartDetail.getPrice()
+                            )
+                    );
+        } catch (Exception e) {
+            throw new QueryBuilderSQLException(e.getMessage());
+        }
+
+    }
+
+    @Override
+    public void deleteCartDetailListByCartId(Integer cartId) {
+        // Delete the cart details
+        DB.table("order_details")
+                .where("order_id", "=", cartId)
+                .delete();
     }
 }

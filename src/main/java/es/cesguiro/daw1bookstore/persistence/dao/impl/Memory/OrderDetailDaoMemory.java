@@ -18,7 +18,17 @@ public class OrderDetailDaoMemory implements OrderDetailDao {
     }
 
     @Override
-    public List<CartDetail> findCartDetailListByCartId(Integer id) {
+    public List<CartDetail> findCartDetailListByCartId(Integer cartId) {
         return List.of();
+    }
+
+    @Override
+    public void insertCartDetailIntoCart(Integer cartId, CartDetail cartDetail) {
+
+    }
+
+    @Override
+    public void deleteCartDetailListByCartId(Integer cartId) {
+
     }
 }

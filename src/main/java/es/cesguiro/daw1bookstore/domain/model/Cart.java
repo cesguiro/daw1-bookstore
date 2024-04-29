@@ -21,7 +21,7 @@ public class Cart {
     public Cart(Integer id, User user, BigDecimal total, List<CartDetail> cartDetailList) {
         this.id = id;
         this.user = user;
-        this.total = total;
+        setTotal(total);
         this.cartDetailList = cartDetailList;
     }
 
@@ -57,6 +57,7 @@ public class Cart {
     }
 
     public void setCartDetailList(List<CartDetail> cartDetailList) {
+        total = new BigDecimal(0);
         this.cartDetailList = cartDetailList;
         for (CartDetail cartDetail : cartDetailList) {
             total = total.add(cartDetail.getTotal());
@@ -64,6 +65,13 @@ public class Cart {
     }
 
     public void addCartDetail(CartDetail cartDetail) {
+        for (CartDetail cd : cartDetailList) {
+            if (cd.getBook().getId().equals(cartDetail.getBook().getId())) {
+                cd.setQuantity(cd.getQuantity() + cartDetail.getQuantity());
+                total = total.add(cartDetail.getTotal());
+                return;
+            }
+        }
         cartDetailList.add(cartDetail);
         total = total.add(cartDetail.getTotal());
     }

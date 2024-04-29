@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-sm-8 col-lg-5">
-            <h6 class="text-muted" th:text="|Carrito  - ${cart.total} €|"></h6>
+            <h6 class="text-muted" th:text="|#{menu.cart}  - ${cart.total} €|"></h6>
             <ul class="list-group">
 
                 <form action="/carts" th:method="PUT" th:object="${cart}">
@@ -25,7 +25,7 @@
                         <input type="number" min="1" max="5" th:field="*{cartDetailList[__${itemStat.index}__].quantity}">
                         <span th:text="|${cartDetail.price} €|"></span>
                     </li>
-                    <button type="submit" class="btn btn-info">Finalizar</button>
+                    <button type="submit" class="btn btn-info" th:text="#{button.finishOrder}"></button>
                 </form>
 
             </ul>

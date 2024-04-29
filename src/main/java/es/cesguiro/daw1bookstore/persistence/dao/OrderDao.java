@@ -11,4 +11,6 @@ public interface OrderDao {
     Order findById(Integer id);
 
     Cart findCartByUserId(Integer userId);
+
+    void update(Cart cart);
 }

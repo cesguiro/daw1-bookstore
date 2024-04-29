@@ -67,6 +67,30 @@ public class OrderDetailDaoMock implements OrderDetailDao {
         return result;
     }
 
+    @Override
+    public void insertCartDetailIntoCart(Integer cartId, CartDetail cartDetail) {
+        OrderDetail orderDetail = new OrderDetail(cartDetail.getId(), cartDetail.getBook(), cartDetail.getQuantity(), cartDetail.getPrice());
+        orderDetailList.add(orderDetail);
+        List<Integer> orderDetailIdList = orderOrderDetailMap.get(cartId);
+        if(orderDetailIdList == null) {
+            orderDetailIdList = new ArrayList<>();
+            orderOrderDetailMap.put(cartId, orderDetailIdList);
+        }
+        orderDetailIdList.add(orderDetail.getId());
+    }
+
+    @Override
+    public void deleteCartDetailListByCartId(Integer cartId) {
+        List<Integer> orderDetailIdList = orderOrderDetailMap.get(cartId);
+        if(orderDetailIdList == null) {
+            return;
+        }
+        orderOrderDetailMap.remove(cartId);
+        for (Integer orderDetailId : orderDetailIdList) {
+            orderDetailList.remove(findById(orderDetailId));
+        }
+    }
+
     private OrderDetail findById(Integer orderDetailId) {
         for (OrderDetail orderDetail : orderDetailList) {
             if (orderDetail.getId() == orderDetailId) {

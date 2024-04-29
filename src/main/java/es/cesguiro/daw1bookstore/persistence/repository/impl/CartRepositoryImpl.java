@@ -26,4 +26,13 @@ public class CartRepositoryImpl implements CartRepository {
         cart.setCartDetailList(cartDetailList);
         return cart;
     }
+
+    @Override
+    public void save(Cart cart) {
+        orderDao.update(cart);
+        OrderDetailIoc.getOrderDetailDao().deleteCartDetailListByCartId(cart.getId());
+        for (CartDetail cartDetail : cart.getCartDetailList()) {
+            OrderDetailIoc.getOrderDetailDao().insertCartDetailIntoCart(cart.getId(), cartDetail);
+        }
+    }
 }

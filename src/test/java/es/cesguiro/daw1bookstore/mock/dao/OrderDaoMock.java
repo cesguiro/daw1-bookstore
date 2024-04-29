@@ -68,4 +68,15 @@ public class OrderDaoMock implements OrderDao {
         }
         return null;
     }
+
+    @Override
+    public void update(Cart cart) {
+        for (Order order : orderList) {
+            if (order.getId() == cart.getId()) {
+                order.setStatus(1);
+                order.setTotal(cart.getTotal());
+                return;
+            }
+        }
+    }
 }
