@@ -8,4 +8,5 @@ public interface CartRepository {
     Cart findByUserId(Integer userId);
 
     void save(Cart cart);
+
 }

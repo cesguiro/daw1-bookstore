@@ -24,6 +24,7 @@ public class DBConnection {
             if(autocommitPropertyValue != null) {
                 boolean autocommitValue = Boolean.parseBoolean(autocommitPropertyValue);
                 connection.setAutoCommit(autocommitValue);
+                LogManager.getLogManager().getLogger("").info("Autocommit set to " + autocommitValue);
             }
             LogManager.getLogManager().getLogger("").info("Connection established with the database");
         } catch (SQLException e) {

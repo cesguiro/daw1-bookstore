@@ -1,14 +1,16 @@
 package es.cesguiro.daw1bookstore.domain.service.impl;
 
 import es.cesguiro.daw1bookstore.common.container.BookIoc;
+import es.cesguiro.daw1bookstore.common.container.OrderIoc;
 import es.cesguiro.daw1bookstore.common.container.UserIoc;
 import es.cesguiro.daw1bookstore.common.exception.ResourceNotFoundException;
-import es.cesguiro.daw1bookstore.domain.model.Book;
-import es.cesguiro.daw1bookstore.domain.model.Cart;
-import es.cesguiro.daw1bookstore.domain.model.CartDetail;
-import es.cesguiro.daw1bookstore.domain.model.User;
+import es.cesguiro.daw1bookstore.domain.model.*;
 import es.cesguiro.daw1bookstore.domain.service.CartService;
 import es.cesguiro.daw1bookstore.persistence.repository.CartRepository;
+import es.cesguiro.daw1bookstore.persistence.repository.OrderRepository;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public class CartServiceImpl implements CartService {
 
@@ -50,6 +52,24 @@ public class CartServiceImpl implements CartService {
     public void updateCartDetail(Cart cart, int cartDetailId, int quantity) {
         cart.updateCartDetail(cartDetailId, quantity);
         cartRepository.save(cart);
+    }
+
+    @Override
+    public void buildOrder(Cart cart) {
+        LocalDate localDate = LocalDate.now();
+
+        Order order = new Order(
+                null,
+                cart.getUser(),
+                localDate,
+                null,
+                cart.getTotal(),
+                1
+        );
+        OrderRepository orderRepository = OrderIoc.getOrderRespository();
+        List<OrderDetail> orderDetailList = order.getOrderDetailList();
+        order.setOrderDetailList(orderDetailList);
+        orderRepository.save(order);
     }
 
     private Book getBook(int bookId) {
