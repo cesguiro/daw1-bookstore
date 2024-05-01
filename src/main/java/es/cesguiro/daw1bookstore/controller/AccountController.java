@@ -34,8 +34,4 @@ public class AccountController {
         model.addAttribute("cart", user.getCart());
         return "carts/detail";
     }
-
-    /*private User getUser() {
-        return UserIoc.getUserService().getActiveUser();
-    }*/
 }

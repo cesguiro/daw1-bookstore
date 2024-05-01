@@ -35,4 +35,15 @@ public class CartRepositoryImpl implements CartRepository {
             OrderDetailIoc.getOrderDetailDao().insertCartDetailIntoCart(cart.getId(), cartDetail);
         }
     }
+
+    @Override
+    public Cart findById(int id) {
+        Cart cart = orderDao.findCartById(id);
+        if(cart == null) {
+            return null;
+        }
+        List<CartDetail> cartDetailList = OrderDetailIoc.getOrderDetailDao().findCartDetailListByCartId(cart.getId());
+        cart.setCartDetailList(cartDetailList);
+        return cart;
+    }
 }

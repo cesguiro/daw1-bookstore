@@ -48,4 +48,9 @@ public class OrderDaoMemory implements OrderDao {
     public Order findByIdAndUserId(Integer id, Integer userId) {
         return null;
     }
+
+    @Override
+    public Cart findCartById(int id) {
+        return null;
+    }
 }

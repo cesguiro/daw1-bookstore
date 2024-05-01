@@ -8,6 +8,7 @@ import es.cesguiro.daw1bookstore.domain.model.Cart;
 import es.cesguiro.daw1bookstore.domain.model.CartDetail;
 import es.cesguiro.daw1bookstore.domain.model.User;
 import es.cesguiro.daw1bookstore.domain.service.CartService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,50 +21,40 @@ import java.math.BigDecimal;
 @RequestMapping(CartController.URL)
 public class CartController {
 
-    public static final String URL = "cart";
+    public static final String URL = "carts";
     private final CartService cartService;
 
     public CartController() {
         this.cartService = CartIoc.getCartService();
     }
 
-    @GetMapping()
-    public String findById(Model model) {
-        //User user = UserIoc.getUserService().getActiveUser();
-        User user = UserUtil.getActiveUser();
-        Cart cart = cartService.findByUserId(user.getId());
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String findById(Model model, @PathVariable int id) {
+        Cart cart = cartService.findById(id);
         model.addAttribute("cart", cart);
         return "carts/detail";
     }
 
     @PostMapping("/books/{bookId}")
     public String addBook(@PathVariable int bookId, @RequestParam int quantity) {
-        //User user = UserIoc.getUserService().getActiveUser();
         User user = UserUtil.getActiveUser();
         Cart cart = cartService.findByUserId(user.getId());
         Book book = new Book();
         book.setId(bookId);
         CartDetail cartDetail = new CartDetail(null, book, quantity, new BigDecimal(0.0));
         cartService.addCartDetail(cart, cartDetail);
-        return "redirect:/cart";
+        return "redirect:account/cart";
     }
 
     @DeleteMapping("/{cartDetailId}")
     public String removeCartDetail(@PathVariable int cartDetailId) {
         //User user = UserIoc.getUserService().getActiveUser();
         User user = UserUtil.getActiveUser();
-        Cart cart = cartService.findByUserId(user.getId());
-        cartService.removeCartDetail(cart, cartDetailId);
-        return "redirect:/cart";
+        //Cart cart = cartService.findByUserId(user.getId())
+        cartService.removeCartDetail(user.getCart(), cartDetailId);
+        return "redirect:account/cart";
     }
-
-    /*@DeleteMapping("/books/{bookId}")
-    public String removeBook(@PathVariable int bookId) {
-        User user = UserIoc.getUserService().getActiveUser();
-        Cart cart = cartService.findByUserId(user.getId());
-        cartService.removeCartDetail(cart, bookId);
-        return "redirect:/cart";
-    }*/
 
     @PutMapping("/{cartDetailId}")
     public String updateCartDetail(@PathVariable int cartDetailId, @RequestParam int quantity) {

@@ -17,4 +17,6 @@ public interface OrderDao {
     List<Order> findAll();
 
     Order findByIdAndUserId(Integer id, Integer userId);
+
+    Cart findCartById(int id);
 }

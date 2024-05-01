@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.domain.service.impl;
 
+import es.cesguiro.daw1bookstore.common.UserUtil;
 import es.cesguiro.daw1bookstore.common.container.BookIoc;
 import es.cesguiro.daw1bookstore.common.container.UserIoc;
 import es.cesguiro.daw1bookstore.common.exception.ResourceNotFoundException;
@@ -42,6 +43,10 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void removeCartDetail(Cart cart, int cartDetailId) {
+        User user = UserUtil.getActiveUser();
+        if(!user.isAdmin() && cart.getId() != user.getCart().getId()) {
+            throw new ResourceNotFoundException("Cart not found");
+        }
         cart.removeCartDetail(cartDetailId);
         cartRepository.save(cart);
     }
@@ -50,6 +55,11 @@ public class CartServiceImpl implements CartService {
     public void updateCartDetail(Cart cart, int cartDetailId, int quantity) {
         cart.updateCartDetail(cartDetailId, quantity);
         cartRepository.save(cart);
+    }
+
+    @Override
+    public Cart findById(int id) {
+        return cartRepository.findById(id);
     }
 
     private Book getBook(int bookId) {

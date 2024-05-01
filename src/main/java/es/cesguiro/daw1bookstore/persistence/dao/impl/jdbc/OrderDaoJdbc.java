@@ -107,4 +107,20 @@ public class OrderDaoJdbc implements OrderDao {
         } catch (Exception e) {
             throw new QueryBuilderSQLException(e.getMessage());
         }    }
+
+    @Override
+    public Cart findCartById(int id) {
+        try {
+            ResultSet resultSet = DB
+                    .table("orders")
+                    .where("orders.id", "=", id)
+                    .get();
+            if(!resultSet.next()) {
+                return null;
+            }
+            return OrderMapper.toCart(resultSet);
+        } catch (Exception e) {
+            throw new QueryBuilderSQLException(e.getMessage());
+        }
+    }
 }
