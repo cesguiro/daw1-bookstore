@@ -15,7 +15,7 @@ public class OrderDaoMemory implements OrderDao {
 
 
     @Override
-    public List<Order> findOrderByUserId(Integer userId) {
+    public List<Order> findByUserId(Integer userId) {
         List<OrderRecord> orderRecordList = orderTable.selectOrderByUserId(userId);
         return OrderMapper.toOrderList(orderRecordList);
     }
@@ -42,5 +42,10 @@ public class OrderDaoMemory implements OrderDao {
     @Override
     public List<Order> findAll() {
         return List.of();
+    }
+
+    @Override
+    public Order findByIdAndUserId(Integer id, Integer userId) {
+        return null;
     }
 }

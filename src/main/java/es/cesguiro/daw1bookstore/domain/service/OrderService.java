@@ -10,5 +10,7 @@ public interface OrderService {
 
     Order findById(Integer id);
 
+    Order findByIdAndUserId(Integer id, Integer userId);
+
     List<Order> findAll();
 }

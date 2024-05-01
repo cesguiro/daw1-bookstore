@@ -64,7 +64,6 @@ public class OrderDetailDaoJdbc implements OrderDetailDao {
                     .join("orders", "order_details.order_id", "orders.id")
                     .join("books", "order_details.book_id", "books.id")
                     .where("orders.id", "=", cartId)
-                    .andWhere("status", "=", 0)
                     .get();
             return OrderDetailMapper.toCartDetailList(resultSet);
         } catch (Exception e) {

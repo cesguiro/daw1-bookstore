@@ -1,7 +1,10 @@
 package es.cesguiro.daw1bookstore.controller;
 
+import es.cesguiro.daw1bookstore.common.UserUtil;
+import es.cesguiro.daw1bookstore.common.container.CartIoc;
 import es.cesguiro.daw1bookstore.common.container.OrderIoc;
 import es.cesguiro.daw1bookstore.common.container.UserIoc;
+import es.cesguiro.daw1bookstore.domain.model.Cart;
 import es.cesguiro.daw1bookstore.domain.model.Order;
 import es.cesguiro.daw1bookstore.domain.model.User;
 import org.springframework.stereotype.Controller;
@@ -19,12 +22,20 @@ public class AccountController {
 
     @GetMapping("/orders")
     public String findOrders(Model model) {
-        List<Order> orderList = OrderIoc.getOrderService().findByUserId(getUser().getId());
+        List<Order> orderList = OrderIoc.getOrderService().findByUserId(UserUtil.getActiveUser().getId());
         model.addAttribute("orderList", orderList);
         return "orders/list";
     }
 
-    private User getUser() {
-        return UserIoc.getUserService().getActiveUser();
+    @GetMapping("/cart")
+    public String findCart(Model model) {
+        //User user = getUser();
+        User user = UserUtil.getActiveUser();
+        model.addAttribute("cart", user.getCart());
+        return "carts/detail";
     }
+
+    /*private User getUser() {
+        return UserIoc.getUserService().getActiveUser();
+    }*/
 }

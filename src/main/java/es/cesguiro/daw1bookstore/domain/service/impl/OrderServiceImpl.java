@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.domain.service.impl;
 
+import es.cesguiro.daw1bookstore.common.UserUtil;
 import es.cesguiro.daw1bookstore.common.exception.AuthorizationException;
 import es.cesguiro.daw1bookstore.common.exception.ResourceNotFoundException;
 import es.cesguiro.daw1bookstore.domain.model.Order;
@@ -30,9 +31,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findById(Integer id) {
-        //Obtener el usuario autenticado
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User userPrincipal = (User) authentication.getPrincipal();
 
         Order order = orderRepository.findById(id);
 
@@ -44,8 +42,22 @@ public class OrderServiceImpl implements OrderService {
             throw new AuthorizationException("You are not authorized to access this resource.");
         }*/
 
-        return orderRepository.findById(id);
+        return order;
     }
+
+    @Override
+    public Order findByIdAndUserId(Integer id, Integer userId) {
+        User user = UserUtil.getActiveUser();
+
+        Order order = orderRepository.findByIdAndUserId(id, userId);
+
+        if (order == null) {
+            throw new ResourceNotFoundException("Order with id " + id + " not found.");
+        }
+
+        return order;
+    }
+
 
     @Override
     public List<Order> findAll() {

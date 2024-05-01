@@ -6,7 +6,7 @@ import es.cesguiro.daw1bookstore.domain.model.Order;
 import java.util.List;
 
 public interface OrderDao {
-    List<Order> findOrderByUserId(Integer userId);
+    List<Order> findByUserId(Integer userId);
 
     Order findById(Integer id);
 
@@ -15,4 +15,6 @@ public interface OrderDao {
     void update(Cart cart);
 
     List<Order> findAll();
+
+    Order findByIdAndUserId(Integer id, Integer userId);
 }

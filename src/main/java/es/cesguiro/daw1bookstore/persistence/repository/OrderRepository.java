@@ -10,4 +10,6 @@ public interface OrderRepository {
     Order findById(Integer id);
 
     List<Order> findAll();
+
+    Order findByIdAndUserId(Integer id, Integer userId);
 }

@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.controller;
 
+import es.cesguiro.daw1bookstore.common.UserUtil;
 import es.cesguiro.daw1bookstore.common.container.CartIoc;
 import es.cesguiro.daw1bookstore.common.container.UserIoc;
 import es.cesguiro.daw1bookstore.domain.model.Book;
@@ -28,7 +29,8 @@ public class CartController {
 
     @GetMapping()
     public String findById(Model model) {
-        User user = UserIoc.getUserService().getActiveUser();
+        //User user = UserIoc.getUserService().getActiveUser();
+        User user = UserUtil.getActiveUser();
         Cart cart = cartService.findByUserId(user.getId());
         model.addAttribute("cart", cart);
         return "carts/detail";
@@ -36,7 +38,8 @@ public class CartController {
 
     @PostMapping("/books/{bookId}")
     public String addBook(@PathVariable int bookId, @RequestParam int quantity) {
-        User user = UserIoc.getUserService().getActiveUser();
+        //User user = UserIoc.getUserService().getActiveUser();
+        User user = UserUtil.getActiveUser();
         Cart cart = cartService.findByUserId(user.getId());
         Book book = new Book();
         book.setId(bookId);
@@ -47,7 +50,8 @@ public class CartController {
 
     @DeleteMapping("/{cartDetailId}")
     public String removeCartDetail(@PathVariable int cartDetailId) {
-        User user = UserIoc.getUserService().getActiveUser();
+        //User user = UserIoc.getUserService().getActiveUser();
+        User user = UserUtil.getActiveUser();
         Cart cart = cartService.findByUserId(user.getId());
         cartService.removeCartDetail(cart, cartDetailId);
         return "redirect:/cart";
@@ -63,7 +67,8 @@ public class CartController {
 
     @PutMapping("/{cartDetailId}")
     public String updateCartDetail(@PathVariable int cartDetailId, @RequestParam int quantity) {
-        User user = UserIoc.getUserService().getActiveUser();
+        //User user = UserIoc.getUserService().getActiveUser();
+        User user = UserUtil.getActiveUser();
         Cart cart = cartService.findByUserId(user.getId());
         cartService.updateCartDetail(cart, cartDetailId, quantity);
         return "redirect:/cart";

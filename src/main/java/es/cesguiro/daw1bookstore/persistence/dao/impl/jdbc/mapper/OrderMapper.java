@@ -44,16 +44,14 @@ public class OrderMapper {
     }
 
     public static Cart toCart(ResultSet resultSet) throws SQLException {
-        /*if(resultSet == null) {
+        if(resultSet == null) {
             return null;
         }
         Cart cart = new Cart(
                 resultSet.getInt("id"),
-                getUser(resultSet),
                 resultSet.getBigDecimal("total")
         );
-        return cart;*/
-        return null;
+        return cart;
     }
 
     private static User getUser(ResultSet resultSet) throws SQLException {

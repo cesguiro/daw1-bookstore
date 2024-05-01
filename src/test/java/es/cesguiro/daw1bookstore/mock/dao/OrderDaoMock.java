@@ -39,7 +39,7 @@ public class OrderDaoMock implements OrderDao {
     }
 
     @Override
-    public List<Order> findOrderByUserId(Integer userId) {
+    public List<Order> findByUserId(Integer userId) {
         List<Order> result = new ArrayList<>();
         for (Order order : orderList) {
             if (order.getUser().getId() == userId && order.getStatus() != 0) {

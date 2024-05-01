@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.controller;
 
+import es.cesguiro.daw1bookstore.common.UserUtil;
 import es.cesguiro.daw1bookstore.common.container.OrderIoc;
 import es.cesguiro.daw1bookstore.common.container.UserIoc;
 import es.cesguiro.daw1bookstore.domain.model.Order;
@@ -46,8 +47,13 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public String findById(Model model, @PathVariable int id) {
-        Order order = orderService.findById(id);
-
+        User user = UserUtil.getActiveUser();
+        Order order;
+        if(user.isAdmin()) {
+            order = orderService.findById(id);
+        } else {
+            order = orderService.findByIdAndUserId(id, user.getId());
+        }
         //Modificar el formato de fecha en función del idioma
         Locale locale = LocaleContextHolder.getLocale();
         // Obtener el patrón de formato de fecha según el idioma local

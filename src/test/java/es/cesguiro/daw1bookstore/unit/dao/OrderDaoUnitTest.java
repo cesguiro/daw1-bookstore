@@ -47,7 +47,7 @@ public class OrderDaoUnitTest {
                 new Order(4, null, LocalDate.of(2023, 02, 12), LocalDate.of(2023, 02, 15), new BigDecimal(190.00), 4),
                 new Order(7, null, LocalDate.of(2024, 03, 29), null, new BigDecimal(125.50), 2)
         );
-        List<Order> actualOrderList = orderDao.findOrderByUserId(userId);
+        List<Order> actualOrderList = orderDao.findByUserId(userId);
 
         assertAll("orders",
                 () -> assertEquals(expectedOrderList.size(), actualOrderList.size(), "Tamaño del listado incorrecto"),
@@ -62,7 +62,7 @@ public class OrderDaoUnitTest {
     public void testFindOrdersByUserIdWithNoOrders() {
         int userId = 19;
         List<Order> expectedOrderList = List.of();
-        List<Order> actualOrderList = orderDao.findOrderByUserId(userId);
+        List<Order> actualOrderList = orderDao.findByUserId(userId);
 
         assertAll("orders",
                 () -> assertEquals(expectedOrderList, actualOrderList, "Tamaño del listado incorrecto")

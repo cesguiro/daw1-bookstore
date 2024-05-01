@@ -32,7 +32,7 @@ public class SecurityConfig {
         return httpSecurity
                 .authorizeHttpRequests((request) -> request
                         .requestMatchers("/", "/books/**").permitAll()
-                        .requestMatchers("/orders", "/carts").hasAuthority("ROLE_USER")
+                        .requestMatchers("/orders", "/carts").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
