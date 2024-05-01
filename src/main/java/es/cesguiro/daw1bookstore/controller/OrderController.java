@@ -7,9 +7,10 @@ import es.cesguiro.daw1bookstore.domain.model.User;
 import es.cesguiro.daw1bookstore.domain.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Role;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,9 +37,9 @@ public class OrderController {
     }
 
     @GetMapping
-    public String findAllByUser(Authentication authentication, Model model) {
-        User user = UserIoc.getUserService().getActiveUser();
-        List<Order> orderList = orderService.findByUserId(user.getId());
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String findAll(Model model) {
+        List<Order> orderList = orderService.findAll();
         model.addAttribute("orderList", orderList);
         return "orders/list";
     }

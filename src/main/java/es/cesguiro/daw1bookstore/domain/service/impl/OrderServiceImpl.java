@@ -40,10 +40,15 @@ public class OrderServiceImpl implements OrderService {
             throw new ResourceNotFoundException("Order with id " + id + " not found.");
         }
 
-        if(userPrincipal.getId() != order.getUser().getId()) {
+        /*if(userPrincipal.getId() != order.getUser().getId()) {
             throw new AuthorizationException("You are not authorized to access this resource.");
-        }
+        }*/
 
         return orderRepository.findById(id);
+    }
+
+    @Override
+    public List<Order> findAll() {
+        return orderRepository.findAll();
     }
 }

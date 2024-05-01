@@ -8,9 +8,9 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-sm-8 col-lg-5">
-            <h6 class="text-muted" th:text="|#{order.id} ${order.id} (${order.total} €)|"></h6>
-            <h6 class="text-muted" th:text="|#{order.date} ${orderDate}|"></h6>
-            <h6 class="text-muted" th:text="|#{order.deliveryDate} ${deliveryDate}|"></h6>
+            <h6 class="text-muted" th:text="|#{orders.id} ${order.id} (${order.total} €)|"></h6>
+            <h6 class="text-muted" th:text="|#{orders.date} ${orderDate}|"></h6>
+            <h6 class="text-muted" th:text="|#{orders.deliveryDate} ${deliveryDate}|"></h6>
             <ul class="list-group">
                 <a th:each="orderDetail : ${order.orderDetailList}" th:href="@{${'/books/' + orderDetail.book.id}}">
                     <li class="list-group-item d-flex justify-content-between align-items-center">

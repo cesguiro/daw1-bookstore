@@ -17,6 +17,8 @@ public class UserDaoJdbc implements UserDao {
         try {
             ResultSet resultSet = DB
                     .table("users")
+                    .leftJoin("orders", "users.id", "orders.user_id")
+                    .andWhere("orders.status", "=", 0)
                     .where("username", "=", username)
                     .get();
             resultSet.next();

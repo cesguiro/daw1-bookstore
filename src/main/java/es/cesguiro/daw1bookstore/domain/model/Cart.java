@@ -10,19 +10,16 @@ import java.util.Objects;
 public class Cart {
 
     private Integer id;
-    private User user;
     private BigDecimal total;
     List<CartDetail> cartDetailList;
 
-    public Cart(Integer id, User user, BigDecimal total) {
+    public Cart(Integer id, BigDecimal total) {
         this.id = id;
-        this.user = user;
         setTotal(total);
     }
 
-    public Cart(Integer id, User user, BigDecimal total, List<CartDetail> cartDetailList) {
+    public Cart(Integer id, BigDecimal total, List<CartDetail> cartDetailList) {
         this.id = id;
-        this.user = user;
         setTotal(total);
         this.cartDetailList = cartDetailList;
     }
@@ -33,14 +30,6 @@ public class Cart {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public BigDecimal getTotal() {
@@ -90,17 +79,6 @@ public class Cart {
     public int hashCode() {
         return Objects.hashCode(id);
     }
-
-    /*public void removeCartDetail(Book book) {
-        for (CartDetail cartDetail : cartDetailList) {
-            if (cartDetail.getBook().getId().equals(book.getId())) {
-                total = total.subtract(cartDetail.getTotal());
-                cartDetailList.remove(cartDetail);
-                return;
-            }
-        }
-        throw new ResourceNotFoundException("Book not found in cart");
-    }*/
 
     public void removeCartDetail(int cartDetailId) {
         for (CartDetail cartDetail : cartDetailList) {

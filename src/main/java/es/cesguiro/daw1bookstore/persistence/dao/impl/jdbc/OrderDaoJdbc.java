@@ -76,4 +76,16 @@ public class OrderDaoJdbc implements OrderDao {
             throw new QueryBuilderSQLException(e.getMessage());
         }
     }
+
+    @Override
+    public List<Order> findAll() {
+        try {
+            ResultSet resultSet = DB
+                    .table("orders")
+                    .get();
+            return OrderMapper.toOrderList(resultSet);
+        } catch (Exception e) {
+            throw new QueryBuilderSQLException(e.getMessage());
+        }
+    }
 }

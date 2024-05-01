@@ -27,7 +27,6 @@ public class OrderMapper {
         BigDecimal total = resultSet.getString("total") != null ? new BigDecimal(resultSet.getString("total")) : new BigDecimal(0);
         Order order = new Order(
                resultSet.getInt("id"),
-               getUser(resultSet),
                orderDate,
                deliveryDate,
                total,
@@ -45,7 +44,7 @@ public class OrderMapper {
     }
 
     public static Cart toCart(ResultSet resultSet) throws SQLException {
-        if(resultSet == null) {
+        /*if(resultSet == null) {
             return null;
         }
         Cart cart = new Cart(
@@ -53,7 +52,8 @@ public class OrderMapper {
                 getUser(resultSet),
                 resultSet.getBigDecimal("total")
         );
-        return cart;
+        return cart;*/
+        return null;
     }
 
     private static User getUser(ResultSet resultSet) throws SQLException {

@@ -1,5 +1,6 @@
 package es.cesguiro.daw1bookstore.persistence.dao.impl.jdbc.mapper;
 
+import es.cesguiro.daw1bookstore.domain.model.Cart;
 import es.cesguiro.daw1bookstore.domain.model.User;
 
 import java.sql.ResultSet;

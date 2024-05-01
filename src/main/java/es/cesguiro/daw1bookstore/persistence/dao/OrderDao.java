@@ -13,4 +13,6 @@ public interface OrderDao {
     Cart findCartByUserId(Integer userId);
 
     void update(Cart cart);
+
+    List<Order> findAll();
 }

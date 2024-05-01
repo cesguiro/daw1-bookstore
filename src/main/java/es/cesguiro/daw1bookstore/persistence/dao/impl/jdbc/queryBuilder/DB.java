@@ -93,6 +93,17 @@ public class DB {
         return this;
     }
 
+    public DB leftJoin(String referencedTable, String primaryKey, String foreignKey) {
+        this.sql
+                .append(" LEFT JOIN ")
+                .append(referencedTable)
+                .append(" ON ")
+                .append(primaryKey)
+                .append("=")
+                .append(foreignKey);
+        return this;
+    }
+
     public DB limit(int limit, Integer offset) {
         this.sql.append(" LIMIT ?");
         this.parameters.add(limit);

@@ -38,4 +38,9 @@ public class OrderDaoMemory implements OrderDao {
     public void update(Cart cart) {
 
     }
+
+    @Override
+    public List<Order> findAll() {
+        return List.of();
+    }
 }

@@ -8,4 +8,6 @@ public interface OrderRepository {
     List<Order> findByUserId(Integer userId);
 
     Order findById(Integer id);
+
+    List<Order> findAll();
 }

@@ -28,6 +28,8 @@ public class User implements UserDetails {
     String surname;
     String address;
     Boolean admin;
+    Cart cart;
+    List<Order> orderList;
 
     public User(Integer id, String username, String password, String email, String name, String surname, String address, Boolean admin) {
         this.id = id;
@@ -106,6 +108,35 @@ public class User implements UserDetails {
 
     public String getPassword() {
         return password;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
+
+    public void addOrder(Order order) {
+        if(orderList == null) {
+            orderList = new ArrayList<>();
+        }
+        orderList.add(order);
+    }
+
+    public void removeOrder(Order order) {
+        if(orderList != null) {
+            orderList.remove(order);
+        }
     }
 
     @Override

@@ -10,7 +10,6 @@ import java.util.Objects;
 public class Order {
 
     private Integer id;
-    private User user;
     private LocalDate orderDate;
     private LocalDate deliveryDate;
     private BigDecimal total;
@@ -24,15 +23,6 @@ public class Order {
     private int status;
 
     private List<OrderDetail> orderDetailList;
-
-    public Order(Integer id, User user, LocalDate orderDate, LocalDate deliveryDate, BigDecimal total, int status) {
-        this.id = id;
-        this.user = user;
-        this.orderDate = orderDate;
-        this.deliveryDate = deliveryDate;
-        setTotal(total);
-        this.status = status;
-    }
 
     public Order(Integer id, LocalDate orderDate, LocalDate deliveryDate, BigDecimal total, int status) {
         this.id = id;
@@ -48,14 +38,6 @@ public class Order {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public LocalDate getOrderDate() {
@@ -122,7 +104,6 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", user=" + user +
                 ", orderDate=" + orderDate +
                 ", deliveryDate=" + deliveryDate +
                 ", total=" + total +

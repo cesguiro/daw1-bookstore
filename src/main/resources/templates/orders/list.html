@@ -5,6 +5,7 @@
 <body>
 <nav th:replace="~{layouts/base:: menu}"></nav>
 <div class="container">
+    <p th:text="#{orders.list}"></p>
     <div class="list-group">
         <a th:each="order : ${orderList}" th:href="@{${'/orders/' + order.id}}" class="list-group-item list-group-item-action" aria-current="true">
             <div></div>

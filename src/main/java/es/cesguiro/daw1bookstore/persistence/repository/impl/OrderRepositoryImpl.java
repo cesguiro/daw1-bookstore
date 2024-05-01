@@ -32,4 +32,9 @@ public class OrderRepositoryImpl implements OrderRepository {
         order.setOrderDetailList(orderDetailList);
         return order;
     }
+
+    @Override
+    public List<Order> findAll() {
+        return orderDao.findAll();
+    }
 }

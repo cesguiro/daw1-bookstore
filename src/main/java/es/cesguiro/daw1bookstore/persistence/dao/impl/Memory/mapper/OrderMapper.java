@@ -22,7 +22,6 @@ public class OrderMapper {
         );
         //Añadimos el usuario al pedido
         UserDao userDao = new UserDaoMemory();
-        order.setUser(userDao.findById(orderRecord.getUserId()));
         return order;
     }
 
