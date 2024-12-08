@@ -2,11 +2,8 @@ package es.cesguiro.daw1bookstore.config;
 
 import es.cesguiro.daw1bookstore.common.container.UserIoc;
 import es.cesguiro.daw1bookstore.common.exception.AuthorizationException;
-import es.cesguiro.daw1bookstore.domain.service.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

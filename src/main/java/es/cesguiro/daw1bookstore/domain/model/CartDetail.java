@@ -65,4 +65,5 @@ public class CartDetail {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
 }

@@ -22,7 +22,11 @@
                         <span th:text="|${cartDetail.price} €|"></span>
                         <button type="submit" class="btn btn-info" th:text="#{button.update}"></button>
                     </form>
+<<<<<<< HEAD
                     <form th:action="@{${'/carts/' + cartDetail.id}}" th:method="DELETE">
+=======
+                    <form th:action="@{${'/cart/cartDetail/' + cartDetail.id}}" th:method="DELETE">
+>>>>>>> origin/feature#23
                         <button type="submit" class="btn btn-danger" th:text="#{button.delete}"></button>
                     </form>
                 </li>
@@ -47,6 +51,9 @@
                 </form>-->
 
             </ul>
+            <form th:action="@{${'/cart/' + cart.id}}" th:method="PUT">
+                <button type="submit" class="btn btn-info" th:text="#{button.finishOrder}"></button>
+            </form>
         </div>
     </div>
 </div>

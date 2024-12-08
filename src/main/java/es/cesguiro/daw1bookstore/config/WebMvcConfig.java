@@ -16,6 +16,7 @@ import java.util.Locale;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     final String defaultLanguage = "es";
+
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();

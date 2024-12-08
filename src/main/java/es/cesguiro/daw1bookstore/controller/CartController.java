@@ -9,8 +9,6 @@ import es.cesguiro.daw1bookstore.domain.model.CartDetail;
 import es.cesguiro.daw1bookstore.domain.model.User;
 import es.cesguiro.daw1bookstore.domain.service.CartService;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +45,7 @@ public class CartController {
         return "redirect:account/cart";
     }
 
-    @DeleteMapping("/{cartDetailId}")
+    @DeleteMapping("/cartDetail/{cartDetailId}")
     public String removeCartDetail(@PathVariable int cartDetailId) {
         //User user = UserIoc.getUserService().getActiveUser();
         User user = UserUtil.getActiveUser();
@@ -57,12 +55,28 @@ public class CartController {
     }
 
     @PutMapping("/{cartDetailId}")
+    /*@DeleteMapping("/books/{bookId}")
+    public String removeBook(@PathVariable int bookId) {
+        User user = UserIoc.getUserService().getActiveUser();
+        Cart cart = cartService.findByUserId(user.getId());
+        cartService.removeCartDetail(cart, bookId);
+        return "redirect:/cart";
+    }*/
     public String updateCartDetail(@PathVariable int cartDetailId, @RequestParam int quantity) {
         //User user = UserIoc.getUserService().getActiveUser();
         User user = UserUtil.getActiveUser();
         Cart cart = cartService.findByUserId(user.getId());
         cartService.updateCartDetail(cart, cartDetailId, quantity);
         return "redirect:/cart";
+    }
+
+    @PutMapping("/{cartId}")
+    public String buildOrder(@PathVariable int cartId) {
+    /*    User user = UserIoc.getUserService().getActiveUser();
+        Cart cart = cartService.findByUserId(user.getId());
+        cartService.buildOrder(cart);
+        return "redirect:/cart";*/
+        return null;
     }
 
 }
