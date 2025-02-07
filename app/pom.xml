@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>es.cesguiro</groupId>
-        <artifactId>daw2-bookstore</artifactId>
+        <artifactId>daw1-bookstore</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
