@@ -1,0 +1,31 @@
+<div th:fragment="bookCard(book)" class="c-book-card">
+
+  <div class="c-book-card__header">
+    <img th:src="${book.cover}" class="" alt="Portada del libro">
+  </div>
+
+  <div class="c-book-card__title">
+    <span th:text="${book.title}">Título del libro</span>
+  </div>
+
+  <div class="c-book-card__authors">
+      <span th:each="author : ${book.authors}" class="c-book-card__author" th:text="${author.name}"></span>
+  </div>
+
+
+  <div class="c-book-card__price">
+    <span class="c-book-card__current-price c-price" th:text="${book.finalPrice}"></span>
+    <span th:if="${book.basePrice != null and book.finalPrice != null and book.basePrice != book.finalPrice}"
+          class="c-book-card__original-price c-price"
+          th:text="${book.basePrice}">
+    </span>
+  </div>
+
+  <div class="c-book-card__buttons">
+    <a th:href="@{/books/{isbn}(isbn=${book.isbn})}" class="c-book-card__button c-book-card__button--view" th:text="#{button.view.book}"></a>
+    <a th:href="@{/cart/add/{isbn}(isbn=${book.isbn})}" class="c-book-card__button" th:text="#{button.add.to.cart}"></a>
+  </div>
+
+</div>
+
+

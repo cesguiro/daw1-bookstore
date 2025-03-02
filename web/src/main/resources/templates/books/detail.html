@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{fragments/base :: head}">
+</head>
+<body class="c-body">
+<nav th:replace="~{fragments/base :: menu}"></nav>
+
+<div class="c-content">
+    <div class="c-book-detail">
+        <!-- Portada -->
+        <div class="c-book-detail__cover">
+            <img th:src="${book.cover}" th:alt="${book.title}" />
+        </div>
+
+        <!-- Información del libro -->
+        <div class="c-book-detail__info">
+            <h1 th:text="${book.title}"></h1>
+            <p class="c-book-detail__synopsis" th:text="${book.synopsis}"></p>
+
+            <p><strong th:text="#{book.tag.publication.date} + ': '"></strong> <span th:text="${book.publicationDate}"></span></p>
+
+            <p>
+                <strong th:text="#{book.tag.publisher} + ': '"></strong>
+                <a th:href="@{/publishers/{slug}/books(slug=${book.publisher.slug})}"
+                   th:text="${book.publisher.name}"></a>
+            </p>
+
+            <p>
+                <strong th:text="#{book.tag.authors} + ': '">Autores:</strong>
+                <span th:each="author, iter : ${book.authors}">
+                    <a th:href="@{/authors/{slug}(slug=${author.slug})}"
+                       th:text="${author.name}"></a>
+                    <span th:if="${!iter.last}">, </span>
+                </span>
+            </p>
+
+            <p>
+                <strong  th:text="#{book.tag.price} + ': '">Precio:</strong>
+                <span th:if="${book.discountPercentage > 0}">
+                    <span class="c-book-detail__price--original c-price" th:text="${book.basePrice}"></span>
+                    <span class="c-book-detail__price--discounted c-price" th:text="${book.finalPrice}"></span>
+                </span>
+                <span th:unless="${book.discountPercentage > 0}" th:text="${book.basePrice}"></span>
+            </p>
+
+            <a th:href="@{/cart/add/{isbn}(isbn=${book.isbn})}" class="c-book-detail__button" th:text="#{button.add.to.cart}">
+                Añadir al carrito
+            </a>
+        </div>
+    </div>
+
+    <a href="javascript:history.back()" class="c-book-detail__back-button" th:text="#{page.back}">
+        ← Volver
+    </a>
+
+</div>
+
+</body>
+</html>

@@ -20,38 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.projectlombok.version>1.18.36</org.projectlombok.version>
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
-        <org.mariadb.java-client.version>3.5.1</org.mariadb.java-client.version>
-        <com.h2database.version>2.3.232</com.h2database.version>
-        <org.flywaydb.version>11.3.0</org.flywaydb.version>
-        <flyway.url>jdbc:h2:mem:testdb;MODE=MySQL</flyway.url>
-        <flyway.user>root</flyway.user>
-        <flyway.password>root</flyway.password>
     </properties>
-
-    <!--<profiles>
-        <profile>
-            <id>test</id>
-            <properties>
-                <flyway.locations>classpath:db/migration/test</flyway.locations>
-                <flyway.url>jdbc:h2:mem:testdb</flyway.url>
-                <flyway.user>root</flyway.user>
-                <flyway.password>root</flyway.password>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-
-        <profile>
-            <id>prod</id>
-            <properties>
-                <flyway.locations>classpath:db/migration/prod</flyway.locations>
-                <flyway.url>jdbc:mariadb://localhost:3306/bookstore</flyway.url>
-                <flyway.user>root</flyway.user>
-                <flyway.password>root</flyway.password>
-            </properties>
-        </profile>
-    </profiles>-->
 
     <dependencies>
         <dependency>
@@ -63,14 +32,8 @@
             <artifactId>util</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${org.springframework.boot.spring-starter-data-jpa}</version>
-        </dependency>
-        <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>${org.mariadb.java-client.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -78,13 +41,9 @@
             <version>${org.projectlombok.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>${org.springframework.boot.spring-starter-test}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
+
+        <!-- Test dependencies -->
+        <!--<dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${com.h2database.version}</version>
@@ -96,6 +55,11 @@
             <version>${org.flywaydb.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>es.cesguiro</groupId>
+            <artifactId>data-loader-test</artifactId>
+            <scope>test</scope>
+        </dependency>-->
     </dependencies>
 
     <build>
@@ -114,39 +78,6 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-            <!--<plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>${org.flywaydb.version}</version>
-                <executions>
-                    <execution>
-                        <id>flyway-test</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>clean</goal>
-                            <goal>migrate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <url>${flyway.url}</url>
-                    <user>${flyway.user}</user>
-                    <password>${flyway.password}</password>
-                    <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>${com.h2database.version}</version>
-                        <scope>test</scope>
-                    </dependency>
-                    <locations>
-                        <location>${flyway.locations}</location>
-                    </locations>
-                    <profiles>
-                        <profile>test</profile>
-                    </profiles>
-
-                </configuration>
-            </plugin>-->
         </plugins>
     </build>
 

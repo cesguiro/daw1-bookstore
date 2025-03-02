@@ -1,0 +1,25 @@
+<div class="c-pagination" th:fragment="pagination">
+  <a th:if="${pageResponse.previous != null}"
+     th:href="@{${pageResponse.previous}}"
+     class="c-pagination__button c-pagination__button--prev"
+     th:text="#{pagination.previous}"
+  >
+    &laquo; Anterior
+  </a>
+
+  <th:block th:each="i : ${#numbers.sequence(1, pageResponse.totalPages)}">
+    <a th:href="@{/books(page=${i}, size=${pageResponse.pageSize})}"
+       th:text="${i}"
+       th:classappend="${i == pageResponse.page} ? 'c-pagination__button--active'"
+       class="c-pagination__button">
+    </a>
+  </th:block>
+
+  <a th:if="${pageResponse.next != null}"
+     th:href="@{${pageResponse.next}}"
+     class="c-pagination__button c-pagination__button--next"
+     th:text="#{pagination.next}"
+  >
+    Siguiente &raquo;
+  </a>
+</div>

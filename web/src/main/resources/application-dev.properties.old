@@ -1,0 +1,20 @@
+# Datasource
+app.datasource.driverClassName=org.mariadb.jdbc.Driver
+app.datasource.jndi=jdbc/Mariadb
+app.datasource.url=jdbc:mariadb://localhost:3306/bookstore_dev
+app.datasource.username=root
+app.datasource.password=root
+app.datasource.maxActive=100
+app.datasource.maxWait=10000
+app.datasource.minIdle=100
+app.datasource.maxIdle=200
+
+app.flyway.locations=classpath:db/migration/dev
+app.flyway.cleanDisabled=false
+
+app.server.hostname=localhost
+
+app.querybuilder.showSql=true
+
+#URLs
+app.base.url=http://localhost:8080

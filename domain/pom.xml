@@ -24,6 +24,10 @@
             <groupId>es.cesguiro</groupId>
             <artifactId>util</artifactId>
         </dependency>
+        <!--<dependency>
+            <groupId>es.cesguiro</groupId>
+            <artifactId>persistence</artifactId>
+        </dependency>-->
     </dependencies>
 
 </project>

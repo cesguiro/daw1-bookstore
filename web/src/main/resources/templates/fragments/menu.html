@@ -1,0 +1,28 @@
+<div th:fragment="menu" class="c-header">
+    <nav class="c-navbar">
+        <ul class="c-navbar__list">
+            <!-- Group left -->
+            <div class="c-navbar__group c-navbar__group-left">
+                <li class="c-navbar__item">
+                    <a href="/">BookStore</a>
+                </li>
+                <li class="c-navbar__item">
+                    <a href="/books" th:text="#{menu.books}">Libros</a>
+                </li>
+            </div>
+
+            <!-- Group right -->
+            <li class="c-navbar__item c-navbar__item-right c-navbar__item--dropdown" onclick="toggleDropdown(this)">
+                <span th:text="#{menu.lang}">Idioma</span>
+                <ul class="c-navbar__dropdown-menu">
+                    <li class="c-navbar__dropdown-item">
+                        <a href="javascript:void(0);" onclick="changeLanguage('es')" th:text="#{lang.spanish}">Español</a>
+                    </li>
+                    <li class="c-navbar__dropdown-item">
+                        <a href="javascript:void(0);" onclick="changeLanguage('en')" th:text="#{lang.english}">English</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
