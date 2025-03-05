@@ -1,6 +1,5 @@
 package es.cesguiro.daw1.bookstore.web.listener;
 
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
 import es.cesguiro.daw1.bookstore.util.property.PropertyUtil;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -14,7 +13,7 @@ import javax.sql.DataSource;
 //@WebListener
 public class FlywayListener implements ServletContextListener {
 
-    private static final Logger logger = LogManager.getLogger(FlywayListener.class);
+    private final Logger logger = LogManager.getLogger(FlywayListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -44,7 +43,7 @@ public class FlywayListener implements ServletContextListener {
             logger.info("Flyway migration completed");
         } catch (Exception e) {
             logger.error("Flyway migration failed", e);
-            throw new Error500("Flyway migration failed");
+            throw new RuntimeException("Flyway migration failed", e);
         }
     }
 

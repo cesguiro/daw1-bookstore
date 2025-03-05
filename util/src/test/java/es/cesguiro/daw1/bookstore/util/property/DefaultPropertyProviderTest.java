@@ -1,6 +1,5 @@
 package es.cesguiro.daw1.bookstore.util.property;
 
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

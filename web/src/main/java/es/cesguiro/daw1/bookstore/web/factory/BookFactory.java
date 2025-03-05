@@ -10,6 +10,8 @@ import es.cesguiro.daw1.bookstore.domain.usecase.book.FindBookByCriteriaUseCase;
 import es.cesguiro.daw1.bookstore.persistence.dao.BookDao;
 import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.BookDaoJdbc;
 import es.cesguiro.daw1.bookstore.persistence.repository.BookRepositoryJdbc;
+import es.cesguiro.daw1.bookstore.web.controller.BookController;
+import es.cesguiro.daw1.bookstore.web.controller.Controller;
 
 public class BookFactory {
 
@@ -18,6 +20,14 @@ public class BookFactory {
     private static FindAllBooksByCriteriaUseCase findAllBooksByCriteriaUseCase;
     private static FindBookByCriteriaUseCase findBookByCriteriaUseCase;
     private static BookHandler bookHandler;
+    private static Controller bookController;
+
+    public static Controller bookController() {
+        if (bookController == null) {
+            bookController = new BookController(bookHandler());
+        }
+        return bookController;
+    }
 
     public static BookHandler bookHandler() {
         if (bookHandler == null) {

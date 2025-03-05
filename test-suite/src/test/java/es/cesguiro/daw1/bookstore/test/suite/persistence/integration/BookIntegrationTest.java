@@ -7,7 +7,6 @@ import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.BookDaoJdbc;
 import es.cesguiro.daw1.bookstore.persistence.repository.BookRepositoryJdbc;
 import es.cesguiro.daw1.bookstore.test.suite.BooksDataLoader;
 import es.cesguiro.daw1.bookstore.test.suite.persistence.FlywayJdbcTest;
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
 import es.cesguiro.daw1.bookstore.util.pagination.Page;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

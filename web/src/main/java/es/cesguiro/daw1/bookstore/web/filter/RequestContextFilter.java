@@ -1,12 +1,11 @@
 package es.cesguiro.daw1.bookstore.web.filter;
 
 
+import es.cesguiro.daw1.bookstore.domain.exception.BusinessException;
+import es.cesguiro.daw1.bookstore.domain.exception.ValidationException;
 import es.cesguiro.daw1.bookstore.util.context.RequestContext;
 import es.cesguiro.daw1.bookstore.util.context.RequestContextHolder;
-import es.cesguiro.daw1.bookstore.util.exception.CustomException;
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
 import es.cesguiro.daw1.bookstore.util.property.PropertyUtil;
-import es.cesguiro.daw1.bookstore.web.TomcatServer;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Locale;
 
@@ -40,11 +38,18 @@ public class RequestContextFilter implements Filter {
         try {
             setupDatabaseConnection();
             chain.doFilter(request, response);
-        } catch (CustomException e) {
-            handleError(httpRequest, httpResponse, e.getStatusCode(), e.getMessage(), e);
+        } catch (BusinessException e) {
+            logger.error("Business error", e);
+            handleError(httpRequest, httpResponse, 404, e);
+        } catch (ValidationException e) {
+            logger.error("Validation error", e);
+            handleError(httpRequest, httpResponse, 400, e);
+        } catch (RuntimeException e) {
+            logger.error("Runtime error", e);
+            handleError(httpRequest, httpResponse, 500, e);
         } catch (Exception e) {
             logger.error("Unexpected error", e);
-            handleError(httpRequest, httpResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal error", e);
+            handleError(httpRequest, httpResponse, 500, e);
         } finally {
             RequestContextHolder.clear();
         }
@@ -56,14 +61,19 @@ public class RequestContextFilter implements Filter {
         RequestContextHolder.getRequestContext().setConnection(dataSource.getConnection());
     }
 
-    private void handleError(HttpServletRequest httpRequest, HttpServletResponse httpResponse, int statusCode, String errorMessage, Exception e) {
-        logger.error("Error in RequestContextFilter", e);
-        RequestContextHolder.getRequestContext().setLocale(Locale.of("es"));
+    private void handleError(HttpServletRequest httpRequest, HttpServletResponse httpResponse, int statusCode, Exception e) {
+        if (RequestContextHolder.getRequestContext().getLocale() == null) {
+            RequestContextHolder.getRequestContext().setLocale(Locale.of("es"));
+        }
         try {
-            httpRequest.setAttribute("statusCode", statusCode);
-            httpRequest.setAttribute("errorMessage", errorMessage);
-            httpRequest.getRequestDispatcher("/error").forward(httpRequest, httpResponse);
-        } catch (ServletException | IOException ex) {
+            // getRequestDispatcher para poder pasar los atributos de la request y response
+            /*httpRequest.setAttribute("statusCode", statusCode);
+            httpRequest.getRequestDispatcher("/error").forward(httpRequest, httpResponse);*/
+
+            // Usamos getSession para poder pasar los atributos de la request y response
+            httpRequest.getSession().setAttribute("statusCode", statusCode);
+            httpResponse.sendRedirect("/error");
+        } catch (Exception ex) {
             throw new RuntimeException("Error while forwarding to error page", ex);
         }
     }

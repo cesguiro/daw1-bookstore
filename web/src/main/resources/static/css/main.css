@@ -438,3 +438,63 @@
 .c-book-detail__info a:hover {
     color: var(--dark-200);  /* Gris más oscuro al pasar el cursor */
 }
+
+.c-form {
+    background-color: var(--light-100);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.c-form__group {
+    margin-bottom: 15px;
+}
+
+.c-form__group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--dark-100);
+}
+
+.c-form__input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--light-300);
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--dark-100);
+}
+
+.c-form__input:focus {
+    border-color: var(--primary-200);
+    outline: none;
+}
+
+.c-button {
+    background-color: var(--primary-100);
+    color: var(--light-100);
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.c-button:hover {
+    background-color: var(--primary-200);
+}
+
+.c-button--primary {
+    background-color: var(--primary-200);
+    color: white;
+}
+
+.c-button--primary:hover {
+    background-color: var(--primary-300);
+}

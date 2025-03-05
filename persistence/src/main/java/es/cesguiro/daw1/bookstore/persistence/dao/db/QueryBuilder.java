@@ -1,6 +1,5 @@
 package es.cesguiro.daw1.bookstore.persistence.dao.db;
 
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
 import es.cesguiro.daw1.bookstore.util.property.PropertyUtil;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
@@ -62,7 +61,7 @@ public class QueryBuilder {
             }
             return null;
         } catch (SQLException e) {
-            throw new Error500("Error finding by id", e);
+            throw new RuntimeException("Error finding by id", e);
         }
     }
 
@@ -81,7 +80,7 @@ public class QueryBuilder {
             }
             return null;
         } catch (SQLException e) {
-            throw new Error500("Error getting one. Query: " + this.query, e);
+            throw new RuntimeException("Error getting one. Query: " + this.query, e);
         }
     }
 
@@ -94,7 +93,7 @@ public class QueryBuilder {
             }
             return 0L;
         } catch (SQLException e) {
-            throw new Error500("Error counting rows. Query: " + this.query, e);
+            throw new RuntimeException("Error counting rows. Query: " + this.query, e);
         }
     }
 

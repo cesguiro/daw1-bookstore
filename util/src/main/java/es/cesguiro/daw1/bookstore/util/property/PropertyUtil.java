@@ -1,18 +1,16 @@
 package es.cesguiro.daw1.bookstore.util.property;
 
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
-
 public class PropertyUtil {
 
     private static PropertyProvider propertyProvider;
 
     private PropertyUtil() {
-        throw new Error500("Utility class");
+        throw new RuntimeException("Utility class");
     }
 
     public static PropertyProvider getPropertyProvider() {
         if (propertyProvider == null) {
-            throw new Error500("Property provider is required");
+            throw new RuntimeException("Property provider is required");
         }
         return propertyProvider;
     }
@@ -33,7 +31,7 @@ public class PropertyUtil {
 
     public static void setPropertyProvider(PropertyProvider propertyProvider) {
         if (propertyProvider == null) {
-            throw new Error500("Property provider is required");
+            throw new RuntimeException("Property provider is required");
         }
         PropertyUtil.propertyProvider = propertyProvider;
     }

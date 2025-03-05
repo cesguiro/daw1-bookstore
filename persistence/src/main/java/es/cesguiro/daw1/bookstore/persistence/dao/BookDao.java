@@ -5,7 +5,7 @@ import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.model.BookRecord;
 import java.util.List;
 import java.util.Optional;
 
-public interface BookDao extends GenericDao<BookRecord> {
+public interface BookDao extends GenericDao<BookRecord, Long> {
 
     /********** DbUtil **********/
     Optional<BookRecord> findByIsbn(String isbn);

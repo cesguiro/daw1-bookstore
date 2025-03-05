@@ -6,7 +6,6 @@ import es.cesguiro.daw1.bookstore.domain.repository.BookRepository;
 import es.cesguiro.daw1.bookstore.domain.repository.PublisherRepository;
 import es.cesguiro.daw1.bookstore.domain.service.book.FindBookByCriteriaService;
 import es.cesguiro.daw1.bookstore.test.suite.BooksDataLoader;
-import es.cesguiro.daw1.bookstore.util.exception.Error404;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;

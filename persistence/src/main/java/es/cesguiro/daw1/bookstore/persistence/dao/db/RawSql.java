@@ -1,7 +1,6 @@
 package es.cesguiro.daw1.bookstore.persistence.dao.db;
 
 import es.cesguiro.daw1.bookstore.util.context.RequestContextHolder;
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +14,37 @@ public class RawSql {
         try {
             return setParameter(query, params).executeQuery();
         } catch (Exception e) {
-            throw new Error500("Error executing query: " + query + " with params: " + params, e);
+            throw new RuntimeException("Error executing query: " + query + " with params: " + params, e);
+        }
+    }
+
+    public static Long insert(String query, List<Object> params) {
+        try {
+            PreparedStatement preparedStatement = setParameter(query, params);
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                return resultSet.getLong(1);
+            }
+            throw new RuntimeException("Error inserting record");
+        } catch (Exception e) {
+            throw new RuntimeException("Error executing insert query: " + query + " with params: " + params, e);
+        }
+    }
+
+    public static int update(String query, List<Object> params) {
+        try {
+            return setParameter(query, params).executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException("Error executing update query: " + query + " with params: " + params, e);
+        }
+    }
+
+    public static int delete(String query, List<Object> params) {
+        try {
+            return setParameter(query, params).executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException("Error executing delete query: " + query + " with params: " + params, e);
         }
     }
 
@@ -30,7 +59,7 @@ public class RawSql {
             }
             return statement;
         } catch (Exception e) {
-            throw new Error500("Error setting parameters", e);
+            throw new RuntimeException("Error setting parameters", e);
         }
     }
 
@@ -39,7 +68,7 @@ public class RawSql {
         try {
             RequestContextHolder.getRequestContext().getConnection().commit();
         } catch (Exception e) {
-            throw new Error500("Error committing transaction", e);
+            throw new RuntimeException("Error committing transaction", e);
         }
     }
 
@@ -47,7 +76,7 @@ public class RawSql {
         try {
             RequestContextHolder.getRequestContext().getConnection().rollback();
         } catch (Exception e) {
-            throw new Error500("Error rolling back transaction", e);
+            throw new RuntimeException("Error rolling back transaction", e);
         }
     }
 }

@@ -1,0 +1,45 @@
+<!-- Fragmento de formulario de registro -->
+<div th:fragment="registerForm">
+    <div class="c-content">
+        <h1 th:text="#{register.title}">Formulario de Registro</h1>
+
+        <!-- Formulario de registro -->
+        <form th:action="@{/users}" method="post" class="c-form">
+            <div class="c-form__group">
+                <label for="email" th:text="#{register.email}">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required class="c-form__input" th:placeholder="#{register.placeholder.email}">
+            </div>
+
+            <div class="c-form__group">
+                <label for="password" th:text="#{register.password}">Contraseña</label>
+                <input type="password" id="password" name="password" required class="c-form__input" th:placeholder="#{register.placeholder.password}">
+            </div>
+
+            <div class="c-form__group">
+                <label for="name" th:text="#{register.name}">Nombre</label>
+                <input type="text" id="name" name="name" required class="c-form__input" th:placeholder="#{register.placeholder.name}">
+            </div>
+
+            <div class="c-form__group">
+                <label for="address" th:text="#{register.address}">Dirección</label>
+                <input type="text" id="address" name="address" required class="c-form__input" th:placeholder="#{register.placeholder.address}">
+            </div>
+
+            <div class="c-form__group">
+                <label for="language" th:text="#{register.language}">Idioma</label>
+                <select id="language" name="language" required class="c-form__input">
+                    <option value="es" th:text="#{lang.spanish}">Español</option>
+                    <option value="en" th:text="#{lang.english}">Inglés</option>
+                </select>
+            </div>
+
+            <button type="submit" class="c-button c-button--primary" th:text="#{register.submit}">Registrarse</button>
+        </form>
+
+        <!-- Enlace a la página de login si ya tienes cuenta -->
+        <p>
+            <span th:text="#{register.alreadyAccount}">¿Ya tienes cuenta?</span>
+            <a href="/login" th:text="#{register.login}">Iniciar sesión</a>
+        </p>
+    </div>
+</div>

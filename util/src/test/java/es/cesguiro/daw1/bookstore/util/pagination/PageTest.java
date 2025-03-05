@@ -1,7 +1,5 @@
 package es.cesguiro.daw1.bookstore.util.pagination;
 
-import es.cesguiro.daw1.bookstore.util.exception.Error400;
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

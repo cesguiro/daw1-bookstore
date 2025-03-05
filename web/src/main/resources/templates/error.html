@@ -5,7 +5,7 @@
 <body class="c-body">
 <nav th:replace="~{fragments/base:: menu}"></nav>
 <div class="c-content">
-    <h1 class="text-center mt-5" th:text="${errorMessage}">Error</h1>
+    <h1 th:with="errorKey='error.' + ${statusCode}" th:text="#{${errorKey}}">Error</h1>
 </div>
 </body>
 </html>

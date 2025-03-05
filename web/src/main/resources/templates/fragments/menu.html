@@ -11,18 +11,29 @@
                 </li>
             </div>
 
-            <!-- Group right -->
-            <li class="c-navbar__item c-navbar__item-right c-navbar__item--dropdown" onclick="toggleDropdown(this)">
-                <span th:text="#{menu.lang}">Idioma</span>
-                <ul class="c-navbar__dropdown-menu">
-                    <li class="c-navbar__dropdown-item">
-                        <a href="javascript:void(0);" onclick="changeLanguage('es')" th:text="#{lang.spanish}">Español</a>
-                    </li>
-                    <li class="c-navbar__dropdown-item">
-                        <a href="javascript:void(0);" onclick="changeLanguage('en')" th:text="#{lang.english}">English</a>
-                    </li>
-                </ul>
-            </li>
+            <!-- Group right (cambiar a div) -->
+            <div class="c-navbar__group c-navbar__group-right">
+                <!-- Enlaces de Login y Registro -->
+                <li class="c-navbar__item">
+                    <a href="/register" th:text="#{menu.register}">Registro</a>
+                </li>
+                <li class="c-navbar__item">
+                    <a href="/login" th:text="#{menu.login}">Login</a>
+                </li>
+
+                <!-- Dropdown para cambiar idioma -->
+                <li class="c-navbar__item c-navbar__item--dropdown" onclick="toggleDropdown(this)">
+                    <span th:text="#{menu.lang}">Idioma</span>
+                    <ul class="c-navbar__dropdown-menu">
+                        <li class="c-navbar__dropdown-item">
+                            <a href="javascript:void(0);" onclick="changeLanguage('es')" th:text="#{lang.spanish}">Español</a>
+                        </li>
+                        <li class="c-navbar__dropdown-item">
+                            <a href="javascript:void(0);" onclick="changeLanguage('en')" th:text="#{lang.english}">English</a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
         </ul>
     </nav>
 </div>

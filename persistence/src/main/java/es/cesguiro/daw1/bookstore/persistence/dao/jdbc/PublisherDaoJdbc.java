@@ -4,7 +4,6 @@ import es.cesguiro.daw1.bookstore.persistence.dao.PublisherDao;
 import es.cesguiro.daw1.bookstore.persistence.dao.db.QueryBuilder;
 import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.mapper.PublisherMapper;
 import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.model.PublisherRecord;
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -25,7 +24,7 @@ public class PublisherDaoJdbc implements PublisherDao {
                     )
             );
         } catch (SQLException e) {
-            throw new Error500("Error finding publisher by book isbn", e);
+            throw new RuntimeException("Error finding publisher by book isbn", e);
         }
     }
 

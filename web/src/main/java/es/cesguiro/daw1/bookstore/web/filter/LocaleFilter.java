@@ -1,6 +1,7 @@
 package es.cesguiro.daw1.bookstore.web.filter;
 
 import es.cesguiro.daw1.bookstore.util.context.RequestContextHolder;
+import es.cesguiro.daw1.bookstore.util.language.LanguageUtil;
 import es.cesguiro.daw1.bookstore.util.property.PropertyUtil;
 import es.cesguiro.daw1.bookstore.web.util.CookieUtil;
 import jakarta.servlet.*;
@@ -18,7 +19,6 @@ public class LocaleFilter implements Filter {
 
     private static final String COOKIE_NAME = "frontend_lang";
     private static final String DEFAULT_LANGUAGE = "es";
-    private static final Logger logger = LogManager.getLogger(LocaleFilter.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
@@ -27,8 +27,9 @@ public class LocaleFilter implements Filter {
 
         String defaultLanguage = PropertyUtil.getPropertyProvider().getProperty("app.language.default", DEFAULT_LANGUAGE);
         String language = CookieUtil.getCookieValue(httpRequest, COOKIE_NAME, defaultLanguage);
+        String lang = LanguageUtil.getAllowLanguage(language);
 
-        CookieUtil.setCookie(httpResponse, COOKIE_NAME, language, 60 * 60 * 24 * 30);
+        CookieUtil.setCookie(httpResponse, COOKIE_NAME, lang, 60 * 60 * 24 * 30);
 
         RequestContextHolder.getRequestContext().setLocale(Locale.of(language));
 

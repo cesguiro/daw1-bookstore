@@ -1,7 +1,5 @@
 package es.cesguiro.daw1.bookstore.util.context;
 
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
-
 public class RequestContextHolder {
 
     private static final ThreadLocal<RequestContext> requestContext = new ThreadLocal<>();
@@ -21,7 +19,7 @@ public class RequestContextHolder {
                 context.getConnection().close();
             }
         } catch (Exception e) {
-                throw new Error500("Error closing connection", e);
+                throw new RuntimeException("Error closing connection", e);
         } finally {
             requestContext.remove();
         }

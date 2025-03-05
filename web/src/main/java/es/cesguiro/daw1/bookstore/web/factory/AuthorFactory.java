@@ -4,6 +4,7 @@ import es.cesguiro.daw1.bookstore.domain.repository.AuthorRepository;
 import es.cesguiro.daw1.bookstore.persistence.dao.AuthorDao;
 import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.AuthorDaoJdbc;
 import es.cesguiro.daw1.bookstore.persistence.repository.AuthorRepositoryJdbc;
+import es.cesguiro.daw1.bookstore.web.controller.AuthController;
 
 public class AuthorFactory {
 

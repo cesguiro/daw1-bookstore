@@ -4,7 +4,6 @@ import es.cesguiro.daw1.bookstore.persistence.dao.AuthorDao;
 import es.cesguiro.daw1.bookstore.persistence.dao.db.QueryBuilder;
 import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.mapper.AuthorMapper;
 import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.model.AuthorRecord;
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -26,7 +25,7 @@ public class AuthorDaoJdbc implements AuthorDao {
                             .get()
             );
         } catch (SQLException e) {
-            throw new Error500("Error finding all authors by book isbn", e);
+            throw new RuntimeException("Error finding all authors by book isbn", e);
         }
     }
 

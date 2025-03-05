@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public interface Template {
 
-    public void init(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext);
-    public void setVariable(String name, Object value);
-    public void process(String template);
+    void init(HttpServletRequest request, HttpServletResponse response);
+    void setVariable(String name, Object value);
+    void process(String template);
 }

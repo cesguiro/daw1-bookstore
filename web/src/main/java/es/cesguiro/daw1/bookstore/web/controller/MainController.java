@@ -1,25 +1,38 @@
 package es.cesguiro.daw1.bookstore.web.controller;
 
+import es.cesguiro.daw1.bookstore.web.factory.TemplateFactory;
+import es.cesguiro.daw1.bookstore.web.router.Method;
+import es.cesguiro.daw1.bookstore.web.router.Route;
+import es.cesguiro.daw1.bookstore.web.router.Routes;
 import es.cesguiro.daw1.bookstore.web.thymeleaf.Template;
-import es.cesguiro.daw1.bookstore.web.thymeleaf.TemplateThymeleaf;
+import es.cesguiro.daw1.bookstore.web.thymeleaf.ThymeleafTemplate;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class MainController {
+public class MainController implements Controller {
 
-    Template template = new TemplateThymeleaf();
+    private final Template template = TemplateFactory.getTemplate();
+
+    @Override
+    public void registerRoutes(Routes routes) {
+        routes.add(new Route(Method.GET, "/", this::index));
+        routes.add(new Route(Method.GET, "/error", this::error));
+    }
 
     public void index(HttpServletRequest request, HttpServletResponse response) {
-        template.init(request, response, request.getServletContext());
         template.process("index");
     }
 
     public void error(HttpServletRequest request, HttpServletResponse response) {
-        Integer statusCode = (Integer) request.getAttribute("statusCode");
-        String errorMessage = (String) request.getAttribute("errorMessage");
-        template.init(request, response, request.getServletContext());
+        //Integer statusCode = (Integer) request.getAttribute("statusCode");
+        Integer statusCode = (Integer) request.getSession().getAttribute("statusCode");
+        if (statusCode == null) {
+            statusCode = 500;
+        }
+
+        request.getSession().removeAttribute("statusCode");
+
         template.setVariable("statusCode", statusCode);
-        template.setVariable("errorMessage", errorMessage);
         template.process("error");
     }
 

@@ -6,7 +6,6 @@ import es.cesguiro.daw1.bookstore.persistence.dao.db.RawSql;
 import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.mapper.BookMapper;
 import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.model.BookRecord;
 import es.cesguiro.daw1.bookstore.util.context.RequestContextHolder;
-import es.cesguiro.daw1.bookstore.util.exception.Error500;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,7 +30,7 @@ public class BookDaoJdbc implements BookDao {
             }
             return Optional.of(BookMapper.toBookRecord(resultSet));
         } catch (SQLException e) {
-            throw new Error500("Error finding book by isbn", e);
+            throw new RuntimeException("Error finding book by isbn", e);
         }
     }
 
@@ -46,7 +45,7 @@ public class BookDaoJdbc implements BookDao {
             preparedStatement.executeQuery();
             return BookMapper.toBookRecords(preparedStatement.getResultSet());
         } catch (SQLException e) {
-            throw new Error500("Error finding all books", e);
+            throw new RuntimeException("Error finding all books", e);
         }
     }
 
@@ -58,7 +57,7 @@ public class BookDaoJdbc implements BookDao {
             preparedStatement.executeQuery();
             return BookMapper.toBookRecords(preparedStatement.getResultSet());
         } catch (SQLException e) {
-            throw new Error500("Error finding all books", e);
+            throw new RuntimeException("Error finding all books", e);
         }
     }
 
@@ -75,7 +74,7 @@ public class BookDaoJdbc implements BookDao {
             }
             return Optional.of(BookMapper.toBookRecord(resultSet));
         } catch (SQLException e) {
-            throw new Error500("Error finding book by id", e);
+            throw new RuntimeException("Error finding book by id", e);
         }
     }
 
@@ -101,7 +100,7 @@ public class BookDaoJdbc implements BookDao {
             }
             return resultSet.getLong(1);
         } catch (SQLException e) {
-            throw new Error500("Error counting books", e);
+            throw new RuntimeException("Error counting books", e);
         }
     }
 
@@ -118,7 +117,7 @@ public class BookDaoJdbc implements BookDao {
             }
             return Optional.of(BookMapper.toBookRecord(resultSet));
         } catch (Exception e) {
-            throw new Error500("Error finding book by isbn", e);
+            throw new RuntimeException("Error finding book by isbn", e);
         }
     }
 
@@ -128,7 +127,7 @@ public class BookDaoJdbc implements BookDao {
         try {
             return BookMapper.toBookRecords(RawSql.select(query, List.of(size, (page - 1) * size)));
         } catch (Exception e) {
-            throw new Error500("Error finding all books", e);
+            throw new RuntimeException("Error finding all books", e);
         }
     }
 
@@ -138,7 +137,7 @@ public class BookDaoJdbc implements BookDao {
         try {
             return BookMapper.toBookRecords(RawSql.select(query, null));
         } catch (Exception e) {
-            throw new Error500("Error finding all books", e);
+            throw new RuntimeException("Error finding all books", e);
         }
     }
 
@@ -152,7 +151,7 @@ public class BookDaoJdbc implements BookDao {
             }
             return Optional.of(BookMapper.toBookRecord(resultSet));
         } catch (Exception e) {
-            throw new Error500("Error finding book by id", e);
+            throw new RuntimeException("Error finding book by id", e);
         }
     }
 
@@ -178,7 +177,7 @@ public class BookDaoJdbc implements BookDao {
         try{
             return Optional.ofNullable(BookMapper.toBookRecord(QueryBuilder.table("books").where("isbn", "=", isbn).getOne()));
         } catch (SQLException e) {
-            throw new Error500("Error finding book by isbn", e);
+            throw new RuntimeException("Error finding book by isbn", e);
         }
     }
 
@@ -187,7 +186,7 @@ public class BookDaoJdbc implements BookDao {
         try {
             return BookMapper.toBookRecords(QueryBuilder.table("books").page(page, size).get());
         } catch (SQLException e) {
-            throw new Error500("Error finding all books", e);
+            throw new RuntimeException("Error finding all books", e);
         }
     }
 
@@ -196,7 +195,7 @@ public class BookDaoJdbc implements BookDao {
         try {
             return BookMapper.toBookRecords(QueryBuilder.table("books").get());
         } catch (SQLException e) {
-            throw new Error500("Error finding all books", e);
+            throw new RuntimeException("Error finding all books", e);
         }
     }
 
@@ -205,7 +204,7 @@ public class BookDaoJdbc implements BookDao {
         try {
             return Optional.ofNullable(BookMapper.toBookRecord(QueryBuilder.table("books").find(id)));
         } catch (SQLException e) {
-            throw new Error500("Error finding book by id", e);
+            throw new RuntimeException("Error finding book by id", e);
         }
     }
 
