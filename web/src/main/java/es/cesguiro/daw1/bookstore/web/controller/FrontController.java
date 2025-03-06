@@ -1,6 +1,7 @@
 package es.cesguiro.daw1.bookstore.web.controller;
 
 import es.cesguiro.daw1.bookstore.domain.exception.BusinessException;
+import es.cesguiro.daw1.bookstore.util.context.RequestContextHolder;
 import es.cesguiro.daw1.bookstore.web.factory.BookFactory;
 import es.cesguiro.daw1.bookstore.web.factory.TemplateFactory;
 import es.cesguiro.daw1.bookstore.web.router.Method;
@@ -40,8 +41,8 @@ public class FrontController extends HttpServlet {
         // Crear la plantilla
         try {
             Template template = TemplateFactory.getTemplate();
-            //JakartaServletWebApplication application = JakartaServletWebApplication.buildApplication(request.getServletContext());
             template.init(request, response);
+            template.setVariable("requestContext", RequestContextHolder.getRequestContext());
         } catch (Exception e) {
             logger.error("Error creating template", e);
             throw new RuntimeException("Error creating template", e);

@@ -15,6 +15,11 @@
         <input type="password" id="password" name="password" required class="c-form__input" th:placeholder="#{login.placeholder.password}">
       </div>
 
+      <!-- Mostrar error si existe -->
+      <div th:if="${error != null}" class="c-form__error">
+        <span th:text="#{${error}}">Error de validación</span>
+      </div>
+
       <button type="submit" class="c-button c-button--primary" th:text="#{login.submit}">Login</button>
     </form>
 

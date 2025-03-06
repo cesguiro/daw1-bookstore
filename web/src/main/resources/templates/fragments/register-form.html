@@ -4,33 +4,59 @@
         <h1 th:text="#{register.title}">Formulario de Registro</h1>
 
         <!-- Formulario de registro -->
-        <form th:action="@{/users}" method="post" class="c-form">
+        <form th:action="@{/register}" method="post" class="c-form">
             <div class="c-form__group">
                 <label for="email" th:text="#{register.email}">Correo Electrónico</label>
-                <input type="email" id="email" name="email" required class="c-form__input" th:placeholder="#{register.placeholder.email}">
+                <input type="email" id="email" name="email" required class="c-form__input"
+                       th:classappend="${errors != null and errors['email']} ? 'c-form__input--error' : ''"
+                       th:placeholder="#{register.placeholder.email}"
+                       th:value="${user != null ? user.email : ''}">
+                <div th:if="${errors != null and errors['email']}" class="c-form__error">
+                    <span th:text="#{${errors['email']}}">Error de validación</span>
+                </div>
             </div>
 
             <div class="c-form__group">
                 <label for="password" th:text="#{register.password}">Contraseña</label>
-                <input type="password" id="password" name="password" required class="c-form__input" th:placeholder="#{register.placeholder.password}">
+                <input type="password" id="password" name="password" required class="c-form__input"
+                          th:classappend="${errors != null and errors['password']} ? 'c-form__input--error' : ''"
+                       th:placeholder="#{register.placeholder.password}">
+                <div th:if="${errors != null and errors['password']}" class="c-form__error">
+                    <span th:text="#{${errors['password']}}">Error de validación</span>
+                </div>
             </div>
 
             <div class="c-form__group">
                 <label for="name" th:text="#{register.name}">Nombre</label>
-                <input type="text" id="name" name="name" required class="c-form__input" th:placeholder="#{register.placeholder.name}">
+                <input type="text" id="name" name="name" required class="c-form__input"
+                       th:placeholder="#{register.placeholder.name}"
+                       th:value="${user != null ? user.name : ''}"
+                >
+                <div th:if="${errors != null and errors['name']}" class="c-form__error">
+                    <span th:text="#{${errors['name']}}">Error de validación</span>
+                </div>
             </div>
 
             <div class="c-form__group">
                 <label for="address" th:text="#{register.address}">Dirección</label>
-                <input type="text" id="address" name="address" required class="c-form__input" th:placeholder="#{register.placeholder.address}">
+                <input type="text" id="address" name="address" required class="c-form__input"
+                       th:placeholder="#{register.placeholder.address}"
+                       th:value="${user != null ? user.address : ''}"
+                >
+                <div th:if="${errors != null and errors['address']}" class="c-form__error">
+                    <span th:text="#{${errors['address']}}">Error de validación</span>
+                </div>
             </div>
 
             <div class="c-form__group">
                 <label for="language" th:text="#{register.language}">Idioma</label>
                 <select id="language" name="language" required class="c-form__input">
-                    <option value="es" th:text="#{lang.spanish}">Español</option>
-                    <option value="en" th:text="#{lang.english}">Inglés</option>
+                    <option value="es" th:selected="${user != null && user.language == 'es'}" th:text="#{lang.spanish}">Español</option>
+                    <option value="en" th:selected="${user != null && user.language == 'en'}" th:text="#{lang.english}">Inglés</option>
                 </select>
+                <div th:if="${errors != null and errors['language']}" class="c-form__error">
+                    <span th:text="#{${errors['language']}}">Error de validación</span>
+                </div>
             </div>
 
             <button type="submit" class="c-button c-button--primary" th:text="#{register.submit}">Registrarse</button>

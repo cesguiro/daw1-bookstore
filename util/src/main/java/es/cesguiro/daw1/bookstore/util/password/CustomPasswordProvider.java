@@ -47,8 +47,17 @@ public class CustomPasswordProvider implements PasswordProvider{
     @Override
     public boolean checkPassword(String password, String storedHash) {
         String[] parts = storedHash.split(":");
+        if (parts.length != 2) {
+            return false;
+        }
         String salt = parts[1];
         String computedHash = hashPassword(password, salt);
         return computedHash.equals(storedHash);
     }
+
+    @Override
+    public boolean isPasswordValid(String password) {
+        return password.length() >= 6;
+    }
+
 }

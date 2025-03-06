@@ -21,7 +21,12 @@ public class CookieUtil {
         Cookie cookie = new Cookie(cookieName, value);
         cookie.setPath("/");
         cookie.setMaxAge(maxAge);
+        // Si queremos que la cookie solo se envíe con solicitudes HTTP. Útil para proteger contra ataques XSS
         cookie.setHttpOnly(true);
+        // Si queremos que la cookie solo se envíe por HTTPS. Útil para proteger contra ataques MITM
+        //cookie.setSecure(true);
+        // Si queremos que la cookie solo se envíe con solicitudes del mismo sitio. Útil para proteger contra ataques CSRF
+        cookie.setAttribute("SameSite", "Strict");
         response.addCookie(cookie);
     }
 

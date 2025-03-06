@@ -10,6 +10,7 @@ public class RequestContext {
 
     private Locale locale;
     private Connection connection;
+    UserContext user;
 
     public RequestContext() {
     }
@@ -30,4 +31,11 @@ public class RequestContext {
         this.connection = connection;
     }
 
+    public void setUser(UserContext user) {
+        this.user = user;
+    }
+
+    public UserContext getUser() {
+        return user;
+    }
 }

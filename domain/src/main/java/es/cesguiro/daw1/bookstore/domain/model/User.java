@@ -1,6 +1,8 @@
 package es.cesguiro.daw1.bookstore.domain.model;
 
-public class User {
+import es.cesguiro.daw1.bookstore.util.context.UserContext;
+
+public class User implements UserContext {
 
     private Long id;
     private String email;
@@ -36,6 +38,12 @@ public class User {
         this.email = email;
     }
 
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
     public String getPassword() {
         return password;
     }
@@ -74,4 +82,5 @@ public class User {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
+
 }

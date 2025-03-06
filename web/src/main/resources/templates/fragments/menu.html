@@ -1,7 +1,7 @@
 <div th:fragment="menu" class="c-header">
     <nav class="c-navbar">
         <ul class="c-navbar__list">
-            <!-- Group left -->
+            <!-- Grupo izquierdo -->
             <div class="c-navbar__group c-navbar__group-left">
                 <li class="c-navbar__item">
                     <a href="/">BookStore</a>
@@ -11,15 +11,29 @@
                 </li>
             </div>
 
-            <!-- Group right (cambiar a div) -->
+            <!-- Grupo derecho -->
             <div class="c-navbar__group c-navbar__group-right">
-                <!-- Enlaces de Login y Registro -->
-                <li class="c-navbar__item">
-                    <a href="/register" th:text="#{menu.register}">Registro</a>
-                </li>
-                <li class="c-navbar__item">
-                    <a href="/login" th:text="#{menu.login}">Login</a>
-                </li>
+                <!-- Si el usuario está autenticado -->
+                <th:block th:if="${requestContext.user != null}">
+                    <li class="c-navbar__item c-navbar__item--dropdown" onclick="toggleDropdown(this)">
+                        <span th:text="${requestContext.user.username}"></span>
+                        <ul class="c-navbar__dropdown-menu">
+                            <li class="c-navbar__dropdown-item">
+                                <a href="/logout" th:text="#{menu.logout}">Cerrar sesión</a>
+                            </li>
+                        </ul>
+                    </li>
+                </th:block>
+
+                <!-- Si el usuario no está autenticado -->
+                <th:block th:unless="${requestContext.user != null}">
+                    <li class="c-navbar__item">
+                        <a href="/register" th:text="#{menu.register}">Registro</a>
+                    </li>
+                    <li class="c-navbar__item">
+                        <a href="/login" th:text="#{menu.login}">Login</a>
+                    </li>
+                </th:block>
 
                 <!-- Dropdown para cambiar idioma -->
                 <li class="c-navbar__item c-navbar__item--dropdown" onclick="toggleDropdown(this)">

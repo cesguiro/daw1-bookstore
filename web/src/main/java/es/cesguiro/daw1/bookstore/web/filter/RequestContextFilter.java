@@ -34,6 +34,7 @@ public class RequestContextFilter implements Filter {
 
         RequestContext requestContext = new RequestContext();
         RequestContextHolder.setRequestContext(requestContext);
+        RequestContextHolder.getRequestContext().setUser(null);
 
         try {
             setupDatabaseConnection();
@@ -71,7 +72,7 @@ public class RequestContextFilter implements Filter {
             httpRequest.getRequestDispatcher("/error").forward(httpRequest, httpResponse);*/
 
             // Usamos getSession para poder pasar los atributos de la request y response
-            httpRequest.getSession().setAttribute("statusCode", statusCode);
+            httpRequest.getSession(true).setAttribute("statusCode", statusCode);
             httpResponse.sendRedirect("/error");
         } catch (Exception ex) {
             throw new RuntimeException("Error while forwarding to error page", ex);

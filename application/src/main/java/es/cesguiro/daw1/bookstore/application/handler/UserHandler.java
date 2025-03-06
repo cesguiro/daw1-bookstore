@@ -4,8 +4,9 @@ import es.cesguiro.daw1.bookstore.domain.model.User;
 
 import java.util.Optional;
 
-public interface AuthHandler {
+public interface UserHandler {
 
-    Optional<User> login(String email, String password);
-    void storeToken(User user, String token);
+    User insert(User user);
+
+    Optional<User> findByToken(String authToken);
 }

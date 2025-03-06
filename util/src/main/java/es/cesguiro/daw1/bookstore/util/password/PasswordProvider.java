@@ -5,4 +5,5 @@ public interface PasswordProvider {
     String hashPassword(String password, String salt);
     boolean checkPassword(String password, String hashedPassword);
     String generateSalt();
+    boolean isPasswordValid(String password);
 }

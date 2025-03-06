@@ -3,12 +3,8 @@ package es.cesguiro.daw1.bookstore.web;
 import es.cesguiro.daw1.bookstore.util.property.PropertyUtil;
 import es.cesguiro.daw1.bookstore.web.controller.Controller;
 import es.cesguiro.daw1.bookstore.web.controller.FrontController;
-import es.cesguiro.daw1.bookstore.web.factory.AuthFactory;
-import es.cesguiro.daw1.bookstore.web.factory.BookFactory;
-import es.cesguiro.daw1.bookstore.web.factory.LocaleFactory;
-import es.cesguiro.daw1.bookstore.web.factory.MainFactory;
-import es.cesguiro.daw1.bookstore.web.filter.LocaleFilter;
-import es.cesguiro.daw1.bookstore.web.filter.RequestContextFilter;
+import es.cesguiro.daw1.bookstore.web.factory.*;
+import es.cesguiro.daw1.bookstore.web.filter.*;
 import es.cesguiro.daw1.bookstore.web.listener.FlywayListener;
 import org.apache.catalina.servlets.DefaultServlet;
 import org.apache.logging.log4j.LogManager;
@@ -47,6 +43,9 @@ public class App {
             // Registrar los filtros
             tomcatServer.registerFilter("requestContextFilter", RequestContextFilter.class, "/*");
             tomcatServer.registerFilter("localeFilter", LocaleFilter.class, "/*");
+            tomcatServer.registerFilter("authFilter", AuthFilter.class, "/*");
+            tomcatServer.registerFilter("loginFilter", LoginFilter.class, "/login");
+            tomcatServer.registerFilter("logoutFilter", LogoutFilter.class, "/logout");
             // Registrar los servlets. Registrar el DefaultServlet para servir archivos estáticos (DeafaultServlet es el encargado de servir contenido estático)
             FrontController frontController = getFrontController();
             tomcatServer.addServlet("frontController", frontController, "/*");
@@ -68,7 +67,8 @@ public class App {
                 BookFactory.bookController(),
                 MainFactory.mainController(),
                 LocaleFactory.localeController(),
-                AuthFactory.authController()
+                AuthFactory.authController(),
+                UserFactory.userController()
         );
         return new FrontController(controllers);
     }

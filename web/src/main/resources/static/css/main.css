@@ -9,6 +9,7 @@
     --primary-800: #f1beb0;
     --primary-900: #ffd7cc;
 
+    --error: #b80a0a;
 
     --secondary-100: #359A3C;
     --secondary-200: #4da44e;
@@ -498,3 +499,22 @@
 .c-button--primary:hover {
     background-color: var(--primary-300);
 }
+
+.c-form__error {
+    color: var(--error); /* Texto en rojo para el mensaje de error */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 0.875rem; /* Tamaño de fuente más pequeño */
+    margin-top: 5px;
+}
+
+/* Enfocar los campos con error */
+.c-form__input--error {
+    border-color: var(--error); /* Borde rojo para los campos con error */
+}
+
+/* Enfocar los campos con error */
+.c-form__input--error:focus {
+    border-color: var(--error); /* Borde más oscuro al enfocar */
+    box-shadow: 0 0 5px var(--error); /* Sombra roja al enfocar */
+}
+

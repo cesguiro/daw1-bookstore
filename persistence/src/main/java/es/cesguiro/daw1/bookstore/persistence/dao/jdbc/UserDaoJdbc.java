@@ -7,6 +7,7 @@ import es.cesguiro.daw1.bookstore.persistence.dao.db.RawSql;
 import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.mapper.UserMapper;
 import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.model.UserRecord;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,37 @@ public class UserDaoJdbc implements UserDao {
             throw new RuntimeException("Error finding user by email", e);
         }
 
+    }
+
+    @Override
+    public void storeToken(UserRecord userRecord, String token) {
+        String query = """
+            INSERT INTO tokens (user_id, token, created_at, expires_at)
+            VALUES (?, ?, NOW(), NOW() + INTERVAL 1 HOUR)
+            """;
+        RawSql.update(
+                query,
+                List.of(userRecord.id(), token)
+        );
+    }
+
+    @Override
+    public Optional<UserRecord> findByToken(String token) {
+        String query = """
+            SELECT u.id, u.email, u.password, u.name, u.address, u.language, u.admin
+            FROM users u
+            JOIN tokens t ON u.id = t.user_id
+            WHERE t.token = ?
+            """;
+        try {
+            ResultSet resultSet = RawSql.select(query, List.of(token));
+            if (!resultSet.next()) {
+                return Optional.empty();
+            }
+            return Optional.of(UserMapper.toUserRecord(resultSet));
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding user by token", e);
+        }
     }
 
     @Override

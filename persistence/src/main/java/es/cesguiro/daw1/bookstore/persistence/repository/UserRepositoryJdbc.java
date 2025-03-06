@@ -16,12 +16,22 @@ public class UserRepositoryJdbc implements UserRepository {
     }
 
     @Override
-    public Optional<User> getByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return userDao.findByEmail(email).map(UserMapper::toUser);
     }
 
     @Override
     public User save(User user) {
         return UserMapper.toUser(userDao.save(UserMapper.toUserRecord(user)));
+    }
+
+    @Override
+    public void storeToken(User user, String token) {
+        userDao.storeToken(UserMapper.toUserRecord(user), token);
+    }
+
+    @Override
+    public Optional<User> findByToken(String token) {
+        return userDao.findByToken(token).map(UserMapper::toUser);
     }
 }
