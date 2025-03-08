@@ -10,13 +10,12 @@ import es.cesguiro.daw1.bookstore.web.router.Method;
 import es.cesguiro.daw1.bookstore.web.router.Route;
 import es.cesguiro.daw1.bookstore.web.router.Routes;
 import es.cesguiro.daw1.bookstore.web.thymeleaf.Template;
-import es.cesguiro.daw1.bookstore.web.thymeleaf.ThymeleafTemplate;
 import jakarta.servlet.http.*;
 
 public class BookController implements Controller {
 
     private final BookHandler bookHandler;
-    private final Template template = TemplateFactory.getTemplate();
+    private final Template template = TemplateFactory.createTemplate();
 
     @Override
     public void registerRoutes(Routes routes) {

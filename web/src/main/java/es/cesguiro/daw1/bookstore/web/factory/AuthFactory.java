@@ -9,8 +9,6 @@ import es.cesguiro.daw1.bookstore.domain.usecase.auth.StoreTokenUseCase;
 import es.cesguiro.daw1.bookstore.web.controller.AuthController;
 import es.cesguiro.daw1.bookstore.web.controller.Controller;
 
-import java.util.Optional;
-
 public class AuthFactory {
 
     private static Controller authController;
@@ -18,30 +16,30 @@ public class AuthFactory {
     private static LoginUseCase loginUseCase;
     private static StoreTokenUseCase storeTokenUseCase;
 
-    public static Controller authController() {
+    public static Controller createAuthController() {
         if (authController == null) {
-            authController = new AuthController(authHandler());
+            authController = new AuthController(createAuthHandler());
         }
         return authController;
     }
 
-    public static AuthHandler authHandler() {
+    public static AuthHandler createAuthHandler() {
         if (authHandler == null) {
-            authHandler = new AuthHandlerImpl(loginUseCase(), storeTokenUseCase());
+            authHandler = new AuthHandlerImpl(createLoginUseCase(), createStoreTokenUseCase());
         }
         return authHandler;
     }
 
-    public static LoginUseCase loginUseCase() {
+    public static LoginUseCase createLoginUseCase() {
         if (loginUseCase == null) {
-            loginUseCase = new LoginService(UserFactory.userRepository());
+            loginUseCase = new LoginService(UserFactory.createUserRepository());
         }
         return loginUseCase;
     }
 
-    public static StoreTokenUseCase storeTokenUseCase() {
+    public static StoreTokenUseCase createStoreTokenUseCase() {
         if (storeTokenUseCase == null) {
-            storeTokenUseCase = new StoreTokenService(UserFactory.userRepository());
+            storeTokenUseCase = new StoreTokenService(UserFactory.createUserRepository());
         }
         return storeTokenUseCase;
     }

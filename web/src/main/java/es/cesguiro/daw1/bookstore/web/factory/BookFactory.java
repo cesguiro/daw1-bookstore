@@ -22,46 +22,46 @@ public class BookFactory {
     private static BookHandler bookHandler;
     private static Controller bookController;
 
-    public static Controller bookController() {
+    public static Controller createBookController() {
         if (bookController == null) {
-            bookController = new BookController(bookHandler());
+            bookController = new BookController(createBookHandler());
         }
         return bookController;
     }
 
-    public static BookHandler bookHandler() {
+    public static BookHandler createBookHandler() {
         if (bookHandler == null) {
-            bookHandler = new BookHandlerImpl(findAllBooksByCriteriaUseCase(), findBookByCriteriaUseCase());
+            bookHandler = new BookHandlerImpl(createFindAllBooksByCriteriaUseCase(), createFindBookByCriteriaUseCase());
         }
         return bookHandler;
     }
 
-    public static FindAllBooksByCriteriaUseCase findAllBooksByCriteriaUseCase() {
+    public static FindAllBooksByCriteriaUseCase createFindAllBooksByCriteriaUseCase() {
         if (findAllBooksByCriteriaUseCase == null) {
-            findAllBooksByCriteriaUseCase = new FindAllBooksByCriteriaService(bookRepository(), AuthorFactory.authorRepository());
+            findAllBooksByCriteriaUseCase = new FindAllBooksByCriteriaService(createBookRepository(), AuthorFactory.createAuthorRepository());
         }
         return findAllBooksByCriteriaUseCase;
     }
 
-    public static FindBookByCriteriaUseCase findBookByCriteriaUseCase() {
+    public static FindBookByCriteriaUseCase createFindBookByCriteriaUseCase() {
         if (findBookByCriteriaUseCase == null) {
             findBookByCriteriaUseCase = new FindBookByCriteriaService(
-                    bookRepository(),
-                    AuthorFactory.authorRepository(),
-                    PublisherFactory.publisherRepository()
+                    createBookRepository(),
+                    AuthorFactory.createAuthorRepository(),
+                    PublisherFactory.createPublisherRepository()
             );
         }
         return findBookByCriteriaUseCase;
     }
 
-    public static BookRepository bookRepository() {
+    public static BookRepository createBookRepository() {
         if (bookRepository == null) {
-            bookRepository = new BookRepositoryJdbc(bookDao());
+            bookRepository = new BookRepositoryJdbc(createBookDao());
         }
         return bookRepository;
     }
 
-    public static BookDao bookDao() {
+    public static BookDao createBookDao() {
         if (bookDao == null) {
             bookDao = new BookDaoJdbc();
         }

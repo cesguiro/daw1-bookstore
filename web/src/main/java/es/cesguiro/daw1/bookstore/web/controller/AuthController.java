@@ -10,16 +10,13 @@ import es.cesguiro.daw1.bookstore.web.router.Routes;
 import es.cesguiro.daw1.bookstore.web.thymeleaf.Template;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.security.SecureRandom;
-import java.util.Base64;
 import java.util.Optional;
 
 public class AuthController implements Controller {
 
-    private final Template template = TemplateFactory.getTemplate();
+    private final Template template = TemplateFactory.createTemplate();
     private final AuthHandler authHandler;
 
     public AuthController(AuthHandler authHandler) {

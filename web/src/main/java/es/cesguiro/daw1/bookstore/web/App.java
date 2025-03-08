@@ -64,11 +64,11 @@ public class App {
 
     private static FrontController getFrontController() {
         List<Controller> controllers = List.of(
-                BookFactory.bookController(),
-                MainFactory.mainController(),
-                LocaleFactory.localeController(),
-                AuthFactory.authController(),
-                UserFactory.userController()
+                BookFactory.createBookController(),
+                MainFactory.createMainController(),
+                LocaleFactory.createLocaleController(),
+                AuthFactory.createAuthController(),
+                UserFactory.createUserController()
         );
         return new FrontController(controllers);
     }

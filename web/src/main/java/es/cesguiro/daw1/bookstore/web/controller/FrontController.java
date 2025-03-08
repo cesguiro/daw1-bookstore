@@ -2,9 +2,7 @@ package es.cesguiro.daw1.bookstore.web.controller;
 
 import es.cesguiro.daw1.bookstore.domain.exception.BusinessException;
 import es.cesguiro.daw1.bookstore.util.context.RequestContextHolder;
-import es.cesguiro.daw1.bookstore.web.factory.BookFactory;
 import es.cesguiro.daw1.bookstore.web.factory.TemplateFactory;
-import es.cesguiro.daw1.bookstore.web.router.Method;
 import es.cesguiro.daw1.bookstore.web.router.Route;
 import es.cesguiro.daw1.bookstore.web.router.Routes;
 import es.cesguiro.daw1.bookstore.web.thymeleaf.Template;
@@ -13,8 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.thymeleaf.web.IWebExchange;
-import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.util.List;
 import java.util.Map;
@@ -40,7 +36,7 @@ public class FrontController extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response) {
         // Crear la plantilla
         try {
-            Template template = TemplateFactory.getTemplate();
+            Template template = TemplateFactory.createTemplate();
             template.init(request, response);
             template.setVariable("requestContext", RequestContextHolder.getRequestContext());
         } catch (Exception e) {

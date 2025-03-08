@@ -4,8 +4,6 @@ import es.cesguiro.daw1.bookstore.application.handler.AuthHandler;
 import es.cesguiro.daw1.bookstore.application.handler.UserHandler;
 import es.cesguiro.daw1.bookstore.domain.exception.ValidationException;
 import es.cesguiro.daw1.bookstore.domain.model.User;
-import es.cesguiro.daw1.bookstore.util.context.RequestContext;
-import es.cesguiro.daw1.bookstore.util.context.RequestContextHolder;
 import es.cesguiro.daw1.bookstore.util.token.TokenUtil;
 import es.cesguiro.daw1.bookstore.web.factory.TemplateFactory;
 import es.cesguiro.daw1.bookstore.web.router.Method;
@@ -24,7 +22,7 @@ public class UserController implements Controller {
 
     private final UserHandler userHandler;
     private final AuthHandler authHandler;
-    private final Template template = TemplateFactory.getTemplate();
+    private final Template template = TemplateFactory.createTemplate();
 
     public UserController(UserHandler userHandler, AuthHandler authHandler) {
         this.userHandler = userHandler;

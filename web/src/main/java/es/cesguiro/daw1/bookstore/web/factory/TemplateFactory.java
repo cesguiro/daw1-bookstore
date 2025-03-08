@@ -7,7 +7,7 @@ public class TemplateFactory {
 
     private static Template template;
 
-    public static Template getTemplate() {
+    public static Template createTemplate() {
         if (template == null) {
             template = new ThymeleafTemplate();
         }

@@ -1,8 +1,6 @@
 package es.cesguiro.daw1.bookstore.web.filter;
 
-import es.cesguiro.daw1.bookstore.domain.model.User;
 import es.cesguiro.daw1.bookstore.util.context.RequestContextHolder;
-import es.cesguiro.daw1.bookstore.util.context.UserContext;
 import es.cesguiro.daw1.bookstore.web.controller.Controller;
 import es.cesguiro.daw1.bookstore.web.controller.UserController;
 import es.cesguiro.daw1.bookstore.web.factory.UserFactory;
@@ -19,7 +17,7 @@ public class AuthFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        userController = UserFactory.userController();
+        userController = UserFactory.createUserController();
     }
 
     @Override

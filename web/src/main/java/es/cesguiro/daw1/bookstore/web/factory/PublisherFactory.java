@@ -10,14 +10,14 @@ public class PublisherFactory {
     private static PublisherDao publisherDao;
     private static PublisherRepository publisherRepository;
 
-    public static PublisherRepository publisherRepository() {
+    public static PublisherRepository createPublisherRepository() {
         if (publisherRepository == null) {
-            publisherRepository = new PublisherRepositoryJdbc(publisherDao());
+            publisherRepository = new PublisherRepositoryJdbc(createPublisherDao());
         }
         return publisherRepository;
     }
 
-    public static PublisherDao publisherDao() {
+    public static PublisherDao createPublisherDao() {
         if (publisherDao == null) {
             publisherDao = new PublisherDaoJdbc();
         }

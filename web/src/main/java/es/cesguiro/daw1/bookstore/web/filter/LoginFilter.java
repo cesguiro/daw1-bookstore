@@ -23,7 +23,7 @@ public class LoginFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        this.authController = AuthFactory.authController();
+        this.authController = AuthFactory.createAuthController();
     }
 
     @Override
@@ -56,14 +56,14 @@ public class LoginFilter implements Filter {
             } else {
                 /*session.setAttribute("error", "error.login");
                 httpResponse.sendRedirect("/login");*/
-                Template template = TemplateFactory.getTemplate();
+                Template template = TemplateFactory.createTemplate();
                 template.init(httpRequest, httpResponse);
                 template.setVariable("error", "error.login");
                 template.setVariable("requestContext", RequestContextHolder.getRequestContext());
                 ((AuthController) authController).showLoginForm(httpRequest, httpResponse);
             }
         } else if (method.equals("GET")) {
-            Template template = TemplateFactory.getTemplate();
+            Template template = TemplateFactory.createTemplate();
             template.init(httpRequest, httpResponse);
             template.setVariable("requestContext", RequestContextHolder.getRequestContext());
             ((AuthController) authController).showLoginForm(httpRequest, httpResponse);

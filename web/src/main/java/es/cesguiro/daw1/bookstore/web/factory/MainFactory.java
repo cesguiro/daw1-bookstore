@@ -7,7 +7,7 @@ public class MainFactory {
 
     private static Controller mainController;
 
-    public static Controller mainController() {
+    public static Controller createMainController() {
         if (mainController == null) {
             mainController = new MainController();
         }

@@ -7,7 +7,7 @@ public class LocaleFactory {
 
     private static Controller localeController;
 
-    public static Controller localeController() {
+    public static Controller createLocaleController() {
         if (localeController == null) {
             localeController = new LocaleController();
         }
