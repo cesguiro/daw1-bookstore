@@ -27,10 +27,18 @@ public class AuthorTestTemplateProvider implements TestTemplateInvocationContext
         List<AuthorRecord> authorRecords = loader.loadAuthorRecordsFromCSV();
 
         Stream<Arguments> argumets = Stream.of(
-                    Arguments.of("9780142424179", List.of(authorRecords.get(0), authorRecords.get(1)), List.of(authors.get(0), authors.get(1))),
-                    Arguments.of("9780060557912", List.of(authorRecords.get(0)), List.of(authors.get(0))),
-                    Arguments.of("1234567890", List.of(), List.of())
+                    Arguments.of("9780142424179", List.of(authors.get(0), authors.get(1))),
+                    Arguments.of("9780060557912", List.of(authors.get(0))),
+                    Arguments.of("1234567890", List.of())
         );
+
+        AuthorDao authorDao = Mockito.mock(AuthorDao.class);
+        Mockito.when(authorDao.findAllByBookIsbn("9780142424179"))
+                .thenReturn(List.of(authorRecords.get(0), authorRecords.get(1)));
+        Mockito.when(authorDao.findAllByBookIsbn("9780060557912"))
+                .thenReturn(List.of(authorRecords.get(0)));
+        Mockito.when(authorDao.findAllByBookIsbn("1234567890"))
+                .thenReturn(Collections.emptyList());
 
         return Stream.of(
             invocationContext(new AuthorDaoJdbc(), argumets, "Integration test (Real DAO)"),
@@ -61,7 +69,7 @@ public class AuthorTestTemplateProvider implements TestTemplateInvocationContext
                     @Override
                     public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
                         if (parameterContext.getParameter().getType() == AuthorDao.class) {
-                            return authorDao;
+                            return authorDao; // authorDao
                         } else if (parameterContext.getParameter().getType() == String.class) {
                             return arguments.iterator().next().get()[0]; // isbn
                         } else if (parameterContext.getParameter().getType() == List.class) {

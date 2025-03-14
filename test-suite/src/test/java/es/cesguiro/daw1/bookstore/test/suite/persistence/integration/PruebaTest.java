@@ -19,14 +19,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PruebaTest {
 
     @TestTemplate
-    void testFindAuthorsByBookIsbn(AuthorDao authorDao, String isbn, List<AuthorRecord> authorRecords, List<Author> expected) {
+    void testFindAuthorsByBookIsbn(AuthorDao authorDao, String isbn, List<Author> expected) {
         AuthorRepository authorRepository = new AuthorRepositoryJdbc(authorDao);
 
-        // 🔹 Simulamos comportamiento si es un mock
-        if (authorDao instanceof org.mockito.MockedStatic) {
-            Mockito.when(authorDao.findAllByBookIsbn(isbn))
-                    .thenReturn(authorRecords);
-        }
 
         // 🔹 Ejecutamos la prueba
         List<Author> actual = authorRepository.findAllByBookIsbn(isbn);

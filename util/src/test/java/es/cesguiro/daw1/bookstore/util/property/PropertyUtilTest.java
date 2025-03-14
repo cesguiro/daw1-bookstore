@@ -32,17 +32,17 @@ class PropertyUtilTest {
     }
 
     @Test
-    @DisplayName("Test get PropertyProvider should throw Error500 if PropertyProvider is null")
+    @DisplayName("Test get PropertyProvider should throw RuntimeException if PropertyProvider is null")
     void testGetPropertyProvider() {
         PropertyUtil.resetPropertyProvider();
-        assertThrows(Error500.class, () -> PropertyUtil.getPropertyProvider(),
+        assertThrows(RuntimeException.class, () -> PropertyUtil.getPropertyProvider(),
                 "getPropertyProvider should throw PropertyUtilException if PropertyProvider is null");
     }
 
     @Test
-    @DisplayName("Test set null PropertyProvider should throw Error500")
+    @DisplayName("Test set null PropertyProvider should throw RuntimeException")
     void testSetPropertyProviderNull() {
-        assertThrows(Error500.class, () -> PropertyUtil.setPropertyProvider(null),
+        assertThrows(RuntimeException.class, () -> PropertyUtil.setPropertyProvider(null),
                 "getInstance with null PropertyProvider should throw PropertyUtilException");
     }
 

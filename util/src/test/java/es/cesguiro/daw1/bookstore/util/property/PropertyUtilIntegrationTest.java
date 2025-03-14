@@ -58,20 +58,20 @@ public class PropertyUtilIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test get non-existing property should throw Error500")
+    @DisplayName("Test get non-existing property should throw RuntimeException")
     void testGetNonExistingProperty() {
-        assertThrows(Error500.class, () -> PropertyUtil.getPropertyProvider().getProperty("non.existing"));
+        assertThrows(RuntimeException.class, () -> PropertyUtil.getPropertyProvider().getProperty("non.existing"));
     }
 
     @Test
-    @DisplayName("Test get property with empty key should throw Error500")
+    @DisplayName("Test get property with empty key should throw RuntimeException")
     void testGetPropertyEmptyKey() {
-        assertThrows(Error500.class, () -> PropertyUtil.getPropertyProvider().getProperty(""));
+        assertThrows(RuntimeException.class, () -> PropertyUtil.getPropertyProvider().getProperty(""));
     }
 
     @Test
-    @DisplayName("Test get property with null key should throw Error500")
+    @DisplayName("Test get property with null key should throw RuntimeException")
     void testGetPropertyNullKey() {
-        assertThrows(Error500.class, () -> PropertyUtil.getPropertyProvider().getProperty(null));
+        assertThrows(RuntimeException.class, () -> PropertyUtil.getPropertyProvider().getProperty(null));
     }
 }

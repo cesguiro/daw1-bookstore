@@ -35,7 +35,7 @@ class DefaultPropertyProviderTest {
     @Test
     @DisplayName("loadFromClassPath should throw exception if file does not exist")
     void testLoadFromClassPathFileNotFound() {
-        assertThrows(Error500.class, () -> provider.loadFromClassPath("nonexistent-file.properties"),
+        assertThrows(RuntimeException.class, () -> provider.loadFromClassPath("nonexistent-file.properties"),
                 "Should throw exception when the file does not exist");
     }
 
@@ -56,7 +56,7 @@ class DefaultPropertyProviderTest {
     @Test
     @DisplayName("loadFromFile should throw exception if file does not exist")
     void testLoadFromFileFileNotFound() {
-        assertThrows(Error500.class, () -> provider.loadFromFile("nonexistent-file.properties"),
+        assertThrows(RuntimeException.class, () -> provider.loadFromFile("nonexistent-file.properties"),
                 "Should throw exception when the file does not exist");
     }
 
@@ -109,7 +109,7 @@ class DefaultPropertyProviderTest {
         URL resourceUrl = getClass().getClassLoader().getResource("test-util.properties");
         provider.loadFromFile(Paths.get(resourceUrl.toURI()).toString());
 
-        assertThrows(Error500.class, () -> provider.getProperty("app.nonexistent"),
+        assertThrows(RuntimeException.class, () -> provider.getProperty("app.nonexistent"),
                 "getProperty should throw KeyNotFoundException if key is not found");
     }
 

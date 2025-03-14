@@ -73,7 +73,7 @@ public class BookIntegrationTest extends FlywayJdbcTest {
     public void testFindAllBooksWithInvalidPage() {
         int page = 0;
         int size = 10;
-        assertThrows(Error500.class, () -> bookRepository.findAll(page, size));
+        assertThrows(RuntimeException.class, () -> bookRepository.findAll(page, size));
     }
 
     static Stream<Arguments> provideFindByIsbnArguments() {

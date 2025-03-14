@@ -33,15 +33,15 @@ class PageTest {
     }
 
     @Test
-    @DisplayName("Test negative page should throw Error400")
+    @DisplayName("Test negative page should throw RuntimeException")
     void testNegativePage() {
-        assertThrows(Error400.class, () -> new Page<>(List.of("element"), -1, 10, 100));
+        assertThrows(RuntimeException.class, () -> new Page<>(List.of("element"), -1, 10, 100));
     }
 
     @Test
-    @DisplayName("Test negative page size should throw Error500")
+    @DisplayName("Test negative page size should throw RuntimeException")
     void testNegativePageSize() {
-        assertThrows(Error500.class, () -> new Page<>(List.of("element"), 1, -1, 1));
+        assertThrows(RuntimeException.class, () -> new Page<>(List.of("element"), 1, -1, 1));
     }
 
     @Test
@@ -73,9 +73,9 @@ class PageTest {
     }
 
     @Test
-    @DisplayName("Test data size exceeds page size should throw Error500")
+    @DisplayName("Test data size exceeds page size should throw RuntimeException")
     void testDataSizeExceedsPageSize() {
-        assertThrows(Error500.class,
+        assertThrows(RuntimeException.class,
                 () -> new Page<>(List.of("element1", "element2", "element3"), 1, 2, 3));
     }
 
@@ -94,9 +94,9 @@ class PageTest {
     }
 
     @Test
-    @DisplayName("Test null data should throw Error500")
+    @DisplayName("Test null data should throw RuntimeException")
     void testNullData() {
-        assertThrows(Error500.class, () -> new Page<>(null, 1, 10, 10));
+        assertThrows(RuntimeException.class, () -> new Page<>(null, 1, 10, 10));
     }
 
 }

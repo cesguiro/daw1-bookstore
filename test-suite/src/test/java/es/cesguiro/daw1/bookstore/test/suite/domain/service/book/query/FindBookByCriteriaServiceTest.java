@@ -1,5 +1,6 @@
 package es.cesguiro.daw1.bookstore.test.suite.domain.service.book.query;
 
+import es.cesguiro.daw1.bookstore.domain.exception.BusinessException;
 import es.cesguiro.daw1.bookstore.domain.model.Book;
 import es.cesguiro.daw1.bookstore.domain.repository.AuthorRepository;
 import es.cesguiro.daw1.bookstore.domain.repository.BookRepository;
@@ -73,12 +74,12 @@ class FindBookByCriteriaServiceTest {
     }
 
     @Test
-    @DisplayName("Test findByIsbn throws Error404 when book is not found")
+    @DisplayName("Test findByIsbn throws BusinessException when book is not found")
     void testFindByIsbnThrowsExceptionWhenBookNotFound() {
         String nonExistentIsbn = "456";
         when(bookRepository.findByIsbn(nonExistentIsbn)).thenReturn(Optional.empty());
 
-        assertThrows(Error404.class,
+        assertThrows(BusinessException.class,
                 () -> findByCriterialService.findByIsbn(nonExistentIsbn),
                 "Should throw Error404 when book is not found");
     }
