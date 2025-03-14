@@ -25,8 +25,12 @@ public class AuthorTestTemplateProvider implements TestTemplateInvocationContext
         List<Author> authors = loader.loadAuthorsFromCSV();
         List<AuthorRecord> authorRecords = loader.loadAuthorRecordsFromCSV();
 
-        String isbn = "9780142424179";
-        List<Author> expected = List.of(authors.getFirst());
+        String isbn1 = "9780142424179";
+        List<Author> expected1 = List.of(authors.getFirst());
+        String isbn2 = "9780060557912";
+        List<Author> expected2 = List.of(authors.get(15), authors.get(16));
+        String isbn3 = "1234567890";
+        List<Author> expected3 = Collections.emptyList();
 
         AuthorDao authorDaoMock = Mockito.mock(AuthorDao.class);
         Mockito.when(authorDaoMock.findAllByBookIsbn("9780142424179"))
@@ -37,8 +41,12 @@ public class AuthorTestTemplateProvider implements TestTemplateInvocationContext
                 .thenReturn(Collections.emptyList());
 
         return Stream.of(
-            invocationContext(new AuthorDaoJdbc(), isbn, expected),
-            invocationContext(authorDaoMock, isbn, expected)
+            invocationContext(new AuthorDaoJdbc(), isbn1, expected1),
+            invocationContext(authorDaoMock, isbn1, expected1),
+            invocationContext(new AuthorDaoJdbc(), isbn2, expected2),
+            invocationContext(authorDaoMock, isbn2, expected2),
+            invocationContext(new AuthorDaoJdbc(), isbn3, expected3),
+            invocationContext(authorDaoMock, isbn3, expected3)
         );
     }
 
