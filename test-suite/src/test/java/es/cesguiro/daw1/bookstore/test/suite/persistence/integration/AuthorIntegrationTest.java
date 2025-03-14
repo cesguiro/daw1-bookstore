@@ -33,7 +33,7 @@ public class AuthorIntegrationTest extends FlywayJdbcTest {
 
     static Stream<Arguments> provideFindAllByBookIsbnArguments() {
         return Stream.of(
-                Arguments.of("9780142424179", List.of(authors.get(0))),
+                Arguments.of("9780142424179", List.of(authors.getFirst())),
                 Arguments.of("9780060557912", List.of(authors.get(15), authors.get(16))),
                 Arguments.of("1234567890", List.of())
         );

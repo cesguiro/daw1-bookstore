@@ -15,12 +15,10 @@ CREATE TABLE books (
                        discount_percentage DECIMAL(4, 2) DEFAULT 0,
                        cover VARCHAR(255),
                        publication_date DATE,
-                       publisher_id INT,
-                       FOREIGN KEY (publisher_id) REFERENCES publishers(id)
+                       publisher_id INT
 );
 
 CREATE INDEX idx_books_publisher_id ON books (publisher_id);
-
 
 CREATE TABLE authors (
                          id INT PRIMARY KEY AUTO_INCREMENT,

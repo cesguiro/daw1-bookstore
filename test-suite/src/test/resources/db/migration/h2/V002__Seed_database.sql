@@ -91,4 +91,3 @@ INSERT INTO books_authors (book_id, author_id) VALUES
     (22, 17),  -- Buenos presagios by Terry Pratchett
     (23, 17),  -- American Gods by Neil Gaiman
     (24, 17);  -- Stardust by Neil Gaiman
-

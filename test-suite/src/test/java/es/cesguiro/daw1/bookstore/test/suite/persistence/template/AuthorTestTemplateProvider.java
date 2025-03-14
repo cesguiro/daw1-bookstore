@@ -6,7 +6,6 @@ import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.AuthorDaoJdbc;
 import es.cesguiro.daw1.bookstore.persistence.dao.jdbc.model.AuthorRecord;
 import es.cesguiro.daw1.bookstore.test.suite.AuthorsDataLoader;
 import org.junit.jupiter.api.extension.*;
-import org.junit.jupiter.params.provider.Arguments;
 import org.mockito.Mockito;
 
 import java.util.Collections;
@@ -26,33 +25,30 @@ public class AuthorTestTemplateProvider implements TestTemplateInvocationContext
         List<Author> authors = loader.loadAuthorsFromCSV();
         List<AuthorRecord> authorRecords = loader.loadAuthorRecordsFromCSV();
 
-        Stream<Arguments> argumets = Stream.of(
-                    Arguments.of("9780142424179", List.of(authors.get(0), authors.get(1))),
-                    Arguments.of("9780060557912", List.of(authors.get(0))),
-                    Arguments.of("1234567890", List.of())
-        );
+        String isbn = "9780142424179";
+        List<Author> expected = List.of(authors.getFirst());
 
-        AuthorDao authorDao = Mockito.mock(AuthorDao.class);
-        Mockito.when(authorDao.findAllByBookIsbn("9780142424179"))
-                .thenReturn(List.of(authorRecords.get(0), authorRecords.get(1)));
-        Mockito.when(authorDao.findAllByBookIsbn("9780060557912"))
-                .thenReturn(List.of(authorRecords.get(0)));
-        Mockito.when(authorDao.findAllByBookIsbn("1234567890"))
+        AuthorDao authorDaoMock = Mockito.mock(AuthorDao.class);
+        Mockito.when(authorDaoMock.findAllByBookIsbn("9780142424179"))
+                .thenReturn(List.of(authorRecords.getFirst()));
+        Mockito.when(authorDaoMock.findAllByBookIsbn("9780060557912"))
+                .thenReturn(List.of(authorRecords.get(15), authorRecords.get(16)));
+        Mockito.when(authorDaoMock.findAllByBookIsbn("1234567890"))
                 .thenReturn(Collections.emptyList());
 
         return Stream.of(
-            invocationContext(new AuthorDaoJdbc(), argumets, "Integration test (Real DAO)"),
-            invocationContext(Mockito.mock(AuthorDao.class), argumets, "Unit test (Mocked DAO)")
+            invocationContext(new AuthorDaoJdbc(), isbn, expected),
+            invocationContext(authorDaoMock, isbn, expected)
         );
     }
 
-    private TestTemplateInvocationContext invocationContext(AuthorDao authorDao, Stream<Arguments> arguments, String testName) {
+    private TestTemplateInvocationContext invocationContext(AuthorDao authorDao, String isbn, List<Author> expected) {
 
         return new TestTemplateInvocationContext() {
 
             @Override
             public String getDisplayName(int invocationIndex) {
-                return testName + " - Execution #" + invocationIndex;
+                return "Execution with ISBN: " + isbn;
             }
 
             @Override
@@ -62,8 +58,8 @@ public class AuthorTestTemplateProvider implements TestTemplateInvocationContext
                     public boolean supportsParameter(ParameterContext parameterContext,
                                                      ExtensionContext extensionContext) throws ParameterResolutionException {
                         return parameterContext.getParameter().getType() == AuthorDao.class ||
-                                parameterContext.getParameter().getType() == String.class ||
-                                parameterContext.getParameter().getType() == List.class;
+                                parameterContext.getParameter().getType() == List.class ||
+                                parameterContext.getParameter().getType() == String.class;
                     }
 
                     @Override
@@ -71,9 +67,9 @@ public class AuthorTestTemplateProvider implements TestTemplateInvocationContext
                         if (parameterContext.getParameter().getType() == AuthorDao.class) {
                             return authorDao; // authorDao
                         } else if (parameterContext.getParameter().getType() == String.class) {
-                            return arguments.iterator().next().get()[0]; // isbn
+                            return isbn; // isbn
                         } else if (parameterContext.getParameter().getType() == List.class) {
-                            return arguments.iterator().next().get()[2]; // expected authors
+                            return expected; // expected
                         }
                         throw new ParameterResolutionException("Unsupported parameter type");
                     }
