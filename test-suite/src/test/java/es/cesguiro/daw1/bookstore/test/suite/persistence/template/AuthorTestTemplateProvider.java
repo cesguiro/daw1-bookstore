@@ -14,6 +14,14 @@ import java.util.stream.Stream;
 
 public class AuthorTestTemplateProvider implements TestTemplateInvocationContextProvider {
 
+    private final AuthorDao authorDaoMock;
+    private final AuthorDao authorDaoJdbc;
+
+    public AuthorTestTemplateProvider(AuthorDao authorDaoMock, AuthorDao authorDaoJdbc) {
+        this.authorDaoJdbc = authorDaoJdbc;
+        this.authorDaoMock = authorDaoMock;
+    }
+
     @Override
     public boolean supportsTestTemplate(ExtensionContext extensionContext) {
         return true; // Permite que se ejecute el test template siempre

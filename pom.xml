@@ -54,7 +54,6 @@
         <module>web</module>
         <module>util</module>
         <module>test-suite</module>
-        <module>auth</module>
     </modules>
 
     <dependencyManagement>

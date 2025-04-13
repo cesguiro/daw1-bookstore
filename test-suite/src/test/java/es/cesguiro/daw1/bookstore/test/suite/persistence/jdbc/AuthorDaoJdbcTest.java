@@ -31,7 +31,7 @@ class AuthorDaoJdbcTest extends FlywayJdbcTest {
 
     static Stream<Arguments> provideFindAuthorsByBookIsbnArguments() {
         return Stream.of(
-                Arguments.of("9780142424179", List.of(authorsRecord.get(0))),
+                Arguments.of("9780142424179", List.of(authorsRecord.getFirst())),
                 Arguments.of("9780060557912", List.of(authorsRecord.get(15), authorsRecord.get(16))),
                 Arguments.of("1234567890", List.of())
         );

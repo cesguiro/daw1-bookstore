@@ -76,10 +76,29 @@
     <build>
         <plugins>
             <!-- Plugin Surefire para ejecutar pruebas con JUnit 5 -->
-            <plugin>
+            <plugin> <!-- Ejecuta sólo los tests unitarios -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${org.apache.maven.plugins.version}</version>
+                <configuration>
+                    <groups>unit</groups>
+                </configuration>
+            </plugin>
+            <plugin> <!-- Ejecuta sólo los tests de integración -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${org.apache.maven.plugins.version}</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <groups>integration</groups>
+                </configuration>
             </plugin>
         </plugins>
     </build>
